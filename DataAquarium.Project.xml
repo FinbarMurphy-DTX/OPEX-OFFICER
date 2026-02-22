@@ -2,7 +2,7 @@
   This file is provided to store the settings for your Data Aquarium project. 
   You can safely delete this file if no further code generation is planned.
 -->
-<project compatibility="20111118" dataModel="required" subscriptionLevel="Unlimited" name="Officer II" prettyName="Officer II" type="Web Site Factory" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" sourceControl="" displayName="" group="" appGenVersion="8.9.44.0" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+<project compatibility="20111118" dataModel="required" subscriptionLevel="Unlimited" name="OPEX-OFFICER" prettyName="OPEX-OFFICER" type="Web Site Factory" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" sourceControl="" displayName="" group="" appGenVersion="8.9.44.0" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
   <connectionString hostDatabaseSharing="false" sessionStateMode="Custom">Server=localhost;User ID=opex;Password=opex;Database=opex;Persist Security Info=True;</connectionString>
   <providerName>MySql.Data.MySqlClient</providerName>
   <namespace>DatatecnixOfficerII</namespace>
@@ -31,7 +31,7 @@ InsertAfter: /configuration/system.webServer
   &lt;/runtime&gt;
 </webConfig>
   </webServer>
-  <features useSaveAndNew="true" pageHeader="OPEX 2.3.7" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="11">
+  <features useSaveAndNew="true" pageHeader="OPEX 2.4.0" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="0">
     <navigation detectUnderscoreSeparatedSchema="" />
     <blob allowUploadOnInsert="true" />
     <framework scriptOnly="true" useExtenders="false" />

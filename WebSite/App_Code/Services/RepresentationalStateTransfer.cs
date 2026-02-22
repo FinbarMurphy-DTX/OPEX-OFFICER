@@ -399,7 +399,7 @@ namespace DatatecnixOfficerII.Services
                 catch (Exception)
                 {
                 }
-                sb.AppendFormat("var __targetFramework='4.7.2';__tf=4.0;__cothost='appfactory';__appInfo='Officer II|{0}';", BusinessRules.JavaScriptString(context.User.Identity.Name));
+                sb.AppendFormat("var __targetFramework='4.7.2';__tf=4.0;__cothost='appfactory';__appInfo='OPEX-OFFICER|{0}';", BusinessRules.JavaScriptString(context.User.Identity.Name));
                 sb.AppendFormat("Sys.Application.add_init(function() {{ Web.DataView._run('{0}','{0}/Services/DataControllerService.asmx', {1}) }});", baseUrl, context.User.Identity.IsAuthenticated.ToString().ToLower());
             }
             context.Response.ContentType = "application/javascript; charset=utf-8";
