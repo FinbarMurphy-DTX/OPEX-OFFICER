@@ -31,7 +31,7 @@ InsertAfter: /configuration/system.webServer
   &lt;/runtime&gt;
 </webConfig>
   </webServer>
-  <features useSaveAndNew="true" pageHeader="OPEX 2.4.0" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="0">
+  <features useSaveAndNew="true" pageHeader="OPEX 2.4.0" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="9">
     <navigation detectUnderscoreSeparatedSchema="" />
     <blob allowUploadOnInsert="true" />
     <framework scriptOnly="true" useExtenders="false" />
@@ -42,7 +42,7 @@ InsertAfter: /configuration/system.webServer
       <auditing></auditing>
     </ease>
     <packageProperties></packageProperties>
-    <smtp deliveryMethod="Network" deliveryFormat="" from="admin@datatecnix.co.uk" clientDomain="" targetName="" host="chimail.uk2.net" port="587" defaultCredentials="false" enableSsl="false" username="support@datatecnix.co.uk" password="uData9088!" />
+    <smtp deliveryMethod="Network" deliveryFormat="" from="support@datatecnix.co.uk" clientDomain="" targetName="" host="smtp.stackmail.com" port="587" defaultCredentials="false" enableSsl="true" username="support@datatecnix.co.uk" password="uData9088!" />
     <addons OfflineSync="" ContentMaker="" ContentHub="" />
   </features>
   <reports enabled="true" version="15" />
