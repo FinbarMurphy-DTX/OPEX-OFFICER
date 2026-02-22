@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_comms" alias="rq_comms" created="2017-06-08T16:26:24" modified="2017-06-08T16:30:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="comment_code" fieldName="CommentCode" label="Reason Code" />
+    <column name="comment_desc" fieldName="CommentDesc" label="Reason" />
+    <column name="stores_only" fieldName="StoresOnly" label="Stores Only" />
+    <column name="req_only" fieldName="ReqOnly" label="Req Only" />
+    <column name="col_only" fieldName="ColOnly" label="Col Only" />
+    <column name="disabled" fieldName="Disabled" label="Disabled" />
+  </columns>
+</dataModel>

@@ -1,0 +1,2089 @@
+<log xmlns="urn:schemas-codeontime-com:xml-builder" xmlns:aquarium="urn:schemas-codeontime-com:data-aquarium" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application" xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+  <c y="NodeSet" t="2017-06-07T16:52:16">
+    <page name="OpexrqTrolley" />
+    <rename>Trolley</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-07T16:52:24">
+    <page name="OpexstItem" />
+    <rename>Catalogue</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-07T16:52:56">
+    <page name="OpexrqStaff" />
+    <configure type="Exclude" />
+  </c>
+  <c y="NodeSet" t="2017-06-07T16:55:19">
+    <page name="OpexrqTrolley" />
+    <move>
+      <page name="OpexstItem" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-06-07T16:55:23">
+    <page name="OpexrqTrolley" />
+    <before>
+      <page name="OpexstItem" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2017-06-07T17:35:55">
+    <page name="OpexstItem" />
+    <dataView id="view1" />
+    <update>
+      <ShowActionButtons>None</ShowActionButtons>
+      <ShowActionBar>false</ShowActionBar>
+      <ShowViewSelector>false</ShowViewSelector>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-07T17:39:05">
+    <page name="OpexstItem" />
+    <dataView id="view1" />
+    <update>
+      <ShowActionButtons>Bottom</ShowActionButtons>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-07T17:43:10">
+    <page name="Membership" />
+    <configure type="Exclude" />
+  </c>
+  <c y="NodeSet" t="2017-06-08T09:06:49">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexrqStaff</Name>
+      <NewName>Staff</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T09:06:56">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexstItem</Name>
+      <NewName>Item</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T09:07:25">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexrqTrolley</Name>
+      <NewName>TrolleyPersonal</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T09:30:54">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexadErrorMessage</Name>
+      <NewName>Messages</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T09:31:04">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexadModuleOptions</Name>
+      <NewName>Options</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T10:09:21">
+    <page name="OpexstItem" />
+    <dataView id="view1" />
+    <update>
+      <Controller>ItemCatalogue</Controller>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-08T10:30:48">
+    <page name="OpexadErrorMessage" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-08T10:30:48">
+    <page name="OpexadModuleOptions" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-08T15:55:24">
+    <page name="OpexrqTrolley" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-08T15:55:49">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexrqTrolleyItem</Name>
+      <NewName>TrolleyLinePersonal</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T15:56:35">
+    <page name="OpexrqTrolley" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>TrolleyLinePersonal</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <FilterSource>view1</FilterSource>
+      <FilterFields>StaffUid</FilterFields>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-08T16:08:23">
+    <page name="OpexrqTrolleyItem" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-08T16:08:23">
+    <page name="OpexstItmsz" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-08T16:15:43">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <FilterSource />
+      <FilterFields />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-08T16:35:10">
+    <page name="OpexrqComms" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-08T17:28:42">
+    <page name="OpexrqTrolley" />
+    <dataView id="view1" />
+    <update>
+      <ShowViewSelector>false</ShowViewSelector>
+      <ShowSearchBar>false</ShowSearchBar>
+      <ShowQuickFind>false</ShowQuickFind>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-08T17:35:04">
+    <pages />
+    <renameRefs type="controller">
+      <Name>OpexrqStitm</Name>
+      <NewName>Profile</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-08T17:35:30">
+    <page name="OpexrqStitm" />
+    <rename>Profile</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-08T17:43:27">
+    <page name="OpexrqStitm" />
+    <update>
+      <UseExtenders>false</UseExtenders>
+      <Title>Profile</Title>
+      <Description>View My Profile Information</Description>
+      <About>This page shows profile information</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T14:20:38">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-list-disabled, 
+view-style-charts-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T14:23:05">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T15:49:56">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T15:51:44">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <ShowActionBar>false</ShowActionBar>
+      <ShowSearchBar>false</ShowSearchBar>
+      <ShowQuickFind>false</ShowQuickFind>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T15:53:00">
+    <page name="OpexrqTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <ShowActionBar>true</ShowActionBar>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:16:03">
+    <page name="OpexrqTrolley" />
+    <dataView id="view1" />
+    <update>
+      <AutoHighlightFirstRow>true</AutoHighlightFirstRow>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:44:42">
+    <page name="Opexroles" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:44:42">
+    <page name="OpexstaffRoles" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:44:42">
+    <page name="OpexrqStaff" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:44:42">
+    <page name="Membership" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:44:42">
+    <page name="Opexlocations" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-13T16:54:12">
+    <page name="OpexrqTrolley" />
+    <update>
+      <Name>Trolley</Name>
+      <UseExtenders>false</UseExtenders>
+      <Title>Trolley</Title>
+      <Description>Trolley</Description>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:33:06">
+    <page name="OpexstItem" />
+    <update>
+      <UseExtenders>false</UseExtenders>
+      <Title>My Catalogue</Title>
+      <Description>View Items in My Catalogue</Description>
+      <About>You can order items form your catalogue here</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:33:25">
+    <page name="OpexstItem" />
+    <update>
+      <Name>MyCatalogue</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:33:39">
+    <page name="MyCatalogue" />
+    <rename>My Catalogue</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:33:49">
+    <page name="Trolley" />
+    <rename>My Trolley</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:33:58">
+    <page name="OpexrqStitm" />
+    <rename>My Profile</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:34:35">
+    <pages />
+    <insert type="page">
+      <Name>StationCatalogue</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Path>Station Catalogue</Path>
+      <Title>Station Catalogue</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:35:19">
+    <pages />
+    <insert type="page">
+      <Name>StationTrolley</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Path>Station Trolley</Path>
+      <Title>Station Trolley</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:35:51">
+    <pages />
+    <insert type="page">
+      <Name>StationOrders</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Path>Station Orders</Path>
+      <Title>Station Orders</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:36:05">
+    <page name="MyCatalogue" />
+    <copy>
+      <page name="Trolley" />
+      <container id="container1" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:36:17">
+    <page name="MyCatalogue" />
+    <container id="container1" />
+    <move>
+      <page name="MyCatalogue" />
+      <container id="c101" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-06-14T11:36:23">
+    <page name="MyCatalogue" />
+    <container id="container1" />
+    <before>
+      <page name="MyCatalogue" />
+      <container id="c101" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2017-06-14T15:53:43">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowViewSelector>true</ShowViewSelector>
+      <SearchByFirstLetter>true</SearchByFirstLetter>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T15:56:19">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <ShowInSummary>false</ShowInSummary>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T15:56:26">
+    <page name="MyCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <ShowInSummary>false</ShowInSummary>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T15:56:57">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T15:57:04">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T16:50:58">
+    <page name="Trolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <FilterSource>view1</FilterSource>
+      <FilterFields>StaffUid</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T16:52:26">
+    <page name="Trolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <FilterSource />
+      <FilterFields />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T17:07:29">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T17:24:05">
+    <page name="Trolley" />
+    <dataView id="view1" />
+    <update>
+      <ShowInSummary>false</ShowInSummary>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T17:49:16">
+    <page name="Trolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <ShowActionBar>false</ShowActionBar>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-14T18:10:13">
+    <page name="Trolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+      <ShowActionBar>true</ShowActionBar>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:38:32">
+    <page name="StationOrders" />
+    <update>
+      <Roles />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:03">
+    <page name="MyCatalogue" />
+    <update>
+      <Roles>officer</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:10">
+    <page name="Trolley" />
+    <update>
+      <Roles>officer</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:17">
+    <page name="OpexrqStitm" />
+    <update>
+      <Roles>officer</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:24">
+    <page name="StationCatalogue" />
+    <update>
+      <Roles>station</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:32">
+    <page name="StationTrolley" />
+    <update>
+      <Roles>station</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T13:43:39">
+    <page name="StationOrders" />
+    <update>
+      <Roles>station</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T14:44:54">
+    <page name="OpexrqRqitm2" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-15T14:45:15">
+    <page name="OpexrqStitm" />
+    <rename>My Orders</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-15T14:45:42">
+    <pages />
+    <insert type="page" context="/page/OpexrqStitm">
+      <Name>MyProfile</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Title>My Profile</Title>
+      <Roles>officer</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-15T14:45:47">
+    <page name="MyProfile" />
+    <move>
+      <page name="OpexrqStitm" />
+      <container id="container1" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-06-15T15:01:42">
+    <page name="OpexrqStitm" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-15T15:02:10">
+    <page name="OpexrqStitm" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>RequisitionLines</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-15T15:16:02">
+    <page name="OpexrqStitm" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:12:19">
+    <page name="OpexrqStitm" />
+    <rename>My Detail</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:12:38">
+    <pages />
+    <insert type="page" context="/page/OpexrqStitm">
+      <Name>MyOrders</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Title>My Orders</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:12:42">
+    <page name="MyProfile" />
+    <before>
+      <page name="MyOrders" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:12:44">
+    <page name="MyOrders" />
+    <move>
+      <page name="OpexrqStitm" />
+      <container id="c101" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:40:59">
+    <page name="MyOrders" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:47:20">
+    <page name="MyOrders" />
+    <rename>My Requisitions</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:47:30">
+    <page name="MyOrders" />
+    <update>
+      <Name>MyRequisitions</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:47:45">
+    <page name="StationOrders" />
+    <rename>Station Requisitions</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-15T16:47:58">
+    <page name="StationOrders" />
+    <update>
+      <Name>StationRequisitions</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-16T12:04:39">
+    <page name="Home" />
+    <container id="container1" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-16T12:04:42">
+    <page name="Home" />
+    <container id="container2" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:02:58">
+    <page name="OpexrqTrolleyLocation" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:02:58">
+    <page name="OpexrqTrolleyItemLocation" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:05:11">
+    <page name="StationCatalogue" />
+    <update>
+      <Roles>Location</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:05:20">
+    <page name="StationTrolley" />
+    <update>
+      <Roles>Location</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:05:30">
+    <page name="StationRequisitions" />
+    <update>
+      <Roles>Location</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:05:38">
+    <page name="StationTrolley" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:06:53">
+    <page name="StationTrolley" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>TrolleyLocation</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:29:05">
+    <pages />
+    <renameRefs type="controller">
+      <Name>ItemCatalogue</Name>
+      <NewName>ItemCataloguePersonal</NewName>
+    </renameRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:44:53">
+    <page name="StationCatalogue" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:45:07">
+    <page name="StationCatalogue" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>ItemCatalogueLocation</Controller>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:45:17">
+    <page name="StationCatalogue" />
+    <container id="c101" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:45:28">
+    <page name="StationCatalogue" />
+    <copy>
+      <page name="MyCatalogue" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:45:28">
+    <page name="StationCatalogue" />
+    <copy>
+      <page name="MyCatalogue" />
+      <container id="container1" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:46:03">
+    <page name="StationCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Controller>TrolleyLocation</Controller>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-20T16:46:15">
+    <page name="StationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Controller>ItemCatalogueLocation</Controller>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-21T16:50:04">
+    <page name="OpexrqLocns" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-21T17:41:35">
+    <page name="StationTrolley" />
+    <copy>
+      <page name="Trolley" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-21T17:41:49">
+    <page name="StationTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Controller>TrolleyLineLocation</Controller>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-21T17:42:03">
+    <page name="StationTrolley" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:12:34">
+    <page name="StationCatalogue" />
+    <rename>Location Catalogue</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:12:48">
+    <page name="StationTrolley" />
+    <rename>Location Trolley</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:13:01">
+    <page name="StationRequisitions" />
+    <rename>Location Requisitions</rename>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:13:36">
+    <page name="StationRequisitions" />
+    <update>
+      <Title>Location Requisitions</Title>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:14:18">
+    <page name="StationRequisitions" />
+    <update>
+      <Name>LocationRequisitions</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:14:27">
+    <page name="StationCatalogue" />
+    <update>
+      <Name>LocationCatalogue</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:14:39">
+    <page name="OpexrqStitm" />
+    <update>
+      <Name>MyDetail</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T09:14:48">
+    <page name="Trolley" />
+    <update>
+      <Name>MyTrolley</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T11:51:16">
+    <page name="LocationRequisitions" />
+    <copy>
+      <page name="MyRequisitions" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-22T11:51:36">
+    <page name="LocationRequisitions" />
+    <dataView id="view1" />
+    <update>
+      <Controller>RequisitionLinesLocations</Controller>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-22T12:19:41">
+    <pages />
+    <deleteRefs type="controller">
+      <Name>RequisitionLinesLocations</Name>
+    </deleteRefs>
+  </c>
+  <c y="NodeSet" t="2017-06-22T12:29:56">
+    <page name="LocationRequisitions" />
+    <container id="c101" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-22T12:30:03">
+    <page name="LocationRequisitions" />
+    <copy>
+      <page name="MyRequisitions" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-22T12:30:16">
+    <page name="LocationRequisitions" />
+    <dataView id="view1" />
+    <update>
+      <Controller>RequisitionLinesLocations</Controller>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-27T12:49:41">
+    <page name="MyTrolley" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-27T12:50:06">
+    <page name="MyCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-27T12:50:23">
+    <page name="LocationCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-27T12:50:35">
+    <page name="StationTrolley" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T09:38:02">
+    <page name="MyProfile" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:16:54">
+    <page name="MyProfile" />
+    <update>
+      <Roles>officer-profile</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:17:19">
+    <page name="MyRequisitions" />
+    <update>
+      <Roles>officer-detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:17:37">
+    <page name="MyDetail" />
+    <update>
+      <Roles>officer-detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:18:52">
+    <page name="LocationRequisitions" />
+    <update>
+      <Roles>Location-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:19:10">
+    <page name="MyTrolley" />
+    <update>
+      <Roles>Officer</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:19:28">
+    <page name="MyCatalogue" />
+    <update>
+      <Roles>Officer</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:19:58">
+    <page name="MyTrolley" />
+    <update>
+      <About>You can add/edit items in your Trolley here</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:20:24">
+    <page name="MyDetail" />
+    <update>
+      <About>This page shows your  profile information</About>
+      <Roles>Officer-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:20:56">
+    <page name="MyDetail" />
+    <update>
+      <About>This page shows your profile and items ordered</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:21:24">
+    <page name="MyRequisitions" />
+    <update>
+      <Roles>Officer-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T10:21:53">
+    <page name="MyProfile" />
+    <update>
+      <Roles>Officer-Profile</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-06-28T12:24:07">
+    <page name="Home" />
+    <copy>
+      <page name="MyCatalogue" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-28T12:24:21">
+    <page name="Home" />
+    <copy>
+      <page name="StationTrolley" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-06-28T12:25:25">
+    <page name="Home" />
+    <container id="c101" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-28T12:25:25">
+    <page name="Home" />
+    <container id="c102" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-06-28T12:26:18">
+    <page name="Home" />
+    <update>
+      <UseExtenders>false</UseExtenders>
+      <Style />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-06T17:59:57">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+      <PageSize>12</PageSize>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-06T18:00:17">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-06T18:05:52">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+      <PageSize />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-07T15:55:42">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-07T15:58:45">
+    <page name="Home" />
+    <update>
+      <CustomStyle />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-08T14:48:18">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>display-style-listonecolumn
+view-style-charts-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-08T14:53:49">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card
+view-style-charts-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-08T15:01:29">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card,
+view-style-charts-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-08T15:01:49">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-07-11T12:10:06">
+    <page name="MyCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+      <AutoSelectFirstRow>true</AutoSelectFirstRow>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-07T16:26:17">
+    <page name="MyCatalogue" />
+    <container id="container1" />
+    <copy>
+      <page name="MyTrolley" />
+      <dataView id="view1" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-08-07T16:26:43">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+      <VisibleWhen>false</VisibleWhen>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-07T16:27:20">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-08-07T16:27:31">
+    <page name="MyCatalogue" />
+    <container id="container1" />
+    <copy>
+      <page name="MyTrolley" />
+      <dataView id="view2" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2017-08-07T16:27:44">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-card, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-07T17:48:35">
+    <page name="MyTrolley" />
+    <update>
+      <Name>Personal</Name>
+      <CustomStyle>material-icon-view-module</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-07T17:51:16">
+    <page name="Personal" />
+    <update>
+      <CustomStyle />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-07T17:51:45">
+    <page name="MyCatalogue" />
+    <update>
+      <Title>Perosnal</Title>
+      <Description>Add Items</Description>
+      <CustomStyle>material-icon-view-module</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T10:43:17">
+    <page name="MyCatalogue" />
+    <update>
+      <Title>Personal</Title>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T10:43:28">
+    <page name="MyCatalogue" />
+    <update>
+      <About>You can order items from your personal catalogue here</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T10:43:47">
+    <page name="MyRequisitions" />
+    <update>
+      <CustomStyle>material-icon-view-module</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T11:57:11">
+    <page name="MyRequisitions" />
+    <update>
+      <CustomStyle />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T11:57:39">
+    <page name="MyCatalogue" />
+    <rename>Personal</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-08T11:58:05">
+    <page name="MyCatalogue" />
+    <dataView id="view1" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:05:36">
+    <page name="Personal" />
+    <update>
+      <Roles>Officer123</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:11:54">
+    <page name="MyCatalogue" />
+    <update>
+      <Description>Add Items to your Personal Trolley</Description>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:14:58">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-card-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:16:36">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:18:42">
+    <page name="MyRequisitions" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:18:53">
+    <page name="MyProfile" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:48:18">
+    <page name="Home" />
+    <update>
+      <Roles>nover</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:49:33">
+    <page name="Home" />
+    <update>
+      <Roles>Never</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-08T13:50:39">
+    <page name="Home" />
+    <update>
+      <Roles />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:20:25">
+    <page name="Home" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:21:14">
+    <userControls />
+    <insert type="userControl">
+      <Name>LoginScreen</Name>
+      <Prefix>uc</Prefix>
+      <Generate>FirstTimeOnly</Generate>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:25:35">
+    <page name="Home" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>MyProfile</Controller>
+      <View>loginForm</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:27:17">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <StartCommandName>Edit</StartCommandName>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:28:58">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <StartCommandName>New</StartCommandName>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:39:34">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <StartCommandName />
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:40:57">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <StartCommandArgument>New</StartCommandArgument>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T08:42:03">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <StartCommandName>New</StartCommandName>
+      <StartCommandArgument>loginForm</StartCommandArgument>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T09:07:07">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <VisibleWhen>($app.userId() == null)</VisibleWhen>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T09:08:20">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <ShowModalForms>true</ShowModalForms>
+      <VisibleWhen>debugger;
+($app.userId() == null)</VisibleWhen>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T09:10:52">
+    <page name="Home" />
+    <dataView id="view1" />
+    <update>
+      <VisibleWhen>debugger;
+(($app.userId() == null)  || ($app.userId() == "") )</VisibleWhen>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:35:34">
+    <page name="StationTrolley" />
+    <update>
+      <Name>Location</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:35:55">
+    <page name="Location" />
+    <update>
+      <Title>Location</Title>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:36:04">
+    <page name="Location" />
+    <rename>Location</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:36:07">
+    <page name="MyCatalogue" />
+    <before>
+      <page name="Location" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:36:24">
+    <page name="Personal" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-08-22T10:36:47">
+    <page name="Location" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+multi-select-none </Tag>
+      <AutoHighlightFirstRow>true</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>true</AutoSelectFirstRow>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T11:20:35">
+    <page name="Location" />
+    <move>
+      <page name="LocationRequisitions" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-08-22T11:27:04">
+    <page name="Location" />
+    <update>
+      <CustomStyle>material-icon-view-module</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T11:27:47">
+    <page name="LocationCatalogue" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2017-08-22T11:53:06">
+    <page name="MyCatalogue" />
+    <update>
+      <CustomStyle>material-icon-person</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T11:53:25">
+    <page name="Location" />
+    <update>
+      <CustomStyle>material-icon-location-city</CustomStyle>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:01:15">
+    <page name="Location" />
+    <update>
+      <Title>Location Catalogue</Title>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:02:08">
+    <page name="Location" />
+    <update>
+      <Name>LocationCatalogue</Name>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:02:25">
+    <page name="LocationCatalogue" />
+    <rename>Location Catalogue</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:03:34">
+    <page name="MyCatalogue" />
+    <rename>Personal Catalogue</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:03:51">
+    <page name="MyDetail" />
+    <rename>Order Details</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:03:56">
+    <page name="MyDetail" />
+    <move>
+      <page name="LocationRequisitions" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:03:59">
+    <page name="MyRequisitions" />
+    <move>
+      <page name="LocationRequisitions" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:04:03">
+    <page name="MyRequisitions" />
+    <before>
+      <page name="LocationRequisitions" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:04:19">
+    <page name="MyDetail" />
+    <rename>Requisition Details</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:20:22">
+    <page name="LocationRequisitions" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+view-style-cards-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:22:56">
+    <page name="MyRequisitions" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+view-style-cards-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:23:08">
+    <page name="MyProfile" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+view-style-cards-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:23:11">
+    <page name="MyProfile" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+view-style-cards-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:23:21">
+    <page name="MyProfile" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+view-style-cards-disabled,
+multi-select-none </Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:32:15">
+    <page name="MyDetail" />
+    <update>
+      <Description>Show details of items ordered</Description>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:32:34">
+    <page name="MyDetail" />
+    <rename>Item  Details</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:32:45">
+    <page name="LocationRequisitions" />
+    <rename>Location Items</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:32:54">
+    <page name="MyRequisitions" />
+    <rename>My Items</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:35:28">
+    <page name="MyDetail" />
+    <update>
+      <Description>Show details of items ordered/resuisitined previously</Description>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:35:54">
+    <page name="MyDetail" />
+    <update>
+      <Description>Show details of items ordered/requisitioned previously</Description>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:36:16">
+    <page name="MyDetail" />
+    <rename>Requested Items</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:36:33">
+    <page name="MyDetail" />
+    <update>
+      <About>This page shows your profile and items requested</About>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-22T12:37:16">
+    <page name="MyDetail" />
+    <update>
+      <Roles>Officer-Detail,Location-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T16:27:43">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-calendar-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T16:31:33">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-list-disabled 
+view-style-cards-disabled 
+view-style-map-disabled 
+view-style-calendar-disabled
+view-style-grid
+view-style-charts-disabled
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:04:15">
+    <page name="LocationCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:04:40">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:05:24">
+    <page name="MyCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:05:33">
+    <page name="MyCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:07:24">
+    <page name="LocationCatalogue" />
+    <dataView id="view2" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+view-style-calendar-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-23T17:07:57">
+    <page name="LocationCatalogue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+multi-select-none</Tag>
+      <ShowViewSelector>false</ShowViewSelector>
+      <ShowSearchBar>false</ShowSearchBar>
+      <ShowQuickFind>false</ShowQuickFind>
+    </update>
+  </c>
+  <c y="NodeSet" t="2017-08-25T14:13:06">
+    <page name="LocationCatalogue" />
+    <rename>Location</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-25T14:13:14">
+    <page name="MyCatalogue" />
+    <rename>Personal</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-25T14:13:22">
+    <page name="MyDetail" />
+    <rename>History</rename>
+  </c>
+  <c y="NodeSet" t="2017-08-31T10:34:29">
+    <page name="RqRanks" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2019-10-01T19:28:25">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterSource>view2</FilterSource>
+      <FilterFields>StaffUid</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T19:39:18">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T20:38:24">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterFields />
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T20:41:57">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterFields>StaffUid</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T20:45:59">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterSource />
+      <FilterFields />
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T20:54:10">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterSource>view2</FilterSource>
+      <FilterFields>StaffUid</FilterFields>
+      <AutoHide />
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:03:34">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterFields>Local_StaffUID</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:06:53">
+    <pages />
+    <insert type="page">
+      <Name>Test</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Path>Test</Path>
+      <Title>Test</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:06:59">
+    <page name="Test" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:07:33">
+    <page name="Test" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>TrolleyPersonal</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:07:45">
+    <page name="Test" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:08:01">
+    <page name="Test" />
+    <container id="c102" />
+    <insert type="dataView">
+      <Controller>TrolleyLinePersonal</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:10:12">
+    <page name="Test" />
+    <dataView id="view2" />
+    <update>
+      <FilterSource>view1</FilterSource>
+      <FilterFields>Local_StaffUID</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:20:10">
+    <page name="Test" />
+    <dataView id="view1" />
+    <update>
+      <View>grid2</View>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:21:15">
+    <page name="Test" />
+    <dataView id="view2" />
+    <update>
+      <AutoHide />
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:23:31">
+    <page name="Test" />
+    <dataView id="view1" />
+    <update>
+      <View>grid1</View>
+    </update>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:23:42">
+    <page name="Test" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:25:03">
+    <pages />
+    <deleteRefs type="field">
+      <Controller>TrolleyLinePersonal</Controller>
+      <Name>Local_StaffUID</Name>
+    </deleteRefs>
+  </c>
+  <c y="NodeSet" t="2019-10-01T21:27:26">
+    <page name="MyCatalogue" />
+    <dataView id="view3" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled</Tag>
+      <FilterSource />
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-01-10T18:15:33">
+    <pages />
+    <insert type="page">
+      <Name>PAVA</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Path>PAVA</Path>
+      <Title>PAVA</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2020-01-10T18:15:47">
+    <page name="PAVA" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2020-01-10T18:35:30">
+    <page name="PAVA" />
+    <move>
+      <page name="SerialNumbersStaff" />
+      <container id="container1" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2020-01-10T18:35:36">
+    <page name="PAVA" />
+    <container id="c101" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2020-01-10T18:35:40">
+    <page name="SerialNumbersStaff" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2020-01-10T19:17:24">
+    <page name="PAVA" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-01-12T16:38:54">
+    <page name="PAVA" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2020-01-12T16:39:17">
+    <page name="SerialNumbersLocation" />
+    <rename>PAVA Spray</rename>
+  </c>
+  <c y="NodeSet" t="2020-01-12T18:47:45">
+    <page name="SerialNumbersLocation" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+view-style-calendar-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-06-20T17:09:26">
+    <page name="SerialNumbersLocation" />
+    <rename>PPE</rename>
+  </c>
+  <c y="NodeSet" t="2020-06-20T17:09:47">
+    <page name="SerialNumbersLocation" />
+    <update>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Roles>PPE</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-06-20T17:09:59">
+    <page name="SerialNumbersLocation" />
+    <update>
+      <Roles />
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-07-06T12:31:06">
+    <page name="MyRequisitions" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2020-07-06T12:31:26">
+    <page name="MyRequisitions" />
+    <container id="c102" />
+    <insert type="dataView">
+      <Controller>RequisitionText</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2020-07-06T12:38:49">
+    <page name="RequisitionText" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:27:18">
+    <pages />
+    <insert type="page" context="/page/MyRequisitions">
+      <Name>MYNonStockItems</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Title>MYNon Stock Items</Title>
+      <Roles>*</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:27:26">
+    <page name="MYNonStockItems" />
+    <update>
+      <Title>Non Stock Items</Title>
+    </update>
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:27:29">
+    <page name="MYNonStockItems" />
+    <move>
+      <page name="MyRequisitions" />
+      <container id="c102" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:27:45">
+    <page name="MYNonStockItems" />
+    <rename>Non Stock Items</rename>
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:33:33">
+    <page name="LocationRequisitions" />
+    <copy>
+      <page name="MYNonStockItems" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2020-07-06T13:33:56">
+    <page name="MYNonStockItems_1" />
+    <dataView id="view2" />
+    <update>
+      <Controller>RequisitionTextLocation</Controller>
+    </update>
+  </c>
+  <c y="NodeSet" t="2021-01-30T14:41:39">
+    <page name="RqBudcd" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2021-01-30T14:41:39">
+    <page name="GlCodes" />
+    <delete />
+  </c>
+</log>

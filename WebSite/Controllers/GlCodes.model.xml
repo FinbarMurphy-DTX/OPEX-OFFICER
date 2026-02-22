@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="gl_codes" alias="gl_codes" created="2021-01-30T14:23:52" modified="2021-01-30T14:28:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="gl_code" fieldName="GlCode" label="Gl Code" />
+    <column name="gl_description" fieldName="GlDescription" label="Gl Description" />
+    <column name="disabled" fieldName="Disabled" label="Disabled" />
+    <column name="display_in_ss" fieldName="DisplayInSs" label="Display In Ss" />
+  </columns>
+</dataModel>

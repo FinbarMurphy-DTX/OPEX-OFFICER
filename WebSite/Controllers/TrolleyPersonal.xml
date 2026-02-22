@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TrolleyPersonal" conflictDetection="overwriteChanges" label="Opexrq Trolley" handler="DatatecnixOfficerII.Rules.TrolleyPersonalBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_trolley`.`rowid` `Rowid`
+	,`rq_trolley`.`date_required` `DateRequired`
+	,`rq_trolley`.`status_code` `StatusCode`
+	,`rq_trolley`.`header_value` `HeaderValue`
+	,`rq_trolley`.`urgent_req` `UrgentReq`
+	,`rq_trolley`.`customer` `Customer`
+	,`rq_trolley`.`del_code` `DelCode`
+	,`rq_trolley`.`free_text` `FreeText`
+	,`rq_trolley`.`job_no` `JobNo`
+	,`rq_trolley`.`budget_ind` `BudgetInd`
+	,`budget_ind`.`budget_desc` `BudgetIndbudgetDesc`
+	,`rq_trolley`.`delivery_location` `DeliveryLocation`
+	,`rq_trolley`.`staff_uid` `StaffUid`
+	,`staff_u`.`location_code` `StaffUlocationCode`
+	,`staff_u`.`forname` `StaffuForname`
+	,`staff_u`.`surname` `StaffuSurname`
+	,`staff_u`.`rank_code` `StaffuRankCode`
+	,`staff_u`.`email` `StaffuEmail`
+	,`staff_u`.`staff_code` `StaffuStaffCode`
+	,`staff_ucompany`.`name` `StaffUcompanyName`
+	,`staff_urank`.`rank_desc` `StaffUrankRankDesc`
+	,`rq_trolley`.`role_id` `RoleID`
+	,`role`.`cost_centre` `RoleCostCentre`
+	,`role_staff_u`.`location_code` `RoleStaffUlocationCode`
+	,`role1`.`name` `RoleName`
+	,`role_location`.`location_desc` `RoleLocationDesc`
+	,`rq_trolley`.`del_location_id` `DelLocationID`
+	,`del_location`.`sla_acc` `DelLocationSlaAcc`
+	,`del_location`.`sla_nam` `DelLocationSlaNam`
+	,`role_rank`.`rank_desc` `RoleRankDesc`
+	,`staff_ulocation`.`location_desc` `StaffUlocationLocationDesc`
+	,`rq_trolley`.`default_comment_code` `DefaultCommentCode`
+	,`default_comment_code`.`comment_desc` `DefaultCommentCodeCommentDesc`
+from `opex`.`rq_trolley` `rq_trolley`
+	left join `opex`.`rq_budcd` `budget_ind` on `rq_trolley`.`budget_ind` = `budget_ind`.`budget_code`
+	left join `opex`.`rq_staff` `staff_u` on `rq_trolley`.`staff_uid` = `staff_u`.`staff_uid`
+	left join `opex`.`rq_locns` `staff_ulocation` on `staff_u`.`location_code` = `staff_ulocation`.`location_code`
+	left join `opex`.`company` `staff_ucompany` on `staff_u`.`company_id` = `staff_ucompany`.`id`
+	left join `opex`.`rq_ranks` `staff_urank` on `staff_u`.`rank_code` = `staff_urank`.`rank_code`
+	left join `opex`.`staff_roles` `role` on `rq_trolley`.`role_id` = `role`.`id`
+	left join `opex`.`rq_staff` `role_staff_u` on `role`.`staff_uid` = `role_staff_u`.`staff_uid`
+	left join `opex`.`roles` `role1` on `role`.`role_id` = `role1`.`id`
+	left join `opex`.`rq_ranks` `role_rank` on `role`.`rank_code` = `role_rank`.`rank_code`
+	left join `opex`.`rq_locns` `role_location` on `role`.`location_code` = `role_location`.`location_code`
+	left join `opex`.`locations` `del_location` on `rq_trolley`.`del_location_id` = `del_location`.`del_location_id`
+	left join `opex`.`rq_comms` `default_comment_code` on `rq_trolley`.`default_comment_code` = `default_comment_code`.`comment_code`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="DateRequired" type="DateTime" label="Date Required" showInSummary="true" />
+    <field name="StatusCode" type="String" label="Status Code" length="2" showInSummary="true" />
+    <field name="HeaderValue" type="Decimal" allowNulls="false" label="Header Value" showInSummary="true" dataFormatString="C2" />
+    <field name="UrgentReq" type="String" label="Urgent Req" length="1" showInSummary="true" />
+    <field name="Customer" type="String" label="Customer" length="8" showInSummary="true" />
+    <field name="DelCode" type="String" label="Del Code" length="8" />
+    <field name="FreeText" type="String" label="Comments" length="255" />
+    <field name="JobNo" type="String" label="Job No" length="10" />
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8">
+      <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
+    </field>
+    <field name="BudgetIndbudgetDesc" type="String" readOnly="true" label="Budget Indbudget Desc" length="50" />
+    <field name="DeliveryLocation" type="String" label="Delivery Location" length="8" />
+    <field name="StaffUlocationCode" type="String" readOnly="true" label="Staff Ulocation Code" length="8" />
+    <field name="StaffuForname" type="String" readOnly="true" label="Forename" length="30" />
+    <field name="StaffuSurname" type="String" readOnly="true" label="Surname" length="30" />
+    <field name="StaffuRankCode" type="String" readOnly="true" label="Rank Code" length="8" />
+    <field name="StaffuEmail" type="String" readOnly="true" label="Email" length="255" />
+    <field name="StaffuStaffCode" type="String" readOnly="true" label="Staff Code" length="8" />
+    <field name="StaffUcompanyName" type="String" readOnly="true" label="Staff Ucompany Name" length="20" />
+    <field name="StaffUrankRankDesc" type="String" readOnly="true" label="Rank" length="32" />
+    <field name="RoleID" type="Int32" label="Change Role" contextFields="StaffUid=StaffUid">
+      <items style="Lookup" dataController="OpexstaffRoles" dataValueField="ID" dataTextField="ID" copy="RoleName=RoleName,&#xD;&#xA;LocalRankCode=LocalRankCode,&#xD;&#xA;LocalRankDescription=LocalRankDescription,&#xD;&#xA;LocalBudgetCode=LocalBudgetCode,&#xD;&#xA;LocalLocation=LocalLocation,&#xD;&#xA;LocalLocationCode=LocalLocationCode&#xD;&#xA;" dataView="grid1" />
+    </field>
+    <field name="RoleCostCentre" type="String" readOnly="true" dataFormatString="c" label="Role Cost Centre" length="8" />
+    <field name="RoleStaffUlocationCode" type="String" readOnly="true" label="Role Staff Ulocation Code" length="8" />
+    <field name="RoleName" type="String" readOnly="true" label="Role Type" length="12" />
+    <field name="RoleLocationDesc" type="String" readOnly="true" label="Location" length="75" />
+    <field name="DelLocationID" type="UInt32" label="Del Location Id">
+      <items style="Lookup" dataController="Opexlocations" dataValueField="DelLocationID" dataTextField="SlaNam" copy="DelLocationSlaNam=SlaNam&#xD;&#xA;DelLocationSlaAcc=SlaAcc" dataView="grid1" />
+    </field>
+    <field name="DelLocationSlaAcc" type="String" readOnly="true" label="Del Location Sla Acc" length="8" />
+    <field name="DelLocationSlaNam" type="String" readOnly="true" label="Deliver To" length="75" />
+    <field name="StaffUid" type="UInt32" allowNulls="false" label="Staff Uid" readOnly="true">
+      <items style="Lookup" dataController="Staff" dataValueField="StaffUid" dataTextField="StaffCode" copy="StaffuForname=Forname, StaffuSurname=Surname, StaffuRankCode=RankCode, StaffuEmail=Email, StaffuStaffCode=StaffCode, StaffUcompanyName=LocationDivisionCompanyName, StaffUrankRankDesc=RankDesc, StaffUlocationLocationDesc=LocationDesc" dataView="grid1" />
+    </field>
+    <field name="RoleRankDesc" type="String" readOnly="true" label="Role Rank" length="32" />
+    <field name="StaffUlocationLocationDesc" type="String" readOnly="true" label="Location" length="75" />
+    <field name="DefaultCommentCode" type="String" label="Default Reason Code" length="3">
+      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentDesc" />
+    </field>
+    <field name="DefaultCommentCodeCommentDesc" type="String" readOnly="true" label="Default Reason" length="20" />
+    <field name="Local_TrolleyCount" type="UInt32" label="Items in Trolley" computed="true" dataFormatString="N0" isVirtual="true">
+      <formula>select count(*) from rq_trolley_item t where t.staff_uid = `rq_trolley`.`staff_uid`</formula>
+    </field>
+    <field name="Local_RoleDescription" type="String" label="Role" computed="true" calculated="true" isVirtual="true" length="200">
+      <formula>BuildRoleName(`role1`.`description`,
+`role_location`.location_desc ,
+`role_rank`.`rank_desc`)</formula>
+    </field>
+    <field name="LocalRankCode" type="String" label="Rank Code" isVirtual="true" computed="true" readOnly="true">
+      <formula>COALESCE(`role`.rank_code,`role1`.rank_code,staff_u.rank_code)</formula>
+    </field>
+    <field name="LocalRankDescription" type="String" label="Rank " isVirtual="true" computed="true" readOnly="true">
+      <formula>( Select  r.rank_desc from rq_ranks r Where r.rank_code = COALESCE(role.rank_code,role1.rank_code,staff_u.rank_code)) 	</formula>
+    </field>
+    <field name="LocalBudgetCode" type="String" label="Budget" isVirtual="true" computed="true" readOnly="true">
+      <formula>COALESCE(role.cost_centre,role1.cost_centre ,(select l.budget_ind from rq_locns l  where l.location_code = `staff_u`.`location_code`  ))</formula>
+    </field>
+    <field name="LocalLocation" type="String" label="Location Code" computed="true" length="75" isVirtual="true">
+      <formula>COALESCE(`role_location`.location_desc,`staff_ulocation`.location_desc )</formula>
+    </field>
+    <field name="LocalLocationCode" type="String" label="Location Code" computed="true" length="8" isVirtual="true">
+      <formula>COALESCE(`role_location`.location_code,staff_u.location_code)</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Delivery">
+      <headerText>Delivery Information</headerText>
+      <dataFields>
+        <dataField fieldName="StaffUid" hidden="true" />
+        <dataField fieldName="StaffuStaffCode" columns="8" />
+        <dataField fieldName="StaffUrankRankDesc" columns="32" />
+        <dataField fieldName="Local_RoleDescription" rows="5" columns="50" />
+        <dataField fieldName="DelLocationSlaNam" columns="50" rows="5" />
+        <dataField fieldName="DateRequired" columns="10" />
+        <dataField fieldName="FreeText" columns="25" />
+        <dataField fieldName="Local_TrolleyCount" columns="15" />
+        <dataField fieldName="StaffuSurname" columns="30" hidden="true" />
+        <dataField fieldName="HeaderValue" columns="15" textMode="Static" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="OPEXTrolleyContents" test="[Local_TrolleyCount] != 0" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Delivery + Role Details">
+      <headerText>You can update your delivery details and role information here</headerText>
+      <categories>
+        <category id="c1" headerText="Delivery Details" tab="Delivery" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaNam" />
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="StaffuStaffCode" columns="8" hidden="true" />
+            <dataField fieldName="DefaultCommentCode" aliasFieldName="DefaultCommentCodeCommentDesc" />
+          </dataFields>
+        </category>
+        <category headerText="Role Information" id="c3" tab="Role">
+          <dataFields>
+            <dataField fieldName="RoleID" columns="15" aliasFieldName="Local_RoleDescription">
+              <headerText>Alternate Role</headerText>
+            </dataField>
+            <dataField fieldName="RoleName" columns="12" />
+            <dataField fieldName="LocalLocation" rows="5" />
+            <dataField fieldName="LocalLocationCode" columns="8" />
+            <dataField fieldName="LocalRankCode" rows="5" />
+            <dataField fieldName="LocalRankDescription" rows="5" />
+            <dataField fieldName="LocalBudgetCode" rows="5" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" id="c2" tab="Hidden">
+          <dataFields>
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="Customer" columns="8" />
+            <dataField fieldName="DelCode" columns="8" />
+            <dataField fieldName="JobNo" columns="10" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="StaffuForname" columns="30" />
+            <dataField fieldName="StaffuSurname" columns="30" />
+            <dataField fieldName="StaffuRankCode" columns="8" />
+            <dataField fieldName="StaffuEmail" />
+            <dataField fieldName="StaffUcompanyName" columns="20" />
+            <dataField fieldName="DeliveryLocation" columns="8" />
+            <dataField fieldName="StaffUrankRankDesc" columns="32" />
+            <dataField fieldName="StaffUlocationLocationDesc" />
+            <dataField fieldName="StaffUid" hidden="true" />
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="RoleCostCentre" columns="8" />
+            <dataField fieldName="RoleRankDesc" columns="32" />
+            <dataField fieldName="RoleLocationDesc" />
+          </dataFields>
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Trolley">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="Customer" columns="8" />
+            <dataField fieldName="DelCode" columns="8" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="JobNo" columns="10" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="DeliveryLocation" columns="8" />
+            <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+            <dataField fieldName="StaffuForname" columns="30" />
+            <dataField fieldName="StaffuSurname" columns="30" />
+            <dataField fieldName="StaffuRankCode" columns="8" />
+            <dataField fieldName="StaffuEmail" />
+            <dataField fieldName="StaffuStaffCode" columns="8" />
+            <dataField fieldName="StaffUcompanyName" columns="20" />
+            <dataField fieldName="StaffUrankRankDesc" columns="32" />
+            <dataField fieldName="RoleID" columns="15" />
+            <dataField fieldName="RoleCostCentre" columns="8" />
+            <dataField fieldName="RoleStaffUlocationCode" columns="8" />
+            <dataField fieldName="RoleName" columns="12" />
+            <dataField fieldName="RoleLocationDesc" />
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaAcc" />
+            <dataField fieldName="DelLocationSlaNam" />
+            <dataField fieldName="RoleRankDesc" columns="32" />
+            <dataField fieldName="StaffUlocationLocationDesc" />
+            <dataField fieldName="DefaultCommentCode" aliasFieldName="DefaultCommentCodeCommentDesc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Trolley Actions" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action commandName="Custom" commandArgument="FullScreen" headerText="Show Catalogue" id="a102" description="Full Screen" causesValidation="false" cssClass="material-icon-view-module" />
+      <action commandName="Custom" commandArgument="SubmitPersonalTrolley" headerText="Submit Trolley" causesValidation="false" id="a100" confirmation="This will submit all the items in your trolley for approval and dispatch" cssClass="material-icon-shopping-cart" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag1" scope="Grid" flat="false">
+      <action commandName="Custom" commandArgument="FullScreen" headerText="Show Catalogue" id="a102" description="Full Screen" causesValidation="false" cssClass="material-icon-view-module" whenView="grid1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="SubmitPersonalTrolley" type="Code" phase="Execute" name="SubmitPersonalTrolley" />
+    <rule id="r103" commandName="Custom" commandArgument="FullScreen" type="JavaScript" phase="Execute" name="FullScreen"><![CDATA[debugger;
+$app.touch.show({ controller: 'ItemCataloguePersonal', view: 'grid1' });]]></rule>
+    <rule id="r101" commandName="Update" type="JavaScript" phase="Before" name="ConfirmRole"><![CDATA[debugger;
+if (this.selectFieldValueObject("RoleID").Modified)
+{
+
+success = this.result.confirm('Changing your role will empty your current Trolley ? ');
+if (!success) 
+{
+  this.preventDefault();
+}
+}
+]]></rule>
+    <rule id="r102" commandName="Update" type="Code" phase="Execute" name="UpadateRole" />
+  </businessRules>
+</dataController>

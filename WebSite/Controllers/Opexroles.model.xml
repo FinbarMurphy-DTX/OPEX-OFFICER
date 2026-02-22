@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="roles" alias="roles" created="2017-06-13T16:31:33" modified="2017-06-13T16:34:13" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="cost_centre" parentTableSchema="opex" parentTableName="rq_budcd" x="300" y="20">
+      <foreignKeyColumn columnName="cost_centre" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="rank" parentTableSchema="opex" parentTableName="rq_ranks" x="300" y="181">
+      <foreignKeyColumn columnName="rank_code" parentColumnName="rank_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="id" fieldName="ID" label="Id" />
+    <column name="name" fieldName="Name" label="Name" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="cost_centre" fieldName="CostCentre" label="Cost Centre" format="c" aliasColumnName="budget_desc" aliasForeignKey="cost_centre" />
+    <column name="budget_desc" fieldName="CostCentrebudgetDesc" label="Cost Centrebudget Desc" foreignKey="cost_centre" />
+    <column name="rank_code" fieldName="RankCode" label="Rank Code" aliasColumnName="rank_desc" aliasForeignKey="rank" />
+    <column name="rank_desc" fieldName="RankDesc" label="Rank Desc" foreignKey="rank" />
+  </columns>
+</dataModel>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="st_item" alias="st_item" created="2017-06-07T10:51:43" modified="2022-04-25T18:54:08" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="sti_grp1" parentTableSchema="opex" parentTableName="st_gp1cd" x="360" y="20">
+      <foreignKeyColumn columnName="sti_grp1" parentColumnName="sti_grp1" />
+    </foreignKey>
+    <foreignKey id="sti_grp2" parentTableSchema="opex" parentTableName="st_gp2cd" x="360" y="182">
+      <foreignKeyColumn columnName="sti_grp2" parentColumnName="sti_grp2" />
+    </foreignKey>
+    <foreignKey id="wh" parentTableSchema="opex" parentTableName="st_whse" x="360" y="504">
+      <foreignKeyColumn columnName="wh_code" parentColumnName="whse_code" />
+    </foreignKey>
+    <foreignKey id="wh_warehouse_type" parentTableSchema="opex" parentTableName="warehouse_types" baseForeignKey="wh" x="1023" y="20">
+      <foreignKeyColumn columnName="warehouse_type" parentColumnName="type_id" />
+    </foreignKey>
+    <foreignKey id="certification" parentTableSchema="opex" parentTableName="st_certs" x="360" y="688">
+      <foreignKeyColumn columnName="certification_code" parentColumnName="code" />
+    </foreignKey>
+    <foreignKey id="staff_filter" parentTableSchema="opex" parentTableName="item_staff_filter" x="360" y="848">
+      <foreignKeyColumn columnName="staff_filter" parentColumnName="staff_filter" />
+    </foreignKey>
+    <foreignKey id="review_period" parentTableSchema="opex" parentTableName="review_periods" x="718" y="20">
+      <foreignKeyColumn columnName="review_period" parentColumnName="period_code" />
+    </foreignKey>
+    <foreignKey id="company" parentTableSchema="opex" parentTableName="company" x="718" y="182">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="item_gl" parentTableSchema="opex" parentTableName="gl_codes" x="718" y="342">
+      <foreignKeyColumn columnName="item_gl_code" parentColumnName="gl_code" />
+    </foreignKey>
+    <foreignKey id="store_unit" parentTableSchema="opex" parentTableName="st_units" x="718" y="825">
+      <foreignKeyColumn columnName="store_unit_id" parentColumnName="rowid" />
+    </foreignKey>
+    <foreignKey id="location_catalogue" parentTableSchema="opex" parentTableName="location_catalogue" x="1331" y="20">
+      <foreignKeyColumn columnName="location_catalogue_id" parentColumnName="location_catalogue_id" />
+    </foreignKey>
+    <foreignKey id="charge" parentTableSchema="opex" parentTableName="st_charge_code" x="1676" y="20">
+      <foreignKeyColumn columnName="charge_id" parentColumnName="charge_id" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" />
+    <column name="sti_desc" fieldName="StiDesc" label="Sti Desc" />
+    <column name="sti_grp1" fieldName="StiGrp1" label="Sti Grp1" aliasColumnName="stg1_grp1_desc" aliasForeignKey="sti_grp1" />
+    <column name="stg1_grp1_desc" fieldName="StiGrp1Stg1Grp1Desc" label="Sti Grp 1 Stg 1 Grp 1 Desc" foreignKey="sti_grp1" />
+    <column name="sti_grp2" fieldName="StiGrp2" label="Sti Grp2" aliasColumnName="stg2_grp2_desc" aliasForeignKey="sti_grp2" />
+    <column name="stg2_grp2_desc" fieldName="StiGrp2Stg2Grp2Desc" label="Sti Grp 2 Stg 2 Grp 2 Desc" foreignKey="sti_grp2" />
+    <column name="vat_code" fieldName="VatCode" label="Vat Code" />
+    <column name="standard_price" fieldName="StandardPrice" label="Standard Price" format="c" />
+    <column name="average_cost" fieldName="AverageCost" label="Average Cost" format="c" />
+    <column name="last_cost" fieldName="LastCost" label="Last Cost" format="c" />
+    <column name="standard_cost" fieldName="StandardCost" label="Standard Cost" format="c" />
+    <column name="sti_on_stp" fieldName="StiOnStp" label="On Stop" />
+    <column name="sti_stnd_ord_qty" fieldName="StiStndOrdQty" label="Sti Stnd Ord Qty" />
+    <column name="sti_stk_lv" fieldName="StiStkLv" label="Sti Stk Lv" />
+    <column name="sti_fre_stk" fieldName="StiFreStk" label="Sti Fre Stk" />
+    <column name="sti_pl_nl_cd" fieldName="StiPlNlCd" label="Sti Pl Nl Cd" />
+    <column name="sti_cs_nl_cd" fieldName="StiCsNlCd" label="Sti Cs Nl Cd" />
+    <column name="sti_ci_nl_cd" fieldName="StiCiNlCd" label="Sti Ci Nl Cd" />
+    <column name="sti_cv_nl_cd" fieldName="StiCvNlCd" label="Sti Cv Nl Cd" />
+    <column name="sti_disc_cd" fieldName="StiDiscCd" label="Sti Disc Cd" />
+    <column name="sti_stk_typ" fieldName="StiStkTyp" label="Sti Stk Typ" />
+    <column name="sti_alt_itm" fieldName="StiAltItm" label="Sti Alt Itm" />
+    <column name="sti_fifo_low" fieldName="StiFifoLow" label="Sti Fifo Low" />
+    <column name="sti_fifo_high" fieldName="StiFifoHigh" label="Sti Fifo High" />
+    <column name="order_unit" fieldName="OrderUnit" label="Order Unit" />
+    <column name="store_unit" fieldName="StoreUnit" label="Store Unit" />
+    <column name="price_unit" fieldName="PriceUnit" label="Price Unit" format="c" />
+    <column name="order_per" fieldName="OrderPer" label="Order Per" />
+    <column name="price_per" fieldName="PricePer" label="Price Per" format="c" />
+    <column name="store_per" fieldName="StorePer" label="Store Per" />
+    <column name="size_scale" fieldName="SizeScale" label="Size Scale" />
+    <column name="last_receipt_date" fieldName="LastReceiptDate" label="Last Receipt Date" />
+    <column name="budget_ind" fieldName="BudgetInd" label="Budget Ind" />
+    <column name="item_oncost" fieldName="ItemOncost" label="Item Oncost" format="c" />
+    <column name="group_oncost" fieldName="GroupOncost" label="Group Oncost" format="c" />
+    <column name="contract_code" fieldName="ContractCode" label="Contract Code" />
+    <column name="max_issue_lv" fieldName="MaxIssueLv" label="Max Issue Lv" />
+    <column name="max_order_qty" fieldName="MaxOrderQty" label="Max Order Qty" />
+    <column name="max_stk_lv" fieldName="MaxStkLv" label="Max Stk Lv" />
+    <column name="total_issues" fieldName="TotalIssues" label="Total Issues" />
+    <column name="frozen_qty" fieldName="FrozenQty" label="Frozen Qty" />
+    <column name="frozen_date" fieldName="FrozenDate" label="Frozen Date" />
+    <column name="inventory_date" fieldName="InventoryDate" label="Inventory Date" />
+    <column name="suspense_code" fieldName="SuspenseCode" label="Suspense Code" />
+    <column name="inventory_code" fieldName="InventoryCode" label="Inventory Code" />
+    <column name="adjustment_code" fieldName="AdjustmentCode" label="Adjustment Code" />
+    <column name="oncost_code" fieldName="OncostCode" label="Oncost Code" format="c" />
+    <column name="sti_desc2" fieldName="StiDesc2" label="Sti Desc2" />
+    <column name="last_stock_take" fieldName="LastStockTake" label="Last Stock Take" />
+    <column name="wh_code" fieldName="WhCode" label="Wh Code" aliasColumnName="whse_code" aliasForeignKey="wh" />
+    <column name="whse_code" fieldName="WhWhseCode" label="Wh Whse Code" foreignKey="wh" />
+    <column name="type_description" fieldName="WhWarehouseTypetypeDescription" label="Wh Warehouse Typetype Description" foreignKey="wh_warehouse_type" />
+    <column name="staff_allowance" fieldName="StaffAllowance" label="Staff Allowance" />
+    <column name="certification_control" fieldName="CertificationControl" label="Certification Control" />
+    <column name="certification_code" fieldName="CertificationCode" label="Certification Code" aliasColumnName="name" aliasForeignKey="certification" />
+    <column name="name" fieldName="CertificationName" label="Certification Name" foreignKey="certification" />
+    <column name="serial_numbers" fieldName="SerialNumbers" label="Serial Numbers" />
+    <column name="cost_fifo" fieldName="CostFifo" label="Cost Fifo" format="c" />
+    <column name="staff_filter" fieldName="StaffFilter" label="Staff Filter" />
+    <column name="staff_filter" fieldName="StaffFilterstaffFilter" label="Staff Filterstaff Filter" foreignKey="staff_filter" />
+    <column name="review_period" fieldName="ReviewPeriod" label="Review Period" aliasColumnName="period_code" aliasForeignKey="review_period" />
+    <column name="period_code" fieldName="ReviewPeriodperiodCode" label="Review Periodperiod Code" foreignKey="review_period" />
+    <column name="company_id" fieldName="CompanyID" label="Company Id" aliasColumnName="name" aliasForeignKey="company" />
+    <column name="name" fieldName="CompanyName" label="Company Name" foreignKey="company" />
+    <column name="old_stock_id" fieldName="OldStockID" label="Old Stock Id" />
+    <column name="item_gl_code" fieldName="ItemGlCode" label="Item Gl Code" aliasColumnName="nla_prt1" aliasForeignKey="item_gl" />
+    <column name="nla_prt1" fieldName="ItemGlNlaPrt1" label="Item Gl Nla Prt1" foreignKey="item_gl" />
+    <column name="item_gender_filter" fieldName="ItemGenderFilter" label="Item Gender Filter" />
+    <column name="archive_flag" fieldName="ArchiveFlag" label="Archive Flag" />
+    <column name="picture1" fieldName="Picture1" label="Picture1" />
+    <column name="vat_id" fieldName="VatID" label="Vat Id" />
+    <column name="abc_volume" fieldName="AbcVolume" label="Abc Volume" />
+    <column name="abc_value" fieldName="AbcValue" label="Abc Value" />
+    <column name="abc_transactions" fieldName="AbcTransactions" label="Abc Transactions" />
+    <column name="order_unit_id" fieldName="OrderUnitID" label="Order Unit Id" />
+    <column name="store_unit_id" fieldName="StoreUnitID" label="Store Unit Id" aliasColumnName="unit_desc" aliasForeignKey="store_unit" />
+    <column name="unit_desc" fieldName="StoreUnitDesc" label="Store Unit Desc" foreignKey="store_unit" />
+    <column name="picture" fieldName="Picture" label="Picture" />
+    <column name="location_catalogue_id" fieldName="LocationCatalogueid" label="Location Catalogue id" aliasColumnName="location_catalogue" aliasForeignKey="location_catalogue" />
+    <column name="location_catalogue" fieldName="LocationCatalogueLocationCatalogue" label="Location Catalogue Location Catalogue" foreignKey="location_catalogue" />
+    <column name="description" fieldName="LocationCatalogueDescription" label="Location Catalogue Description" foreignKey="location_catalogue" />
+    <column name="charge_id" fieldName="Chargeid" label="Charge id" aliasColumnName="charge_code" aliasForeignKey="charge" />
+    <column name="charge_code" fieldName="ChargeCode" label="Charge Code" foreignKey="charge" />
+    <column name="charge_code_description" fieldName="ChargeCodeDescription" label="Charge Code Description" foreignKey="charge" />
+    <column name="staff_location_catalogue_id" fieldName="StaffLocationCatalogueid" label="Staff Location Catalogue id" />
+  </columns>
+</dataModel>

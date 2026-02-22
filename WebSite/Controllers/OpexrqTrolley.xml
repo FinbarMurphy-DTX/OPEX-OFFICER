@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="OpexrqTrolley" conflictDetection="overwriteChanges" label="Opexrq Trolley" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_trolley`.`rowid` `Rowid`
+	,`rq_trolley`.`staff_code` `StaffCode`
+	,`rq_trolley`.`epl_number` `EplNumber`
+	,`rq_trolley`.`date_required` `DateRequired`
+	,`rq_trolley`.`status_code` `StatusCode`
+	,`rq_trolley`.`header_value` `HeaderValue`
+	,`rq_trolley`.`urgent_req` `UrgentReq`
+	,`rq_trolley`.`customer` `Customer`
+	,`rq_trolley`.`del_code` `DelCode`
+	,`rq_trolley`.`free_text` `FreeText`
+	,`rq_trolley`.`job_no` `JobNo`
+	,`rq_trolley`.`budget_ind` `BudgetInd`
+	,`budget_ind`.`budget_desc` `BudgetIndbudgetDesc`
+	,`rq_trolley`.`delivery_location` `DeliveryLocation`
+	,`rq_trolley`.`staff_uid` `StaffUid`
+	,`staff_u`.`location_code` `StaffUlocationCode`
+	,`staff_u`.`forname` `StaffuForname`
+	,`staff_u`.`surname` `StaffuSurname`
+	,`staff_u`.`rank_code` `StaffuRankCode`
+	,`staff_u`.`email` `StaffuEmail`
+	,`staff_ulocation`.`location_code` `StaffUlocationLocationCode`
+	,`staff_ucompany`.`name` `StaffUcompanyName`
+	,`staff_upo_approval_level`.`description` `StaffUpoApprovalLeveldescription`
+	,`staff_urank`.`rank_code` `StaffUrankRankCode`
+	,`rq_trolley`.`role_id` `RoleID`
+	,`role`.`cost_centre` `RoleCostCentre`
+	,`role_staff_u`.`location_code` `RoleStaffUlocationCode`
+	,`role1`.`name` `RoleName`
+	,`role_rank`.`rank_code` `RoleRankCode`
+	,`role_location`.`location_code` `RoleLocationCode`
+	,`role_cost_centre`.`budget_desc` `RoleCostCentrebudgetDesc`
+	,`rq_trolley`.`del_location_id` `DelLocationID`
+	,`del_location`.`sla_acc` `DelLocationSlaAcc`
+from `opex`.`rq_trolley` `rq_trolley`
+	left join `opex`.`rq_budcd` `budget_ind` on `rq_trolley`.`budget_ind` = `budget_ind`.`budget_code`
+	left join `opex`.`rq_staff` `staff_u` on `rq_trolley`.`staff_uid` = `staff_u`.`staff_uid`
+	left join `opex`.`rq_locns` `staff_ulocation` on `staff_u`.`location_code` = `staff_ulocation`.`location_code`
+	left join `opex`.`company` `staff_ucompany` on `staff_u`.`company_id` = `staff_ucompany`.`id`
+	left join `opex`.`po_approvals` `staff_upo_approval_level` on `staff_u`.`po_approval_level` = `staff_upo_approval_level`.`id`
+	left join `opex`.`rq_ranks` `staff_urank` on `staff_u`.`rank_code` = `staff_urank`.`rank_code`
+	left join `opex`.`staff_roles` `role` on `rq_trolley`.`role_id` = `role`.`id`
+	left join `opex`.`rq_staff` `role_staff_u` on `role`.`staff_uid` = `role_staff_u`.`staff_uid`
+	left join `opex`.`roles` `role1` on `role`.`role_id` = `role1`.`id`
+	left join `opex`.`rq_ranks` `role_rank` on `role`.`rank_code` = `role_rank`.`rank_code`
+	left join `opex`.`rq_locns` `role_location` on `role`.`location_code` = `role_location`.`location_code`
+	left join `opex`.`rq_budcd` `role_cost_centre` on `role`.`cost_centre` = `role_cost_centre`.`budget_code`
+	left join `opex`.`locations` `del_location` on `rq_trolley`.`del_location_id` = `del_location`.`del_location_id`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="StaffCode" type="String" label="Staff Code" length="8" showInSummary="true" />
+    <field name="EplNumber" type="String" label="Epl Number" length="8" showInSummary="true" />
+    <field name="DateRequired" type="DateTime" label="Date Required" showInSummary="true" />
+    <field name="StatusCode" type="String" label="Status Code" length="2" showInSummary="true" />
+    <field name="HeaderValue" type="Decimal" allowNulls="false" label="Header Value" showInSummary="true" />
+    <field name="UrgentReq" type="String" label="Urgent Req" length="1" />
+    <field name="Customer" type="String" label="Customer" length="8" />
+    <field name="DelCode" type="String" label="Del Code" length="8" />
+    <field name="FreeText" type="String" label="Free Text" length="255" />
+    <field name="JobNo" type="String" label="Job No" length="10" />
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8" />
+    <field name="BudgetIndbudgetDesc" type="String" readOnly="true" label="Budget Indbudget Desc" length="50" />
+    <field name="DeliveryLocation" type="String" label="Delivery Location" length="8" />
+    <field name="StaffUid" type="UInt32" allowNulls="false" label="Staff Uid">
+      <items style="Lookup" dataController="OpexrqStaff" newDataView="createForm1" dataValueField="StaffUid" dataTextField="LocationCode" copy="StaffuForname=Forname, StaffuSurname=Surname, StaffuRankCode=RankCode, StaffuEmail=Email, StaffUlocationLocationCode=LocationCode1, StaffUcompanyName=LocationDivisionCompanyName, StaffUrankRankCode=RankCode1" />
+    </field>
+    <field name="StaffUlocationCode" type="String" readOnly="true" label="Staff Ulocation Code" length="8" />
+    <field name="StaffuForname" type="String" readOnly="true" label="Staff u Forname" length="30" />
+    <field name="StaffuSurname" type="String" readOnly="true" label="Staff u Surname" length="20" />
+    <field name="StaffuRankCode" type="String" readOnly="true" label="Staff u Rank Code" length="8" />
+    <field name="StaffuEmail" type="String" readOnly="true" label="Staff u Email" length="255" />
+    <field name="StaffUlocationLocationCode" type="String" readOnly="true" label="Staff Ulocation Location Code" length="8" />
+    <field name="StaffUcompanyName" type="String" readOnly="true" label="Staff Ucompany Name" length="20" />
+    <field name="StaffUpoApprovalLeveldescription" type="String" readOnly="true" label="Staff Upo Approval Leveldescription" length="50" />
+    <field name="StaffUrankRankCode" type="String" readOnly="true" label="Staff Urank Rank Code" length="8" />
+    <field name="RoleID" type="Int32" label="Role Id" />
+    <field name="RoleCostCentre" type="String" readOnly="true" dataFormatString="c" label="Role Cost Centre" length="8" />
+    <field name="RoleStaffUlocationCode" type="String" readOnly="true" label="Role Staff Ulocation Code" length="8" />
+    <field name="RoleName" type="String" readOnly="true" label="Role Name" length="12" />
+    <field name="RoleRankCode" type="String" readOnly="true" label="Role Rank Code" length="8" />
+    <field name="RoleLocationCode" type="String" readOnly="true" label="Role Location Code" length="8" />
+    <field name="RoleCostCentrebudgetDesc" type="String" readOnly="true" label="Role Cost Centrebudget Desc" length="50" />
+    <field name="DelLocationID" type="UInt32" label="Del Location Id" />
+    <field name="DelLocationSlaAcc" type="String" readOnly="true" label="Del Location Sla Acc" length="8" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Opexrq Trolley">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StaffCode" columns="8" />
+        <dataField fieldName="EplNumber" columns="8" />
+        <dataField fieldName="DateRequired" columns="10" />
+        <dataField fieldName="StatusCode" columns="2" />
+        <dataField fieldName="HeaderValue" columns="15" />
+        <dataField fieldName="UrgentReq" columns="1" />
+        <dataField fieldName="Customer" columns="8" />
+        <dataField fieldName="DelCode" columns="8" />
+        <dataField fieldName="FreeText" />
+        <dataField fieldName="JobNo" columns="10" />
+        <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+        <dataField fieldName="DeliveryLocation" columns="8" />
+        <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+        <dataField fieldName="StaffuForname" columns="30" />
+        <dataField fieldName="StaffuSurname" columns="20" />
+        <dataField fieldName="StaffuRankCode" columns="8" />
+        <dataField fieldName="StaffuEmail" />
+        <dataField fieldName="StaffUlocationLocationCode" columns="8" />
+        <dataField fieldName="StaffUcompanyName" columns="20" />
+        <dataField fieldName="StaffUpoApprovalLeveldescription" columns="50" />
+        <dataField fieldName="StaffUrankRankCode" columns="8" />
+        <dataField fieldName="RoleID" columns="15" />
+        <dataField fieldName="RoleCostCentre" columns="8" />
+        <dataField fieldName="RoleStaffUlocationCode" columns="8" />
+        <dataField fieldName="RoleName" columns="12" />
+        <dataField fieldName="RoleRankCode" columns="8" />
+        <dataField fieldName="RoleLocationCode" columns="8" />
+        <dataField fieldName="RoleCostCentrebudgetDesc" columns="50" />
+        <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaAcc" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review opex Opexrq Trolley">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="opex Opexrq Trolley" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="EplNumber" columns="8" />
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="Customer" columns="8" />
+            <dataField fieldName="DelCode" columns="8" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="JobNo" columns="10" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="DeliveryLocation" columns="8" />
+            <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+            <dataField fieldName="StaffuForname" columns="30" />
+            <dataField fieldName="StaffuSurname" columns="20" />
+            <dataField fieldName="StaffuRankCode" columns="8" />
+            <dataField fieldName="StaffuEmail" />
+            <dataField fieldName="StaffUlocationLocationCode" columns="8" />
+            <dataField fieldName="StaffUcompanyName" columns="20" />
+            <dataField fieldName="StaffUpoApprovalLeveldescription" columns="50" />
+            <dataField fieldName="StaffUrankRankCode" columns="8" />
+            <dataField fieldName="RoleID" columns="15" />
+            <dataField fieldName="RoleCostCentre" columns="8" />
+            <dataField fieldName="RoleStaffUlocationCode" columns="8" />
+            <dataField fieldName="RoleName" columns="12" />
+            <dataField fieldName="RoleRankCode" columns="8" />
+            <dataField fieldName="RoleLocationCode" columns="8" />
+            <dataField fieldName="RoleCostCentrebudgetDesc" columns="50" />
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaAcc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New opex Opexrq Trolley">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New opex Opexrq Trolley" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="EplNumber" columns="8" />
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="Customer" columns="8" />
+            <dataField fieldName="DelCode" columns="8" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="JobNo" columns="10" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="DeliveryLocation" columns="8" />
+            <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+            <dataField fieldName="StaffuForname" columns="30" />
+            <dataField fieldName="StaffuSurname" columns="20" />
+            <dataField fieldName="StaffuRankCode" columns="8" />
+            <dataField fieldName="StaffuEmail" />
+            <dataField fieldName="StaffUlocationLocationCode" columns="8" />
+            <dataField fieldName="StaffUcompanyName" columns="20" />
+            <dataField fieldName="StaffUpoApprovalLeveldescription" columns="50" />
+            <dataField fieldName="StaffUrankRankCode" columns="8" />
+            <dataField fieldName="RoleID" columns="15" />
+            <dataField fieldName="RoleCostCentre" columns="8" />
+            <dataField fieldName="RoleStaffUlocationCode" columns="8" />
+            <dataField fieldName="RoleName" columns="12" />
+            <dataField fieldName="RoleRankCode" columns="8" />
+            <dataField fieldName="RoleLocationCode" columns="8" />
+            <dataField fieldName="RoleCostCentrebudgetDesc" columns="50" />
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaAcc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

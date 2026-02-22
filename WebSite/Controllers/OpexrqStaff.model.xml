@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_staff" alias="rq_staff" created="2017-06-07T10:41:48" modified="2022-04-25T18:52:35" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="rank" parentTableSchema="opex" parentTableName="rq_ranks" x="427" y="20">
+      <foreignKeyColumn columnName="rank_code" parentColumnName="rank_code" />
+    </foreignKey>
+    <foreignKey id="rank_staff_filter" parentTableSchema="opex" parentTableName="item_staff_filter" baseForeignKey="rank" x="788" y="20">
+      <foreignKeyColumn columnName="staff_filter" parentColumnName="staff_filter" />
+    </foreignKey>
+    <foreignKey id="location" parentTableSchema="opex" parentTableName="rq_locns" x="496" y="208">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+    <foreignKey id="location_division" parentTableSchema="opex" parentTableName="divisions" baseForeignKey="location" x="1053" y="20">
+      <foreignKeyColumn columnName="division_code" parentColumnName="division_code" />
+    </foreignKey>
+    <foreignKey id="location_division_company" parentTableSchema="opex" parentTableName="company" baseForeignKey="location_division" x="1345" y="20">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="location_company" parentTableSchema="opex" parentTableName="company" baseForeignKey="location" x="1053" y="204">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="location_default_delivery_location" parentTableSchema="opex" parentTableName="locations" baseForeignKey="location" x="1053" y="381">
+      <foreignKeyColumn columnName="default_delivery_location_id" parentColumnName="del_location_id" />
+    </foreignKey>
+    <foreignKey id="location_budget_ind" parentTableSchema="opex" parentTableName="rq_budcd" baseForeignKey="location" x="1053" y="559">
+      <foreignKeyColumn columnName="budget_ind" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="company" parentTableSchema="opex" parentTableName="company" x="427" y="458">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="location_catalogue" parentTableSchema="opex" parentTableName="location_catalogue" x="1594" y="20" baseForeignKey="location">
+      <foreignKeyColumn columnName="location_catalogue_id" parentColumnName="location_catalogue_id" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Uid" />
+    <column name="staff_code" fieldName="StaffCode" label="Staff Code" />
+    <column name="staff_title" fieldName="StaffTitle" label="Staff Title" />
+    <column name="initials" fieldName="Initials" label="Initials" />
+    <column name="forname" fieldName="Forname" label="Forname" />
+    <column name="surname" fieldName="Surname" label="Surname" />
+    <column name="rank_code" fieldName="RankCode" label="Rank Code" aliasColumnName="rank_desc" aliasForeignKey="rank" />
+    <column name="rank_desc" fieldName="RankDesc" label="Rank Desc" foreignKey="rank" />
+    <column name="staff_filter" fieldName="RankStaffFilterstaffFilter" label="Rank Staff Filterstaff Filter" foreignKey="rank_staff_filter" />
+    <column name="epl_number" fieldName="EplNumber" label="Epl Number" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" aliasColumnName="location_desc" aliasForeignKey="location" />
+    <column name="location_desc" fieldName="LocationDesc" label="Location Desc" foreignKey="location" />
+    <column name="default_delivery_location_id" fieldName="LocationDefaultDeliveryLocationid" label="Location Default Delivery Location id" foreignKey="location" />
+    <column name="location_catalogue_id" fieldName="LocationCatalogueid" label="Location Catalogue id" foreignKey="location" />
+    <column name="staff_location_catalogue_id" fieldName="LocationStaffLocationCatalogueid" label="Location Staff Location Catalogue id" foreignKey="location" />
+    <column name="division_desc" fieldName="LocationDivisionDesc" label="Location Division Desc" foreignKey="location_division" />
+    <column name="name" fieldName="LocationDivisionCompanyName" label="Location Division Company Name" foreignKey="location_division_company" />
+    <column name="name" fieldName="LocationCompanyName" label="Location Company Name" foreignKey="location_company" />
+    <column name="sla_acc" fieldName="LocationDefaultDeliveryLocationSlaAcc" label="Location Default Delivery Location Sla Acc" foreignKey="location_default_delivery_location" />
+    <column name="budget_desc" fieldName="LocationBudgetIndbudgetDesc" label="Location Budget Indbudget Desc" foreignKey="location_budget_ind" />
+    <column name="join_date" fieldName="JoinDate" label="Join Date" />
+    <column name="leave_date" fieldName="LeaveDate" label="Leave Date" />
+    <column name="comments" fieldName="Comments" label="Comments" />
+    <column name="email" fieldName="Email" label="Email" />
+    <column name="company_id" fieldName="CompanyID" label="Company Id" aliasColumnName="name" aliasForeignKey="company" />
+    <column name="name" fieldName="CompanyName" label="Company Name" foreignKey="company" />
+    <column name="userCredentials" fieldName="UserCredentials" label="user Credentials" />
+    <column name="telephone" fieldName="Telephone" label="Telephone" />
+    <column name="internal" fieldName="Internal" label="Internal" />
+    <column name="opex_user" fieldName="OpexUser" label="Opex User" />
+    <column name="opex_user_name" fieldName="OpexUserName" label="Opex User Name" />
+    <column name="gender" fieldName="Gender" label="Gender" />
+    <column name="active" fieldName="Active" label="Active" />
+    <column name="restrict_access" fieldName="RestrictAccess" label="Restrict Access" />
+    <column name="access_control_type" fieldName="AccessControlType" label="Access Control Type" />
+    <column name="location_catalogue" fieldName="LocationCatalogueLocationCatalogue" label="Location Catalogue Location Catalogue" foreignKey="location_catalogue" />
+    <column name="description" fieldName="LocationCatalogueDescription" label="Location Catalogue Description" foreignKey="location_catalogue" />
+  </columns>
+</dataModel>

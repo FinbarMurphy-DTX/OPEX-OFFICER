@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Opexlocations" conflictDetection="overwriteChanges" label="Opexlocations" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`locations`.`sla_acc` `SlaAcc`
+	,`locations`.`location_code` `LocationCode`
+	,`locations`.`sla_nam` `SlaNam`
+	,`locations`.`sla_shrt_nam` `SlaShrtNam`
+	,`locations`.`sla_add1` `SlaAdd1`
+	,`locations`.`sla_add2` `SlaAdd2`
+	,`locations`.`del_location_id` `DelLocationID`
+	,`locations`.`sla_add3` `SlaAdd3`
+	,`locations`.`sla_add4` `SlaAdd4`
+	,`locations`.`sla_pst_cd` `SlaPstCd`
+	,`locations`.`sla_cntt` `SlaCntt`
+	,`locations`.`sla_cntt_let1` `SlaCnttLet1`
+	,`locations`.`sla_titl_let1` `SlaTitlLet1`
+	,`locations`.`sla_tel` `SlaTel`
+	,`locations`.`sla_fax` `SlaFax`
+	,`locations`.`email` `Email`
+	,`locations`.`disabled` `Disabled`
+from `opex`.`locations` `locations`
+]]></text>
+    </command>
+    <command id="del_location_idIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="DelLocationID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="SlaAcc" type="String" allowNulls="false" label="Delivery Code" length="8" showInSummary="true" />
+    <field name="LocationCode" type="String" label="Location Code" length="8" showInSummary="true" />
+    <field name="SlaNam" type="String" allowNulls="false" label="Name" length="75" showInSummary="true" />
+    <field name="SlaShrtNam" type="String" label="Short Name" length="6" showInSummary="true" />
+    <field name="SlaAdd1" type="String" label="Address" length="50" showInSummary="true" />
+    <field name="SlaAdd2" type="String" label="Address" length="50" />
+    <field name="DelLocationID" type="UInt32" allowNulls="false" isPrimaryKey="true" label="Delivery Id" readOnly="true" />
+    <field name="SlaAdd3" type="String" label="Address" length="50" />
+    <field name="SlaAdd4" type="String" label="Address" length="50" />
+    <field name="SlaPstCd" type="String" label="Post Code" length="10" />
+    <field name="SlaTel" type="String" label="Telephone" length="15" />
+    <field name="SlaFax" type="String" label="Sla Fax" length="15" />
+    <field name="Email" type="String" label="Email" length="45" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Delivery Addresses" filter="disabled = &quot;N&quot;" tags="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;multi-select-none ">
+      <headerText>This is a list of valid Delivery Addresses</headerText>
+      <dataFields>
+        <dataField fieldName="DelLocationID" columns="15" />
+        <dataField fieldName="SlaAcc" columns="8" />
+        <dataField fieldName="LocationCode" columns="8" hidden="true" />
+        <dataField fieldName="SlaNam" />
+        <dataField fieldName="SlaShrtNam" columns="6" />
+        <dataField fieldName="SlaAdd1" columns="50" />
+        <dataField fieldName="SlaPstCd" columns="10" />
+        <dataField fieldName="SlaTel" columns="15" />
+        <dataField fieldName="Email" columns="45" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" commandName="Select" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

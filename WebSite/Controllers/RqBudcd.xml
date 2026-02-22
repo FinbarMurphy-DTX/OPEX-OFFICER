@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RqBudcd" conflictDetection="overwriteChanges" label="Rq Budcd" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_budcd`.`budget_code` `BudgetCode`
+	,`rq_budcd`.`budget_desc` `BudgetDesc`
+	,`rq_budcd`.`disabled` `Disabled`
+	,`rq_budcd`.`displya_in_ss` `DisplyaInSs`
+from `opex`.`rq_budcd` `rq_budcd`
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="BudgetCode" type="String" allowNulls="false" isPrimaryKey="true" label="Budget Code" length="8" showInSummary="true" readOnly="true" />
+    <field name="BudgetDesc" type="String" allowNulls="false" label="Description" length="50" showInSummary="true" readOnly="true" />
+    <field name="Disabled" type="String" label="Disabled" length="1" showInSummary="true" readOnly="true" />
+    <field name="DisplyaInSs" type="String" label="Displya In Ss" length="1" showInSummary="true" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Rq Budcd" filter="Disabled = &quot;N&quot; AND DisplyaInSs = &quot;Y&quot;">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="BudgetCode" columns="8" />
+        <dataField fieldName="BudgetDesc" columns="50" />
+        <dataField fieldName="Disabled" columns="1" hidden="true" />
+        <dataField fieldName="DisplyaInSs" columns="1" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Rq Budcd">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Rq Budcd" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="BudgetDesc" columns="50" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="DisplyaInSs" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Rq Budcd">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="BudgetDesc" columns="50" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="DisplyaInSs" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

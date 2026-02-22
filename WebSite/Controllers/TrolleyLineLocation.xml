@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TrolleyLineLocation" conflictDetection="overwriteChanges" label="Opexrq Trolley Item Location" handler="DatatecnixOfficerII.Rules.TrolleyLineLocationBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_trolley_item_location`.`rowid` `Rowid`
+	,`rq_trolley_item_location`.`item_code` `ItemCode`
+	,`item`.`sti_desc` `ItemStiDesc`
+	,`rq_trolley_item_location`.`size_code` `SizeCode`
+	,`rq_trolley_item_location`.`qty` `Qty`
+	,`rq_trolley_item_location`.`comment_code` `CommentCode`
+	,`comment`.`comment_desc` `CommentDesc`
+	,`rq_trolley_item_location`.`line_value` `LineValue`
+	,`rq_trolley_item_location`.`req_item_cost` `ReqItemCost`
+	,`rq_trolley_item_location`.`requested_by` `RequestedBy`
+	,`requested_by`.`staff_code` `RequestedbyStaffCode`
+	,`requested_by`.`surname` `RequestedbySurname`
+	,`rq_trolley_item_location`.`requested_date` `RequestedDate`
+	,`rq_trolley_item_location`.`location_code` `LocationCode`
+	,`rq_trolley_item_location`.`type` `Type`
+	,`rq_trolley_item_location`.`description` `Description`
+	,`rq_trolley_item_location`.`additional_information` `AdditionalInformation`
+	,`rq_trolley_item_location`.`gl_code` `glCode`
+	,`rq_trolley_item_location`.`budget_code` `BudgetCode`
+	,`rq_trolley_item_location`.`supplier` `Supplier`
+from `opex`.`rq_trolley_item_location` `rq_trolley_item_location`
+	left join `opex`.`st_item` `item` on `rq_trolley_item_location`.`item_code` = `item`.`item_code`
+	left join `opex`.`rq_comms` `comment` on `rq_trolley_item_location`.`comment_code` = `comment`.`comment_code`
+	left join `opex`.`rq_staff` `requested_by` on `rq_trolley_item_location`.`requested_by` = `requested_by`.`staff_uid`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="ItemCode" type="String" label="Item Code" length="16" showInSummary="true" causesCalculate="true">
+      <items style="Lookup" dataController="ItemCatalogueLocation" dataValueField="ItemCode" dataTextField="ItemCode" dataView="grid1" copy="ItemStiDesc = ItemStiDesc&#xD;&#xA;CommentCode = ChargeCode&#xD;&#xA;CommentDesc = ChargeCodeDescription" />
+    </field>
+    <field name="ItemStiDesc" type="String" readOnly="true" label="Item Description" length="75" />
+    <field name="SizeCode" type="String" label="Size" length="20" showInSummary="true" contextFields="ItemCode=ItemCode" causesCalculate="true">
+      <items style="Lookup" dataController="ItemSize" dataView="grid1" dataTextField="SizeCode" dataValueField="SizeCode" copy="ReqItemCost=Local_OPEXCost" />
+    </field>
+    <field name="Qty" type="Decimal" label="Qty" showInSummary="true" />
+    <field name="CommentCode" type="String" label="Reason Code" length="3" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="ReasonCodes" dataValueField="CommentCode" dataTextField="CommentDesc" />
+    </field>
+    <field name="CommentDesc" type="String" readOnly="true" label="Reason" length="20" />
+    <field name="LineValue" type="Decimal" allowNulls="false" label="Total Cost" showInSummary="true" dataFormatString="C2" />
+    <field name="ReqItemCost" type="Decimal" allowNulls="false" dataFormatString="c" label="Item Cost" />
+    <field name="RequestedBy" type="UInt32" allowNulls="false" label="Requested By">
+      <items style="Lookup" dataController="Staff" newDataView="createForm1" dataValueField="StaffUid" dataTextField="StaffCode" copy="RequestedbySurname=Surname" />
+    </field>
+    <field name="RequestedbyStaffCode" type="String" readOnly="true" label="Requested By" length="8" />
+    <field name="RequestedbySurname" type="String" readOnly="true" label="Surname" length="30" />
+    <field name="RequestedDate" type="DateTime" label="Requested Date" />
+    <field name="LocationCode" type="String" allowNulls="false" label="Location Code" length="8" />
+    <field name="Type" type="String" label="Type" length="1" />
+    <field name="Description" type="String" label="Description" length="500" />
+    <field name="AdditionalInformation" type="String" label="Additional Information" length="200" />
+    <field name="glCode" type="String" label="GL Code" length="12">
+      <items style="Lookup" dataController="GlCodes" dataView="grid1" dataTextField="GlCode" dataValueField="GlCode" />
+    </field>
+    <field name="BudgetCode" type="String" label="Budget Code" length="8">
+      <items style="Lookup" dataController="RqBudcd" dataView="grid1" dataTextField="BudgetCode" dataValueField="BudgetCode" />
+    </field>
+    <field name="Supplier" type="String" label="Supplier" length="20" />
+    <field name="Local_Description" type="String" label="Description" computed="true" isVirtual="true" length="75">
+      <formula>CASE 
+WHEN `rq_trolley_item_location`.`type` = "N" THEN
+`rq_trolley_item_location`.`description`
+ELSE 
+`item`.`sti_desc` 
+END</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Location Trolley">
+      <headerText>This is a list of items in the Location Trolley, click the three dots next to the item code to modify</headerText>
+      <dataFields>
+        <dataField fieldName="ItemCode" tag="lookup-details-hidden" />
+        <dataField fieldName="Local_Description" rows="5" />
+        <dataField fieldName="SizeCode" columns="20" tag="lookup-details-hidden" />
+        <dataField fieldName="Qty" columns="15" />
+        <dataField fieldName="ReqItemCost" columns="15" />
+        <dataField fieldName="LineValue" columns="15" />
+        <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" tag="lookup-details-hidden" />
+        <dataField fieldName="RequestedBy" aliasFieldName="RequestedbyStaffCode" />
+        <dataField fieldName="RequestedbySurname" columns="30" />
+        <dataField fieldName="RequestedDate" columns="10" />
+        <dataField fieldName="Type" columns="1" hidden="true" />
+        <dataField fieldName="AdditionalInformation" />
+        <dataField fieldName="glCode" columns="12" />
+        <dataField fieldName="BudgetCode" columns="8" />
+        <dataField fieldName="Supplier" columns="20" />
+        <dataField fieldName="LocationCode" columns="8" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Trolly Item">
+      <headerText>You can update this trolley item here</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" hidden="true" />
+            <dataField fieldName="ItemCode" tag="lookup-details-hidden">
+              <visibility>
+                <expression test="[Type] == &quot;S&quot;" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="SizeCode" columns="20" tag="lookup-details-hidden">
+              <visibility>
+                <expression test="[Type] == &quot;S&quot;" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" tag="lookup-details-hidden" />
+            <dataField fieldName="ReqItemCost" columns="15" textMode="Text">
+              <readOnly>
+                <expression test="[Type] == &quot;S&quot;" type="ClientScript" />
+              </readOnly>
+            </dataField>
+            <dataField fieldName="Description">
+              <visibility>
+                <expression test="[Type] == &quot;N&quot;" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="AdditionalInformation" />
+            <dataField fieldName="LineValue" columns="15">
+              <visibility>
+                <expression test="[Type] == &quot;S&quot;" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="glCode" columns="12" />
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="Supplier" columns="20" />
+            <dataField fieldName="Type" columns="1" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="Add Item to Trolley">
+      <headerText>Add Items to Location Trolley</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ItemCode" aliasFieldName="ItemStiDesc" tag="lookup-details-hidden" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" tag="lookup-details-hidden" />
+            <dataField fieldName="ReqItemCost" columns="15" textMode="Static" />
+            <dataField fieldName="LineValue" columns="15" textMode="Static" />
+            <dataField fieldName="AdditionalInformation" />
+            <dataField fieldName="glCode" columns="12" />
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="Supplier" columns="20" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" id="c2">
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="RequestedBy" hidden="true" />
+            <dataField fieldName="RequestedbySurname" columns="30" />
+            <dataField fieldName="RequestedDate" columns="10" />
+            <dataField fieldName="Type" columns="1" />
+            <dataField fieldName="Description">
+              <headerText>Additional Information</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="nonStockForm" type="Form" commandId="command1" label="Add Item to Trolley">
+      <headerText>Add Items to Location Trolley</headerText>
+      <categories>
+        <category id="c1" headerText="Add Description and Qty of the Item" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Type" columns="1" hidden="true" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" tag="lookup-details-hidden" />
+            <dataField fieldName="glCode" columns="12" />
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="Supplier" columns="20" />
+            <dataField fieldName="ReqItemCost" columns="15" textMode="Text" />
+            <dataField fieldName="AdditionalInformation" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" id="c2">
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="RequestedBy" hidden="true" />
+            <dataField fieldName="RequestedbySurname" columns="30" />
+            <dataField fieldName="RequestedDate" columns="10" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="ItemCode" aliasFieldName="ItemStiDesc" tag="lookup-details-hidden" />
+            <dataField fieldName="LineValue" columns="15" textMode="Static" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" flat="false">
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="More Information" />
+      <action id="a2" commandName="Edit" commandArgument="editForm1" />
+      <action id="a3" commandName="Delete" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="Add Item" />
+      <action id="a100" commandName="New" commandArgument="nonStockForm" cssClass="NewIcon" headerText="Add Non Stock Item" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Calculate" type="JavaScript" phase="Execute" name="CalculateLineCost"><![CDATA[var q = [Qty];
+var ic = [ReqItemCost];
+[LineValue]=q * ic;]]></rule>
+    <rule id="r101" commandName="Calculate" type="Code" phase="Execute" name="GetSizeCost" />
+    <rule id="r103" commandName="Insert|Update" type="Code" phase="Execute" name="HideLocalFields" />
+    <rule id="r104" commandName="Insert|Update|Delete" type="Code" phase="After" name="RefreshMaster" />
+    <rule id="r105" commandName="Email" type="Code" phase="After" name="ConfirmEmail" />
+    <rule id="r106" commandName="Email" type="Email" phase="Execute" name="AskAQuestion" commandArgument="Ask"><![CDATA[From: "{Parameters_Forname} {Parameters_Surname}" {Parameters_OfficerEmail}
+To: {Parameters_AskEmail}
+Subject: {Parameters_Subject}
+<html>
+<body>
+<p>
+{Parameters_OfficerEmailHeader}
+{Parameters_Message}
+{Parameters_OfficerEmailFooter}
+</p>
+</body>
+</html>]]></rule>
+    <rule id="r107" commandName="New" type="Code" phase="Execute" name="GetDefaults" />
+    <rule id="r108" commandName="Update" type="Code" phase="Execute" name="UpdateRequester" />
+    <rule id="r102" commandName="Email" commandArgument="Ask" type="JavaScript" phase="After" name="AllowMessageDisplay"><![CDATA[this.preventDefault(); // #1585]]></rule>
+    <rule id="r109" commandName="Insert|Update" view="nonStockForm|editForm1" type="JavaScript" phase="Before" name="CheckMandatoryFields"><![CDATA[debugger;
+var fieldValue = [glCode];
+var lineType = [Type];
+if ((fieldValue == null)  && (lineType == "N")){
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('glCode', 'GL Code Required');
+  	return
+}
+
+    fieldValue = [BudgetCode];
+
+if ((fieldValue == null)  && (lineType == "N")){
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('BudgetCode', 'Budget Code Required');
+  	return
+}
+
+    fieldValue = [Description];
+if ((fieldValue == null)  && (lineType == "N")){
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('Description', 'Description Required');
+  	return
+}
+
+  var q = [Qty];
+  var ic = [ReqItemCost];
+  [LineValue]=q * ic;]]></rule>
+  </businessRules>
+</dataController>

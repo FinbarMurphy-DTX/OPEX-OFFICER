@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_trolley" alias="rq_trolley" created="2017-06-07T10:48:29" modified="2017-06-27T14:26:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="budget_ind" parentTableSchema="opex" parentTableName="rq_budcd" x="320" y="20">
+      <foreignKeyColumn columnName="budget_ind" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="staff_u" parentTableSchema="opex" parentTableName="rq_staff" x="320" y="181">
+      <foreignKeyColumn columnName="staff_uid" parentColumnName="staff_uid" />
+    </foreignKey>
+    <foreignKey id="staff_ulocation" parentTableSchema="opex" parentTableName="rq_locns" baseForeignKey="staff_u" x="626" y="20">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+    <foreignKey id="staff_ucompany" parentTableSchema="opex" parentTableName="company" baseForeignKey="staff_u" x="626" y="273">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="staff_urank" parentTableSchema="opex" parentTableName="rq_ranks" baseForeignKey="staff_u" x="626" y="628">
+      <foreignKeyColumn columnName="rank_code" parentColumnName="rank_code" />
+    </foreignKey>
+    <foreignKey id="role" parentTableSchema="opex" parentTableName="staff_roles" x="320" y="435">
+      <foreignKeyColumn columnName="role_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="role_staff_u" parentTableSchema="opex" parentTableName="rq_staff" baseForeignKey="role" x="986" y="20">
+      <foreignKeyColumn columnName="staff_uid" parentColumnName="staff_uid" />
+    </foreignKey>
+    <foreignKey id="role1" parentTableSchema="opex" parentTableName="roles" baseForeignKey="role" x="986" y="250">
+      <foreignKeyColumn columnName="role_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="role_rank" parentTableSchema="opex" parentTableName="rq_ranks" baseForeignKey="role" x="986" y="457">
+      <foreignKeyColumn columnName="rank_code" parentColumnName="rank_code" />
+    </foreignKey>
+    <foreignKey id="role_location" parentTableSchema="opex" parentTableName="rq_locns" baseForeignKey="role" x="986" y="642">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+    <foreignKey id="del_location" parentTableSchema="opex" parentTableName="locations" x="320" y="644">
+      <foreignKeyColumn columnName="del_location_id" parentColumnName="del_location_id" />
+    </foreignKey>
+    <foreignKey id="default_comment_code" parentTableSchema="opex" parentTableName="rq_comms" x="1347" y="20">
+      <foreignKeyColumn columnName="default_comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="date_required" fieldName="DateRequired" label="Date Required" />
+    <column name="status_code" fieldName="StatusCode" label="Status Code" />
+    <column name="header_value" fieldName="HeaderValue" label="Header Value" />
+    <column name="urgent_req" fieldName="UrgentReq" label="Urgent Req" />
+    <column name="customer" fieldName="Customer" label="Customer" />
+    <column name="del_code" fieldName="DelCode" label="Del Code" />
+    <column name="free_text" fieldName="FreeText" label="Free Text" />
+    <column name="job_no" fieldName="JobNo" label="Job No" />
+    <column name="budget_ind" fieldName="BudgetInd" label="Budget Ind" aliasColumnName="budget_desc" aliasForeignKey="budget_ind" />
+    <column name="budget_desc" fieldName="BudgetIndbudgetDesc" label="Budget Indbudget Desc" foreignKey="budget_ind" />
+    <column name="delivery_location" fieldName="DeliveryLocation" label="Delivery Location" />
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Uid" aliasColumnName="location_code" aliasForeignKey="staff_u" />
+    <column name="location_code" fieldName="StaffUlocationCode" label="Staff Ulocation Code" foreignKey="staff_u" />
+    <column name="forname" fieldName="StaffuForname" label="Forename" foreignKey="staff_u" />
+    <column name="surname" fieldName="StaffuSurname" label="Surname" foreignKey="staff_u" />
+    <column name="rank_code" fieldName="StaffuRankCode" label="Rank Code" foreignKey="staff_u" />
+    <column name="email" fieldName="StaffuEmail" label="Email" foreignKey="staff_u" />
+    <column name="staff_code" fieldName="StaffuStaffCode" label="Staff u Staff Code" foreignKey="staff_u" />
+    <column name="name" fieldName="StaffUcompanyName" label="Staff Ucompany Name" foreignKey="staff_ucompany" />
+    <column name="rank_desc" fieldName="StaffUrankRankDesc" label="Staff Urank Rank Desc" foreignKey="staff_urank" />
+    <column name="role_id" fieldName="RoleID" label="Role Id" />
+    <column name="cost_centre" fieldName="RoleCostCentre" label="Role Cost Centre" format="c" foreignKey="role" />
+    <column name="location_code" fieldName="RoleStaffUlocationCode" label="Role Staff Ulocation Code" foreignKey="role_staff_u" />
+    <column name="name" fieldName="RoleName" label="Role Name" foreignKey="role1" />
+    <column name="location_desc" fieldName="RoleLocationDesc" label="Role Location Desc" foreignKey="role_location" />
+    <column name="del_location_id" fieldName="DelLocationID" label="Del Location Id" aliasColumnName="sla_acc" aliasForeignKey="del_location" />
+    <column name="sla_acc" fieldName="DelLocationSlaAcc" label="Del Location Sla Acc" foreignKey="del_location" />
+    <column name="sla_nam" fieldName="DelLocationSlaNam" label="Del Location Sla Nam" foreignKey="del_location" />
+    <column name="rank_desc" fieldName="RoleRankDesc" label="Role Rank Desc" foreignKey="role_rank" />
+    <column name="location_desc" fieldName="StaffUlocationLocationDesc" label="Staff Ulocation Location Desc" foreignKey="staff_ulocation" />
+    <column name="default_comment_code" fieldName="DefaultCommentCode" label="Default Reason Code" aliasColumnName="comment_desc" aliasForeignKey="default_comment_code" />
+    <column name="comment_desc" fieldName="DefaultCommentCodeCommentDesc" label="Default Comment Code Comment Desc" foreignKey="default_comment_code" />
+  </columns>
+</dataModel>

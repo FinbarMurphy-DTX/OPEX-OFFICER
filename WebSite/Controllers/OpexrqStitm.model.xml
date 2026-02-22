@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_stitm" alias="rq_stitm" created="2017-06-08T17:31:19" modified="2017-06-08T17:39:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="item_code" parentTableSchema="opex" parentTableName="st_item" x="993" y="20">
+      <foreignKeyColumn columnName="item_code" parentColumnName="item_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="item_code" fieldName="ItemCode" label="Item Code" aliasColumnName="sti_desc" aliasForeignKey="item_code" />
+    <column name="sti_desc" fieldName="ItemCodeStiDesc" label="Item Code Sti Desc" foreignKey="item_code" />
+    <column name="kit_code" fieldName="KitCode" label="Kit Code" />
+    <column name="allowance" fieldName="Allowance" label="Allowance" />
+    <column name="remarks" fieldName="Remarks" label="Remarks" />
+    <column name="size_code" fieldName="SizeCode" label="Size Code" />
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Uid" />
+  </columns>
+</dataModel>

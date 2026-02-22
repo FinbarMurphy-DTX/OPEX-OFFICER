@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="OfficerEmailPrompt" conflictDetection="overwriteChanges" handler="DatatecnixOfficerII.Rules.OfficerEmailPromptBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="ItemCode" type="String" label="Item Code" length="16" />
+    <field name="StiDesc" type="String" label="Description" length="75" showInSummary="true" />
+    <field name="SizeCode" type="String" label="Size Code" length="20" showInSummary="true" />
+    <field name="Message" type="String" label="Message" length="500" allowNulls="false" />
+    <field name="Forname" type="String" label="Forname" length="30" showInSummary="true" />
+    <field name="Surname" type="String" label="Surname" length="30" showInSummary="true" />
+    <field name="AskEmail" type="String" label="To" />
+    <field name="OfficerEmail" type="String" label="From" />
+    <field name="RqHeader" type="Int32" label="Requisition" />
+    <field name="Subject" type="String" label="Subject" length="100" />
+    <field name="OfficerEmailHeader" type="String" label="Email Header" />
+    <field name="OfficerEmailFooter" type="String" label="Email Header" />
+  </fields>
+  <views>
+    <view id="PromptView" type="Form" label="Prompt">
+      <categories>
+        <category id="c1" headerText="Ask A Question" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="OfficerEmail" rows="5" />
+            <dataField fieldName="Forname" columns="30" hidden="true" />
+            <dataField fieldName="Surname" columns="30" hidden="true" />
+            <dataField fieldName="AskEmail" rows="5" />
+            <dataField fieldName="RqHeader" columns="15" hidden="true">
+              <visibility>
+                <expression test="[RqHeader] != null" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="ItemCode" columns="16" hidden="true" />
+            <dataField fieldName="StiDesc" rows="5" hidden="true" />
+            <dataField fieldName="SizeCode" columns="20" hidden="true">
+              <visibility>
+                <expression test="[SizeCode] != null" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Subject" rows="5" />
+            <dataField fieldName="Message" rows="5" textMode="RichText" />
+            <dataField fieldName="OfficerEmailHeader" rows="5" hidden="true" />
+            <dataField fieldName="OfficerEmailFooter" rows="5" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Code" phase="Execute" name="SetFieldDefaults" />
+  </businessRules>
+  <actions />
+</dataController>

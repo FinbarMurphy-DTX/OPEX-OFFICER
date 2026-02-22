@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ReasonCodes" conflictDetection="overwriteChanges" label="Opexrq Comms" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_comms`.`comment_code` `CommentCode`
+	,`rq_comms`.`comment_desc` `CommentDesc`
+	,`rq_comms`.`stores_only` `StoresOnly`
+	,`rq_comms`.`req_only` `ReqOnly`
+	,`rq_comms`.`col_only` `ColOnly`
+	,`rq_comms`.`disabled` `Disabled`
+from `opex`.`rq_comms` `rq_comms`
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="CommentCode" type="String" allowNulls="false" isPrimaryKey="true" label="Reason Code" length="3" showInSummary="true" />
+    <field name="CommentDesc" type="String" label="Reason" length="20" showInSummary="true" />
+    <field name="StoresOnly" type="String" label="Stores Only" length="1" showInSummary="true" />
+    <field name="ReqOnly" type="String" label="Req Only" length="1" showInSummary="true" />
+    <field name="ColOnly" type="String" label="Col Only" length="1" showInSummary="true" />
+    <field name="Disabled" type="String" label="Disabled" length="1" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Opexrq Comms" filter="stores_only = &quot;N&quot;&#xD;&#xA;AND&#xD;&#xA;disabled = &quot;N&quot;&#xD;&#xA;AND&#xD;&#xA;col_only =  &quot;N&quot;">
+      <headerText>Choose from the list of reason codes displayed</headerText>
+      <dataFields>
+        <dataField fieldName="CommentCode" columns="3" />
+        <dataField fieldName="CommentDesc" columns="20" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Reason Codes">
+      <headerText>Reason Code Detail</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CommentCode" columns="3" />
+            <dataField fieldName="CommentDesc" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Comms">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CommentCode" columns="3" />
+            <dataField fieldName="CommentDesc" columns="20" />
+            <dataField fieldName="StoresOnly" columns="1" />
+            <dataField fieldName="ReqOnly" columns="1" />
+            <dataField fieldName="ColOnly" columns="1" />
+            <dataField fieldName="Disabled" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

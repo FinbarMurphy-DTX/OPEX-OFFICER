@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_budcd" alias="rq_budcd" created="2021-01-30T14:21:05" modified="2021-01-30T14:23:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="budget_code" fieldName="BudgetCode" label="Budget Code" />
+    <column name="budget_desc" fieldName="BudgetDesc" label="Budget Desc" />
+    <column name="disabled" fieldName="Disabled" label="Disabled" />
+    <column name="displya_in_ss" fieldName="DisplyaInSs" label="Displya In Ss" />
+  </columns>
+</dataModel>

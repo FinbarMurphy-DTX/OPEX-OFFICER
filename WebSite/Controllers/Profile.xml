@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Profile" conflictDetection="overwriteChanges" label="Opexrq Stitm" handler="DatatecnixOfficerII.Rules.ProfileBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_stitm`.`item_code` `ItemCode`
+	,`item_code`.`sti_desc` `ItemCodeStiDesc`
+	,`rq_stitm`.`kit_code` `KitCode`
+	,`rq_stitm`.`allowance` `Allowance`
+	,`rq_stitm`.`remarks` `Remarks`
+	,`rq_stitm`.`size_code` `SizeCode`
+	,`rq_stitm`.`rowid` `Rowid`
+	,`rq_stitm`.`staff_uid` `StaffUid`
+from `opex`.`rq_stitm` `rq_stitm`
+	left join `opex`.`st_item` `item_code` on `rq_stitm`.`item_code` = `item_code`.`item_code`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" showInSummary="true">
+      <items style="Lookup" dataController="Item" dataValueField="ItemCode" dataTextField="ItemCode" dataView="grid1" />
+    </field>
+    <field name="ItemCodeStiDesc" type="String" readOnly="true" label="Description" length="75" />
+    <field name="KitCode" type="String" label="Kit Code" length="16" showInSummary="true" />
+    <field name="Allowance" type="Int16" label="Allowance" showInSummary="true" />
+    <field name="Remarks" type="String" label="Remarks" length="40" showInSummary="true" />
+    <field name="SizeCode" type="String" label="Size Code" length="20" showInSummary="true" contextFields="ItemCode=ItemCode">
+      <items style="Lookup" dataController="ItemSize" dataView="grid1" dataValueField="SizeCode" />
+    </field>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="StaffUid" type="UInt32" allowNulls="false" label="Staff Uid" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Profile" tags="view-style-card, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none ">
+      <headerText>This is a list of clothing sizes and tailoring remarks</headerText>
+      <dataFields>
+        <dataField fieldName="StaffUid" columns="15" hidden="true" />
+        <dataField fieldName="ItemCode" />
+        <dataField fieldName="ItemCodeStiDesc" rows="5" columns="50" />
+        <dataField fieldName="SizeCode" columns="20" />
+        <dataField fieldName="Remarks" columns="40" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Profile">
+      <headerText>You can modify the size and add special tailoring requests here</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ItemCode" readOnly="true" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="Remarks" columns="40" />
+            <dataField fieldName="StaffUid" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Stitm">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" aliasFieldName="ItemCodeStiDesc" />
+            <dataField fieldName="KitCode" columns="16" />
+            <dataField fieldName="Allowance" columns="15" />
+            <dataField fieldName="Remarks" columns="40" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="StaffUid" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Email" type="Email" phase="Execute" name="AskAQuestion" commandArgument="Ask"><![CDATA[From: "{Parameters_Forname} {Parameters_Surname}" {Parameters_OfficerEmail}
+To: {Parameters_AskEmail}
+Subject: {Parameters_Subject}
+<html>
+<body>
+<p>
+{Parameters_OfficerEmailHeader}
+{Parameters_Message}
+{Parameters_OfficerEmailFooter}
+</p>
+</body>
+</html>]]></rule>
+    <rule id="r102" commandName="Email" type="Code" phase="After" name="ConfirmEmail" />
+  </businessRules>
+</dataController>

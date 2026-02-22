@@ -1,0 +1,50 @@
+﻿/* Hide the lef hand side i button and record summary*/
+
+/*
+#app-sidebar .ui-listview
+{
+    visibility:hidden;
+}
+
+.OPEXTrolleyContents span.app-field.app-field-Local_TrolleyCount.app-field-type-numeric
+{    background-color: darkcyan;
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+
+}
+
+    */
+
+/*
+#WYFS .app-icon-avatar,
+#WYFS .app-avatar,
+
+*/
+/*
+.app-sidebar.app-sidebar-right,
+.app-btn-context
+{visibility:hidden !important;}
+
+    */
+/*
+    http://community.codeontime.com/codeontime/topics/touch-ui-right-side-bar-obscuring-data-view
+*/
+
+/*
+.ui-panel.ui-panel-fixed.ui-body-a.app-sidebar.app-sidebar-right
+{visibility:hidden !important;}
+
+*/
+
+/*  http://community.codeontime.com/codeontime/topics/see-all-icon-corrupting
+
+*/
+
+/*
+.app-echo .app-echo-toolbar > .app-echo-see-all {
+padding-right: 16px !important;
+}
+
+    */
+

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SerialNumbersReplacePrompt" conflictDetection="overwriteChanges" handler="DatatecnixOfficerII.Rules.SerialNumbersReplacePromptBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="SerialNumber" type="String" allowNulls="false" label="Returning Serial Number" length="20" showInSummary="true" />
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" showInSummary="true">
+      <items dataController="Item" newDataView="createForm1" dataValueField="ItemCode" dataTextField="StiDesc" />
+    </field>
+    <field name="NewSerialNumber" type="String" label="New Serial Number" contextFields="ItemCode=ItemCode" />
+    <field name="NewSerialNumberId" type="Int32" label="New Serial Number" contextFields="ItemCode=ItemCode">
+      <items style="Lookup" dataController="SerialNumbersLocation" dataView="gridIssued" dataTextField="SerialNumber" dataValueField="ID" copy="NewSerialNumber=SerialNumber" />
+    </field>
+    <field name="ItemStiDesc" type="String" readOnly="true" label="Item" length="75" allowNulls="false" />
+  </fields>
+  <views>
+    <view id="Prompt" type="Form" label="New Details">
+      <categories>
+        <category id="c1" headerText="Serial Numbers Replace" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="SerialNumber" columns="20" textMode="Static" />
+            <dataField fieldName="ItemStiDesc" rows="5" />
+            <dataField fieldName="ItemCode" columns="16" textMode="Static" />
+            <dataField fieldName="NewSerialNumberId" columns="15" />
+            <dataField fieldName="NewSerialNumber" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

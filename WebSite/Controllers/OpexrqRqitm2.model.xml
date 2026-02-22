@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_rqitm_2" alias="rq_rqitm_2" created="2017-06-15T14:05:19" modified="2017-06-22T13:04:16" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="comment" parentTableSchema="opex" parentTableName="rq_comms" x="355" y="457">
+      <foreignKeyColumn columnName="comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+    <foreignKey id="whse" parentTableSchema="opex" parentTableName="st_whse" x="355" y="618">
+      <foreignKeyColumn columnName="whse_code" parentColumnName="whse_code" />
+    </foreignKey>
+    <foreignKey id="status" parentTableSchema="opex" parentTableName="rq_status" x="355" y="802">
+      <foreignKeyColumn columnName="status_code" parentColumnName="status_code" />
+    </foreignKey>
+    <foreignKey id="rq_header" parentTableSchema="opex" parentTableName="rq_rqns" x="355" y="963">
+      <foreignKeyColumn columnName="rq_header" parentColumnName="rowid" />
+    </foreignKey>
+    <foreignKey id="serial_number" parentTableSchema="opex" parentTableName="serial_numbers" x="876" y="21">
+      <foreignKeyColumn columnName="serial_number_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="gl" parentTableSchema="opex" parentTableName="gl_codes" x="744" y="343">
+      <foreignKeyColumn columnName="gl_code" parentColumnName="gl_code" />
+    </foreignKey>
+    <foreignKey id="dispatch" parentTableSchema="opex" parentTableName="requisition_dispatch_detail" x="744" y="733">
+      <foreignKeyColumn columnName="dispatch_id" parentColumnName="dispatch_id" />
+    </foreignKey>
+    <foreignKey id="item_condition_code" parentTableSchema="opex" parentTableName="item_condition_status" x="1311" y="20" baseForeignKey="serial_number">
+      <foreignKeyColumn columnName="item_condition_code" parentColumnName="item_condition_code" />
+    </foreignKey>
+    <foreignKey id="item" parentTableSchema="opex" parentTableName="st_item" x="1110" y="363">
+      <foreignKeyColumn columnName="item_code" parentColumnName="item_code" />
+    </foreignKey>
+    <foreignKey id="location_code" parentTableSchema="opex" parentTableName="rq_locns" x="1581" y="20" baseForeignKey="rq_header">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" />
+    <column name="sti_desc" fieldName="StiDesc" label="Item Description" foreignKey="item" />
+    <column name="size_code" fieldName="SizeCode" label="Size Code" />
+    <column name="outs_qty" fieldName="OutsQty" label="Outstanding" />
+    <column name="comment_code" fieldName="CommentCode" label="Reason Code" />
+    <column name="comment_desc" fieldName="CommentDesc" label="Reason" foreignKey="comment" />
+    <column name="whse_code" fieldName="WhseCode" label="Warehouse Code" />
+    <column name="stwh_desc" fieldName="Warehouse" label="Warehouse" foreignKey="whse" />
+    <column name="status_code" fieldName="StatusCode" label="Status Code" />
+    <column name="status_description" fieldName="StatusDescription" label="Status Description" foreignKey="status" />
+    <column name="line_value" fieldName="LineValue" label="Line Value" />
+    <column name="alloc_qty" fieldName="AllocQty" label="Alloc Qty" />
+    <column name="orig_qty" fieldName="OrigQty" label="Orig Qty" />
+    <column name="req_item_cost" fieldName="ReqItemCost" label="Item Cost" format="c" />
+    <column name="budget_ind" fieldName="BudgetInd" label="Budget Ind" />
+    <column name="return_dt" fieldName="ReturnDt" label="Return Date" />
+    <column name="rq_header" fieldName="RqHeader" label="Requisition" aliasColumnName="staff_code" aliasForeignKey="rq_header" />
+    <column name="staff_code" fieldName="RqHeaderstaffCode" label="Staff Code" foreignKey="rq_header" />
+    <column name="staff_uid" fieldName="rqHeaderStaffUid" label="Staff UID" foreignKey="rq_header" />
+    <column name="location_code" fieldName="rqHeaderLocationCode" label="rq Header Location Code" foreignKey="rq_header" />
+    <column name="rqn_prefix" fieldName="rqHeaderRqnPrefix" label="rq Header Rqn Prefix" foreignKey="rq_header" />
+    <column name="date_time_placed" fieldName="DateTimePlaced" label="Placed" />
+    <column name="date_time_rcvd" fieldName="DateTimeRcvd" label="Dispatched" />
+    <column name="return_qty_total" fieldName="ReturnQtyTotal" label="Return Qty Total" />
+    <column name="serial_number_id" fieldName="SerialNumberID" label="Serial Number Id" aliasColumnName="item_code" aliasForeignKey="serial_number" />
+    <column name="serial_number" fieldName="SerialNumberSerialNumber" label="Serial Number" foreignKey="serial_number" />
+    <column name="item_condition_code" fieldName="ConditionCode" label="Serial Number Item Condition Code" foreignKey="serial_number" />
+    <column name="gl_code" fieldName="GlCode" label="GL Code" />
+    <column name="gl_description" fieldName="glDescription" label="GL description" foreignKey="gl" />
+    <column name="dispatch_id" fieldName="DispatchID" label="Dispatch Id" />
+    <column name="status_code" fieldName="DispatchStatusCode" label="Dispatch Status Code" foreignKey="dispatch" />
+    <column name="additional_text" fieldName="AdditionalText" label="Additional Text" />
+    <column name="description" fieldName="ItemConditionCodeDescription" label="Item Condition" foreignKey="item_condition_code" />
+    <column name="location_desc" fieldName="LocationCodeLocationDesc" label="Location Code Location Desc" foreignKey="location_code" />
+  </columns>
+</dataModel>

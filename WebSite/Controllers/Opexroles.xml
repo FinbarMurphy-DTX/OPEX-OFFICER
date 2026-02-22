@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Opexroles" conflictDetection="overwriteChanges" label="Opexroles" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`roles`.`id` `ID`
+	,`roles`.`name` `Name`
+	,`roles`.`description` `Description`
+	,`roles`.`cost_centre` `CostCentre`
+	,`cost_centre`.`budget_desc` `CostCentrebudgetDesc`
+	,`roles`.`rank_code` `RankCode`
+	,`rank`.`rank_desc` `RankDesc`
+from `opex`.`roles` `roles`
+	left join `opex`.`rq_budcd` `cost_centre` on `roles`.`cost_centre` = `cost_centre`.`budget_code`
+	left join `opex`.`rq_ranks` `rank` on `roles`.`rank_code` = `rank`.`rank_code`
+]]></text>
+    </command>
+    <command id="idIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="Name" type="String" label="Name" length="12" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="CostCentre" type="String" dataFormatString="c" label="Cost Centre" length="8" showInSummary="true">
+      <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
+    </field>
+    <field name="CostCentrebudgetDesc" type="String" readOnly="true" label="Cost Centrebudget Desc" length="50" />
+    <field name="RankCode" type="String" label="Rank Code" length="8" showInSummary="true">
+      <items style="Lookup" dataController="RqRanks" newDataView="createForm1" dataValueField="RankCode" dataTextField="RankDesc" />
+    </field>
+    <field name="RankDesc" type="String" readOnly="true" label="Rank Desc" length="32" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Opexroles">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Name" columns="12" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="CostCentre" aliasFieldName="CostCentrebudgetDesc" />
+        <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Opexroles">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Opexroles" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Name" columns="12" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="CostCentre" aliasFieldName="CostCentrebudgetDesc" />
+            <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexroles">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Name" columns="12" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="CostCentre" aliasFieldName="CostCentrebudgetDesc" />
+            <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

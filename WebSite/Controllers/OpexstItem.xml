@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="OpexstItem" conflictDetection="overwriteChanges" label="Opexst Item" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`st_item`.`rowid` `Rowid`
+	,`st_item`.`item_code` `ItemCode`
+	,`st_item`.`sti_desc` `StiDesc`
+	,`st_item`.`sti_grp1` `StiGrp1`
+	,`sti_grp1`.`stg1_grp1_desc` `StiGrp1Stg1Grp1Desc`
+	,`st_item`.`sti_grp2` `StiGrp2`
+	,`sti_grp2`.`stg2_grp2_desc` `StiGrp2Stg2Grp2Desc`
+	,`st_item`.`vat_code` `VatCode`
+	,`st_item`.`standard_price` `StandardPrice`
+	,`st_item`.`average_cost` `AverageCost`
+	,`st_item`.`last_cost` `LastCost`
+	,`st_item`.`standard_cost` `StandardCost`
+	,`st_item`.`sti_on_stp` `StiOnStp`
+	,`st_item`.`sti_stnd_ord_qty` `StiStndOrdQty`
+	,`st_item`.`sti_stk_lv` `StiStkLv`
+	,`st_item`.`sti_fre_stk` `StiFreStk`
+	,`st_item`.`sti_pl_nl_cd` `StiPlNlCd`
+	,`st_item`.`sti_cs_nl_cd` `StiCsNlCd`
+	,`st_item`.`sti_ci_nl_cd` `StiCiNlCd`
+	,`st_item`.`sti_cv_nl_cd` `StiCvNlCd`
+	,`st_item`.`sti_disc_cd` `StiDiscCd`
+	,`st_item`.`sti_stk_typ` `StiStkTyp`
+	,`st_item`.`sti_alt_itm` `StiAltItm`
+	,`st_item`.`sti_fifo_low` `StiFifoLow`
+	,`st_item`.`sti_fifo_high` `StiFifoHigh`
+	,`st_item`.`order_unit` `OrderUnit`
+	,`st_item`.`store_unit` `StoreUnit`
+	,`st_item`.`price_unit` `PriceUnit`
+	,`st_item`.`order_per` `OrderPer`
+	,`st_item`.`price_per` `PricePer`
+	,`st_item`.`store_per` `StorePer`
+	,`st_item`.`size_scale` `SizeScale`
+	,`st_item`.`last_receipt_date` `LastReceiptDate`
+	,`st_item`.`budget_ind` `BudgetInd`
+	,`st_item`.`item_oncost` `ItemOncost`
+	,`st_item`.`group_oncost` `GroupOncost`
+	,`st_item`.`contract_code` `ContractCode`
+	,`st_item`.`max_issue_lv` `MaxIssueLv`
+	,`st_item`.`max_order_qty` `MaxOrderQty`
+	,`st_item`.`max_stk_lv` `MaxStkLv`
+	,`st_item`.`total_issues` `TotalIssues`
+	,`st_item`.`frozen_qty` `FrozenQty`
+	,`st_item`.`frozen_date` `FrozenDate`
+	,`st_item`.`inventory_date` `InventoryDate`
+	,`st_item`.`suspense_code` `SuspenseCode`
+	,`st_item`.`inventory_code` `InventoryCode`
+	,`st_item`.`adjustment_code` `AdjustmentCode`
+	,`st_item`.`oncost_code` `OncostCode`
+	,`st_item`.`sti_desc2` `StiDesc2`
+	,`st_item`.`last_stock_take` `LastStockTake`
+	,`st_item`.`wh_code` `WhCode`
+	,`wh`.`whse_code` `WhWhseCode`
+	,`wh_warehouse_type`.`type_description` `WhWarehouseTypetypeDescription`
+	,`st_item`.`staff_allowance` `StaffAllowance`
+	,`st_item`.`certification_control` `CertificationControl`
+	,`st_item`.`certification_code` `CertificationCode`
+	,`certification`.`name` `CertificationName`
+	,`st_item`.`serial_numbers` `SerialNumbers`
+	,`st_item`.`cost_fifo` `CostFifo`
+	,`st_item`.`staff_filter` `StaffFilter`
+	,`staff_filter`.`staff_filter` `StaffFilterstaffFilter`
+	,`st_item`.`review_period` `ReviewPeriod`
+	,`review_period`.`period_code` `ReviewPeriodperiodCode`
+	,`st_item`.`company_id` `CompanyID`
+	,`company`.`name` `CompanyName`
+	,`st_item`.`old_stock_id` `OldStockID`
+	,`st_item`.`item_gl_code` `ItemGlCode`
+	,`item_gl`.`nla_prt1` `ItemGlNlaPrt1`
+	,`st_item`.`item_gender_filter` `ItemGenderFilter`
+	,`st_item`.`archive_flag` `ArchiveFlag`
+	,`st_item`.`picture` `Picture`
+	,`st_item`.`picture1` `Picture1`
+	,`st_item`.`vat_id` `VatID`
+	,`st_item`.`abc_volume` `AbcVolume`
+	,`st_item`.`abc_value` `AbcValue`
+	,`st_item`.`abc_transactions` `AbcTransactions`
+	,`st_item`.`order_unit_id` `OrderUnitID`
+	,`st_item`.`store_unit_id` `StoreUnitID`
+	,`store_unit`.`unit_desc` `StoreUnitDesc`
+from `opex`.`st_item` `st_item`
+	left join `opex`.`st_gp1cd` `sti_grp1` on `st_item`.`sti_grp1` = `sti_grp1`.`sti_grp1`
+	left join `opex`.`st_gp2cd` `sti_grp2` on `st_item`.`sti_grp2` = `sti_grp2`.`sti_grp2`
+	left join `opex`.`st_whse` `wh` on `st_item`.`wh_code` = `wh`.`whse_code`
+	left join `opex`.`warehouse_types` `wh_warehouse_type` on `wh`.`warehouse_type` = `wh_warehouse_type`.`type_id`
+	left join `opex`.`st_certs` `certification` on `st_item`.`certification_code` = `certification`.`code`
+	left join `opex`.`item_staff_filter` `staff_filter` on `st_item`.`staff_filter` = `staff_filter`.`staff_filter`
+	left join `opex`.`review_periods` `review_period` on `st_item`.`review_period` = `review_period`.`period_code`
+	left join `opex`.`company` `company` on `st_item`.`company_id` = `company`.`id`
+	left join `opex`.`gl_codes` `item_gl` on `st_item`.`item_gl_code` = `item_gl`.`gl_code`
+	left join `opex`.`st_units` `store_unit` on `st_item`.`store_unit_id` = `store_unit`.`rowid`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="UInt64" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" />
+    <field name="StiDesc" type="String" label="Description" length="75" showInSummary="true" />
+    <field name="StiGrp1" type="String" label="Group" length="3" showInSummary="true" />
+    <field name="StiGrp1Stg1Grp1Desc" type="String" readOnly="true" label="Group" length="20" />
+    <field name="StiGrp2" type="String" label="Sti Grp2" length="3" showInSummary="true" />
+    <field name="StiGrp2Stg2Grp2Desc" type="String" readOnly="true" label="Group" length="20" />
+    <field name="VatCode" type="String" label="Vat Code" length="1" showInSummary="true" />
+    <field name="StandardPrice" type="Decimal" dataFormatString="c" label="Standard Price" />
+    <field name="AverageCost" type="Decimal" dataFormatString="c" label="Average Cost" />
+    <field name="LastCost" type="Decimal" dataFormatString="c" label="Last Cost" />
+    <field name="StandardCost" type="Decimal" dataFormatString="c" label="Standard Cost" />
+    <field name="StiOnStp" type="String" label="On Stop" length="1" />
+    <field name="StiStndOrdQty" type="Decimal" allowNulls="false" label="Sti Stnd Ord Qty" />
+    <field name="StiStkLv" type="Decimal" allowNulls="false" label="Sti Stk Lv" />
+    <field name="StiFreStk" type="Decimal" allowNulls="false" label="Sti Fre Stk" />
+    <field name="StiPlNlCd" type="String" label="Sti Pl Nl Cd" length="12" />
+    <field name="StiCsNlCd" type="String" label="Sti Cs Nl Cd" length="12" />
+    <field name="StiCiNlCd" type="String" label="Sti Ci Nl Cd" length="12" />
+    <field name="StiCvNlCd" type="String" label="Sti Cv Nl Cd" length="12" />
+    <field name="StiDiscCd" type="String" label="Sti Disc Cd" length="2" />
+    <field name="StiStkTyp" type="String" label="Sti Stk Typ" length="1" />
+    <field name="StiAltItm" type="String" label="Sti Alt Itm" length="1" />
+    <field name="StiFifoLow" type="Int16" label="Sti Fifo Low" />
+    <field name="StiFifoHigh" type="Int16" label="Sti Fifo High" />
+    <field name="OrderUnit" type="String" label="Order Unit" length="4" />
+    <field name="StoreUnit" type="String" label="Store Unit" length="4" />
+    <field name="PriceUnit" type="String" dataFormatString="c" label="Price Unit" length="4" />
+    <field name="OrderPer" type="Decimal" label="Order Per" />
+    <field name="PricePer" type="Decimal" dataFormatString="c" label="Price Per" />
+    <field name="StorePer" type="Decimal" label="Store Per" />
+    <field name="SizeScale" type="String" label="Size Scale" length="15" />
+    <field name="LastReceiptDate" type="DateTime" label="Last Receipt Date" />
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8" />
+    <field name="ItemOncost" type="String" dataFormatString="c" label="Item Oncost" length="2" />
+    <field name="GroupOncost" type="String" dataFormatString="c" label="Group Oncost" length="1" />
+    <field name="ContractCode" type="String" label="Contract Code" length="10" />
+    <field name="MaxIssueLv" type="Decimal" label="Max Issue Lv" />
+    <field name="MaxOrderQty" type="Decimal" label="Max Order Qty" />
+    <field name="MaxStkLv" type="Decimal" label="Max Stk Lv" />
+    <field name="TotalIssues" type="Decimal" label="Total Issues" />
+    <field name="FrozenQty" type="Decimal" label="Frozen Qty" />
+    <field name="FrozenDate" type="DateTime" label="Frozen Date" />
+    <field name="InventoryDate" type="DateTime" label="Inventory Date" />
+    <field name="SuspenseCode" type="String" label="Suspense Code" length="12" />
+    <field name="InventoryCode" type="String" label="Inventory Code" length="12" />
+    <field name="AdjustmentCode" type="String" label="Adjustment Code" length="12" />
+    <field name="OncostCode" type="String" dataFormatString="c" label="Oncost Code" length="12" />
+    <field name="StiDesc2" type="String" label="Description" length="75" />
+    <field name="LastStockTake" type="DateTime" label="Last Stock Take" />
+    <field name="WhCode" type="String" allowNulls="false" label="Wh Code" length="3" />
+    <field name="WhWhseCode" type="String" readOnly="true" label="Wh Whse Code" length="3" />
+    <field name="WhWarehouseTypetypeDescription" type="String" readOnly="true" label="Wh Warehouse Typetype Description" length="50" />
+    <field name="StaffAllowance" type="Int32" label="Staff Allowance" />
+    <field name="CertificationControl" type="String" label="Certification Control" length="1" />
+    <field name="CertificationCode" type="Int32" label="Certification Code" />
+    <field name="CertificationName" type="String" readOnly="true" label="Certification Name" length="25" />
+    <field name="SerialNumbers" type="String" label="Serial Numbers" length="1" />
+    <field name="CostFifo" type="Decimal" dataFormatString="c" label="Cost Fifo" />
+    <field name="StaffFilter" type="String" label="Staff Filter" length="8" />
+    <field name="StaffFilterstaffFilter" type="String" readOnly="true" label="Staff Filterstaff Filter" length="8" />
+    <field name="ReviewPeriod" type="String" label="Review Period" length="1" />
+    <field name="ReviewPeriodperiodCode" type="String" readOnly="true" label="Review Periodperiod Code" length="1" />
+    <field name="CompanyID" type="UInt32" label="Company Id" />
+    <field name="CompanyName" type="String" readOnly="true" label="Company Name" length="20" />
+    <field name="OldStockID" type="String" label="Old Stock Id" length="15" />
+    <field name="ItemGlCode" type="String" label="Item Gl Code" length="12" />
+    <field name="ItemGlNlaPrt1" type="String" readOnly="true" label="Item Gl Nla Prt1" length="4" />
+    <field name="ItemGenderFilter" type="String" label="Item Gender Filter" length="1" />
+    <field name="ArchiveFlag" type="String" label="Archive Flag" length="1" />
+    <field name="Picture" type="Byte[]" onDemand="true" sourceFields="rowid" onDemandHandler="st_itemPicture" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Picture" />
+    <field name="Picture1" type="Byte[]" onDemand="true" sourceFields="rowid" onDemandHandler="st_itemPicture1" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Picture1" />
+    <field name="VatID" type="Int32" label="Vat Id" />
+    <field name="AbcVolume" type="String" label="Abc Volume" length="1" />
+    <field name="AbcValue" type="String" label="Abc Value" length="1" />
+    <field name="AbcTransactions" type="String" label="Abc Transactions" length="1" />
+    <field name="OrderUnitID" type="UInt32" label="Order Unit Id" />
+    <field name="StoreUnitID" type="UInt32" label="Store Unit Id" />
+    <field name="StoreUnitDesc" type="String" readOnly="true" label="Pack Size" length="32" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Catalogue" sortExpression="ItemCode asc" filter="StiOnStp =&quot;N&quot;">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="Picture" columns="15" />
+        <dataField fieldName="ItemCode" columns="16" />
+        <dataField fieldName="StiGrp1" aliasFieldName="StiGrp1Stg1Grp1Desc" />
+        <dataField fieldName="StiDesc" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Catalogue">
+      <headerText>You can ask a question about this item or add it to your trolley using the buttons below</headerText>
+      <categories>
+        <category id="Detail" headerText="Detail" tab="Detail" flow="NewColumn">
+          <description><![CDATA[Information about this Item]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="StiDesc" />
+            <dataField fieldName="StiDesc2" rows="5" />
+            <dataField fieldName="StoreUnitID" aliasFieldName="StoreUnitDesc" />
+            <dataField fieldName="StiGrp1" aliasFieldName="StiGrp1Stg1Grp1Desc" />
+            <dataField fieldName="StiGrp2" aliasFieldName="StiGrp2Stg2Grp2Desc" />
+          </dataFields>
+        </category>
+        <category headerText="Pictures" id="c1" tab="Pictures">
+          <description><![CDATA[Images for his Item]]></description>
+          <dataFields>
+            <dataField fieldName="Picture" columns="15" />
+            <dataField fieldName="Picture1" columns="15" />
+          </dataFields>
+          <visibility>
+            <expression test="[Picture] != null" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New opex Opexst Item">
+      <headerText>hello</headerText>
+      <categories>
+        <category id="c1" headerText="New opex Opexst Item" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="StiDesc" />
+            <dataField fieldName="StiGrp1" aliasFieldName="StiGrp1Stg1Grp1Desc" />
+            <dataField fieldName="StiGrp2" aliasFieldName="StiGrp2Stg2Grp2Desc" />
+            <dataField fieldName="VatCode" columns="1" />
+            <dataField fieldName="StandardPrice" columns="15" />
+            <dataField fieldName="AverageCost" columns="15" />
+            <dataField fieldName="LastCost" columns="15" />
+            <dataField fieldName="StandardCost" columns="15" />
+            <dataField fieldName="StiOnStp" columns="1" />
+            <dataField fieldName="StiStndOrdQty" columns="15" />
+            <dataField fieldName="StiStkLv" columns="15" />
+            <dataField fieldName="StiFreStk" columns="15" />
+            <dataField fieldName="StiPlNlCd" columns="12" />
+            <dataField fieldName="StiCsNlCd" columns="12" />
+            <dataField fieldName="StiCiNlCd" columns="12" />
+            <dataField fieldName="StiCvNlCd" columns="12" />
+            <dataField fieldName="StiDiscCd" columns="2" />
+            <dataField fieldName="StiStkTyp" columns="1" />
+            <dataField fieldName="StiAltItm" columns="1" />
+            <dataField fieldName="StiFifoLow" columns="15" />
+            <dataField fieldName="StiFifoHigh" columns="15" />
+            <dataField fieldName="OrderUnit" columns="4" />
+            <dataField fieldName="StoreUnit" columns="4" />
+            <dataField fieldName="PriceUnit" columns="4" />
+            <dataField fieldName="OrderPer" columns="15" />
+            <dataField fieldName="PricePer" columns="15" />
+            <dataField fieldName="StorePer" columns="15" />
+            <dataField fieldName="SizeScale" columns="15" />
+            <dataField fieldName="LastReceiptDate" columns="10" />
+            <dataField fieldName="BudgetInd" columns="8" />
+            <dataField fieldName="ItemOncost" columns="2" />
+            <dataField fieldName="GroupOncost" columns="1" />
+            <dataField fieldName="ContractCode" columns="10" />
+            <dataField fieldName="MaxIssueLv" columns="15" />
+            <dataField fieldName="MaxOrderQty" columns="15" />
+            <dataField fieldName="MaxStkLv" columns="15" />
+            <dataField fieldName="TotalIssues" columns="15" />
+            <dataField fieldName="FrozenQty" columns="15" />
+            <dataField fieldName="FrozenDate" columns="10" />
+            <dataField fieldName="InventoryDate" columns="10" />
+            <dataField fieldName="SuspenseCode" columns="12" />
+            <dataField fieldName="InventoryCode" columns="12" />
+            <dataField fieldName="AdjustmentCode" columns="12" />
+            <dataField fieldName="OncostCode" columns="12" />
+            <dataField fieldName="StiDesc2" />
+            <dataField fieldName="LastStockTake" columns="10" />
+            <dataField fieldName="WhCode" aliasFieldName="WhWhseCode" />
+            <dataField fieldName="WhWarehouseTypetypeDescription" columns="50" />
+            <dataField fieldName="StaffAllowance" columns="15" />
+            <dataField fieldName="CertificationControl" columns="1" />
+            <dataField fieldName="CertificationCode" aliasFieldName="CertificationName" />
+            <dataField fieldName="SerialNumbers" columns="1" />
+            <dataField fieldName="CostFifo" columns="15" />
+            <dataField fieldName="StaffFilter" columns="8" />
+            <dataField fieldName="StaffFilterstaffFilter" columns="8" />
+            <dataField fieldName="ReviewPeriod" aliasFieldName="ReviewPeriodperiodCode" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="OldStockID" columns="15" />
+            <dataField fieldName="ItemGlCode" aliasFieldName="ItemGlNlaPrt1" />
+            <dataField fieldName="ItemGenderFilter" columns="1" />
+            <dataField fieldName="ArchiveFlag" columns="1" />
+            <dataField fieldName="Picture" columns="15" />
+            <dataField fieldName="Picture1" columns="15" />
+            <dataField fieldName="VatID" columns="15" />
+            <dataField fieldName="AbcVolume" columns="1" />
+            <dataField fieldName="AbcValue" columns="1" />
+            <dataField fieldName="AbcTransactions" columns="1" />
+            <dataField fieldName="OrderUnitID" columns="15" />
+            <dataField fieldName="StoreUnitID" aliasFieldName="StoreUnitDesc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="More Information" />
+      <action commandName="Custom" commandArgument="Add" headerText="Add to Trolley" causesValidation="false" id="a100" />
+      <action commandName="Custom" commandArgument="Ask" headerText="Ask a Question " causesValidation="false" id="a101" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+      <action commandName="Custom" commandArgument="Add" headerText="Add to Trolley" causesValidation="false" id="a100" />
+      <action commandName="Custom" commandArgument="Ask" headerText="Ask a Question " causesValidation="false" id="a101" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Item Actions" flat="true">
+      <action commandName="Custom" commandArgument="Add" headerText="Add" causesValidation="false" id="a100" />
+    </actionGroup>
+  </actions>
+</dataController>

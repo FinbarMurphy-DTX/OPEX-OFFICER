@@ -1,0 +1,31 @@
+﻿
+/* https://codeontime.com/blog/label/Touch%20UI
+  */
+{
+
+  "defaultUI": "TouchUI",
+  "appName": "OPEX",
+
+
+  "ui": {
+    "smartDates": false
+  },
+
+  "splash": {
+    "enabled": true,
+    "duration": null,
+    "background": "/images/police.png",
+    "logo": "/images/logo-black.png"
+  }
+
+  /*
+   , "membership": {
+        "accountManager": {
+            "enabled": false
+        }
+    }
+     */
+}
+
+
+

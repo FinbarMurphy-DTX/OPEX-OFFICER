@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SerialNumbersAssignPrompt" conflictDetection="overwriteChanges" handler="DatatecnixOfficerII.Rules.SerialNumbersAssignPromptBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="SerialNumber" type="String" allowNulls="false" label="Issuing Serial Number" length="20" showInSummary="true" />
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" showInSummary="true">
+      <items dataController="Item" newDataView="createForm1" dataValueField="ItemCode" dataTextField="StiDesc" />
+    </field>
+    <field name="ItemStiDesc" type="String" readOnly="true" label="Item" length="75" allowNulls="false" />
+    <field name="StaffEpl" type="String" label="EPL Number" contextFields="ItemCode=ItemCode" />
+    <field name="StaffSurname" type="String" label="Surname" contextFields="ItemCode=ItemCode" />
+    <field name="StaffId" type="Int32" label="Assign To" contextFields="LocationCode=LocationCode">
+      <items style="Lookup" dataController="StaffUnrestricted" dataView="grid1" dataTextField="Surname" dataValueField="StaffUid" copy="StaffEpl=EplNumber&#xD;&#xA;StaffSurname=Surname" description="Staff to Assign to" />
+    </field>
+    <field name="LocationCode" type="String" label="Location Code" length="8" />
+  </fields>
+  <views>
+    <view id="Prompt" type="Form" label="Assign">
+      <headerText>Enter the Officer to Assign to</headerText>
+      <categories>
+        <category id="c1" headerText="Serial Numbers Assign Prompt" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="ItemStiDesc" rows="5" />
+            <dataField fieldName="SerialNumber" columns="20" />
+            <dataField fieldName="StaffId" columns="15" />
+            <dataField fieldName="StaffEpl" rows="5" />
+            <dataField fieldName="StaffSurname" rows="5" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

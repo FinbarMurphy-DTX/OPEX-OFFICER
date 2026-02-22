@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_trolley_item_location" alias="rq_trolley_item_location" created="2017-06-20T15:46:26" modified="2021-01-30T17:43:56" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="item" parentTableSchema="opex" parentTableName="st_item" x="532" y="20">
+      <foreignKeyColumn columnName="item_code" parentColumnName="item_code" />
+    </foreignKey>
+    <foreignKey id="comment" parentTableSchema="opex" parentTableName="rq_comms" x="413" y="494">
+      <foreignKeyColumn columnName="comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+    <foreignKey id="requested_by" parentTableSchema="opex" parentTableName="rq_staff" x="117" y="633">
+      <foreignKeyColumn columnName="requested_by" parentColumnName="staff_uid" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" aliasColumnName="sti_desc" aliasForeignKey="item" />
+    <column name="sti_desc" fieldName="ItemStiDesc" label="Item Sti Desc" foreignKey="item" />
+    <column name="size_code" fieldName="SizeCode" label="Size Code" />
+    <column name="qty" fieldName="Qty" label="Qty" />
+    <column name="comment_code" fieldName="CommentCode" label="Comment Code" aliasColumnName="comment_desc" aliasForeignKey="comment" />
+    <column name="comment_desc" fieldName="CommentDesc" label="Comment Desc" foreignKey="comment" />
+    <column name="line_value" fieldName="LineValue" label="Line Value" />
+    <column name="req_item_cost" fieldName="ReqItemCost" label="Req Item Cost" format="c" />
+    <column name="requested_by" fieldName="RequestedBy" label="Requested By" aliasColumnName="staff_code" aliasForeignKey="requested_by" />
+    <column name="staff_code" fieldName="RequestedbyStaffCode" label="Requested by Staff Code" foreignKey="requested_by" />
+    <column name="surname" fieldName="RequestedbySurname" label="Requested by Surname" foreignKey="requested_by" />
+    <column name="requested_date" fieldName="RequestedDate" label="Requested Date" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" />
+    <column name="type" fieldName="Type" label="Type" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="additional_information" fieldName="AdditionalInformation" label="Additional Information" />
+    <column name="gl_code" fieldName="glCode" label="gl Code" />
+    <column name="budget_code" fieldName="BudgetCode" label="Budget Code" />
+    <column name="supplier" fieldName="Supplier" label="Supplier" />
+  </columns>
+</dataModel>

@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ItemSize" conflictDetection="overwriteChanges" label="Opexst Itmsz" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`st_itmsz`.`rowid` `Rowid`
+	,`st_itmsz`.`item_code` `ItemCode`
+	,`st_itmsz`.`size_code` `SizeCode`
+	,`st_itmsz`.`average_cost` `AverageCost`
+	,`st_itmsz`.`last_cost` `LastCost`
+	,`st_itmsz`.`standard_cost` `StandardCost`
+	,`st_itmsz`.`on_stop` `OnStop`
+	,`st_itmsz`.`last_purch_date` `LastPurchDate`
+	,`st_itmsz`.`danger_level` `DangerLevel`
+	,`st_itmsz`.`std_order_qty` `StdOrderQty`
+	,`st_itmsz`.`total_level` `TotalLevel`
+	,`st_itmsz`.`open_balance` `OpenBalance`
+	,`st_itmsz`.`allocated_qty` `AllocatedQty`
+	,`st_itmsz`.`free_qty` `FreeQty`
+	,`st_itmsz`.`on_order_qty` `OnOrderQty`
+	,`st_itmsz`.`total_issues` `TotalIssues`
+	,`st_itmsz`.`lead_time` `LeadTime`
+	,`st_itmsz`.`fifo_low` `FifoLow`
+	,`st_itmsz`.`fifo_high` `FifoHigh`
+	,`st_itmsz`.`vat_code` `VatCode`
+	,`st_itmsz`.`standard_price` `StandardPrice`
+	,`st_itmsz`.`max_issue_lv` `MaxIssueLv`
+	,`st_itmsz`.`max_order_qty` `MaxOrderQty`
+	,`st_itmsz`.`max_stk_lv` `MaxStkLv`
+	,`st_itmsz`.`last_receipt_date` `LastReceiptDate`
+	,`st_itmsz`.`frozen_qty` `FrozenQty`
+	,`st_itmsz`.`frozen_date` `FrozenDate`
+	,`st_itmsz`.`stock_type` `StockType`
+	,`st_itmsz`.`abc_cls` `AbcCls`
+	,`st_itmsz`.`abc_cls_dt` `AbcClsDt`
+	,`st_itmsz`.`size_sort_order` `SizeSortOrder`
+	,`st_itmsz`.`cost_fifo` `CostFifo`
+	,`st_itmsz`.`last_stock_take` `LastStockTake`
+from `opex`.`st_itmsz` `st_itmsz`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="UInt64" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" showInSummary="true" />
+    <field name="SizeCode" type="String" allowNulls="false" label="Size Code" length="20" showInSummary="true" />
+    <field name="AverageCost" type="Decimal" dataFormatString="c" label="Average Cost" showInSummary="true" />
+    <field name="LastCost" type="Decimal" dataFormatString="c" label="Last Cost" showInSummary="true" />
+    <field name="StandardCost" type="Decimal" dataFormatString="c" label="Standard Cost" showInSummary="true" />
+    <field name="OnStop" type="String" label="On Stop" length="1" />
+    <field name="LastPurchDate" type="DateTime" label="Last Purch Date" />
+    <field name="DangerLevel" type="Decimal" label="Danger Level" />
+    <field name="StdOrderQty" type="Decimal" label="Std Order Qty" />
+    <field name="TotalLevel" type="Decimal" label="Total Level" />
+    <field name="OpenBalance" type="Decimal" label="Open Balance" />
+    <field name="AllocatedQty" type="Decimal" label="Allocated Qty" />
+    <field name="FreeQty" type="Decimal" label="Free Qty" />
+    <field name="OnOrderQty" type="Decimal" label="On Order Qty" />
+    <field name="TotalIssues" type="Decimal" label="Total Issues" />
+    <field name="LeadTime" type="Int16" label="Lead Time" />
+    <field name="FifoLow" type="Int16" label="Fifo Low" />
+    <field name="FifoHigh" type="Int16" label="Fifo High" />
+    <field name="VatCode" type="String" label="Vat Code" length="1" />
+    <field name="StandardPrice" type="Decimal" dataFormatString="c" label="Standard Price" />
+    <field name="MaxIssueLv" type="Decimal" label="Max Issue Lv" />
+    <field name="MaxOrderQty" type="Decimal" label="Max Order Qty" />
+    <field name="MaxStkLv" type="Decimal" label="Max Stk Lv" />
+    <field name="LastReceiptDate" type="DateTime" label="Last Receipt Date" />
+    <field name="FrozenQty" type="Decimal" label="Frozen Qty" />
+    <field name="FrozenDate" type="DateTime" label="Frozen Date" />
+    <field name="StockType" type="String" label="Stock Type" length="1" />
+    <field name="AbcCls" type="String" label="Abc Cls" length="1" />
+    <field name="AbcClsDt" type="DateTime" label="Abc Cls Dt" />
+    <field name="SizeSortOrder" type="Int32" label="Size Sort Order" />
+    <field name="CostFifo" type="Decimal" dataFormatString="c" label="Cost Fifo" />
+    <field name="LastStockTake" type="DateTime" label="Last Stock Take" />
+    <field name="Local_OPEXCost" type="Currency" label="Item Cost" computed="true" dataFormatString="C2">
+      <formula>OPEXCost(`st_itmsz`.`item_code`,`st_itmsz`.`size_code`,null)</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Sizes" sortExpression="SizeSortOrder,SizeCode">
+      <headerText>This is a list of sizes for this item</headerText>
+      <dataFields>
+        <dataField fieldName="ItemCode" columns="16" />
+        <dataField fieldName="SizeCode" columns="20" />
+        <dataField fieldName="FreeQty" columns="15" />
+        <dataField fieldName="Local_OPEXCost" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Opexst Itmsz">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="Local_OPEXCost" columns="15" />
+            <dataField fieldName="FreeQty" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" id="c2">
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+          <dataFields>
+            <dataField fieldName="AbcCls" columns="1" />
+            <dataField fieldName="AverageCost" columns="15" />
+            <dataField fieldName="LastCost" columns="15" />
+            <dataField fieldName="StandardCost" columns="15" />
+            <dataField fieldName="OnStop" columns="1" />
+            <dataField fieldName="LastPurchDate" columns="10" />
+            <dataField fieldName="DangerLevel" columns="15" />
+            <dataField fieldName="StdOrderQty" columns="15" />
+            <dataField fieldName="TotalLevel" columns="15" />
+            <dataField fieldName="OpenBalance" columns="15" />
+            <dataField fieldName="AllocatedQty" columns="15" />
+            <dataField fieldName="OnOrderQty" columns="15" />
+            <dataField fieldName="TotalIssues" columns="15" />
+            <dataField fieldName="LeadTime" columns="15" />
+            <dataField fieldName="FifoLow" columns="15" />
+            <dataField fieldName="FifoHigh" columns="15" />
+            <dataField fieldName="VatCode" columns="1" />
+            <dataField fieldName="StandardPrice" columns="15" />
+            <dataField fieldName="MaxIssueLv" columns="15" />
+            <dataField fieldName="MaxOrderQty" columns="15" />
+            <dataField fieldName="MaxStkLv" columns="15" />
+            <dataField fieldName="LastReceiptDate" columns="10" />
+            <dataField fieldName="FrozenQty" columns="15" />
+            <dataField fieldName="FrozenDate" columns="10" />
+            <dataField fieldName="StockType" columns="1" />
+            <dataField fieldName="AbcClsDt" columns="10" />
+            <dataField fieldName="SizeSortOrder" columns="15" />
+            <dataField fieldName="CostFifo" columns="15" />
+            <dataField fieldName="LastStockTake" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexst Itmsz">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="AverageCost" columns="15" />
+            <dataField fieldName="LastCost" columns="15" />
+            <dataField fieldName="StandardCost" columns="15" />
+            <dataField fieldName="OnStop" columns="1" />
+            <dataField fieldName="LastPurchDate" columns="10" />
+            <dataField fieldName="DangerLevel" columns="15" />
+            <dataField fieldName="StdOrderQty" columns="15" />
+            <dataField fieldName="TotalLevel" columns="15" />
+            <dataField fieldName="OpenBalance" columns="15" />
+            <dataField fieldName="AllocatedQty" columns="15" />
+            <dataField fieldName="FreeQty" columns="15" />
+            <dataField fieldName="OnOrderQty" columns="15" />
+            <dataField fieldName="TotalIssues" columns="15" />
+            <dataField fieldName="LeadTime" columns="15" />
+            <dataField fieldName="FifoLow" columns="15" />
+            <dataField fieldName="FifoHigh" columns="15" />
+            <dataField fieldName="VatCode" columns="1" />
+            <dataField fieldName="StandardPrice" columns="15" />
+            <dataField fieldName="MaxIssueLv" columns="15" />
+            <dataField fieldName="MaxOrderQty" columns="15" />
+            <dataField fieldName="MaxStkLv" columns="15" />
+            <dataField fieldName="LastReceiptDate" columns="10" />
+            <dataField fieldName="FrozenQty" columns="15" />
+            <dataField fieldName="FrozenDate" columns="10" />
+            <dataField fieldName="StockType" columns="1" />
+            <dataField fieldName="AbcCls" columns="1" />
+            <dataField fieldName="AbcClsDt" columns="10" />
+            <dataField fieldName="SizeSortOrder" columns="15" />
+            <dataField fieldName="CostFifo" columns="15" />
+            <dataField fieldName="LastStockTake" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

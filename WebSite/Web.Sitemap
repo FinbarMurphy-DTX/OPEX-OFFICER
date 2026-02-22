@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
+    <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" />
+    <siteMapNode title="Location" description="" url="~/pages/location-catalogue" roles="Location" cssClass="material-icon-location-city" />
+    <siteMapNode title="Personal" description="Add Items to your Personal Trolley" url="~/pages/my-catalogue" roles="Officer" cssClass="material-icon-person" />
+    <siteMapNode title="History" description="Show details of items ordered/requisitioned previously" url="~/pages/my-detail" roles="Officer-Detail,Location-Detail">
+      <siteMapNode title="Location Items" description="" url="~/pages/location-requisitions" roles="Location-Detail">
+        <siteMapNode title="Non Stock Items" description="" url="~/pages/mynon-stock-items_1" roles="*" />
+      </siteMapNode>
+      <siteMapNode title="My Items" description="" url="~/pages/my-requisitions" roles="Officer-Detail">
+        <siteMapNode title="Non Stock Items" description="" url="~/pages/mynon-stock-items" roles="*" />
+      </siteMapNode>
+      <siteMapNode title="My Profile" description="" url="~/pages/my-profile" roles="Officer-Profile" />
+    </siteMapNode>
+    <siteMapNode title="PPE" description="View Serial Numbers Location" url="~/pages/serial-numbers-location" />
+    <siteMapNode title="Opex Site Content" description="View Opex Site Content" url="~/pages/opex_site_content" roles="Administrators, Content Editors, Developers" />
+  </siteMapNode>
+</siteMap>

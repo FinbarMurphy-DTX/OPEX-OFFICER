@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_ranks" alias="rq_ranks" created="2017-08-30T17:39:20" modified="2017-08-30T17:40:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="staff_filter" parentTableSchema="opex" parentTableName="item_staff_filter" x="285" y="20">
+      <foreignKeyColumn columnName="staff_filter" parentColumnName="staff_filter" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="rank_code" fieldName="RankCode" label="Rank Code" />
+    <column name="rank_desc" fieldName="RankDesc" label="Rank Desc" />
+    <column name="staff_filter" fieldName="StaffFilter" label="Staff Filter" aliasColumnName="staff_filter_description" aliasForeignKey="staff_filter" />
+    <column name="staff_filter_description" fieldName="StaffFilterStaffFilterDescription" label="Staff Filter Staff Filter Description" foreignKey="staff_filter" />
+  </columns>
+</dataModel>

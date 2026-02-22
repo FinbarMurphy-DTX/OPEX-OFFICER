@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="ad_module_options" alias="ad_module_options" created="2017-06-08T09:25:04" modified="2017-06-08T09:26:13" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="id" fieldName="ID" label="Id" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="value" fieldName="Value" label="Value" />
+    <column name="option_name" fieldName="OptionName" label="Option Name" />
+    <column name="required" fieldName="Required" label="Required" />
+  </columns>
+</dataModel>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="staff_roles" alias="staff_roles" created="2017-06-13T16:34:22" modified="2017-06-13T16:43:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="role" parentTableSchema="opex" parentTableName="roles" x="914" y="370">
+      <foreignKeyColumn columnName="role_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="staff_u" parentTableSchema="opex" parentTableName="rq_staff" x="892" y="144">
+      <foreignKeyColumn columnName="staff_uid" parentColumnName="staff_uid" />
+    </foreignKey>
+    <foreignKey id="cost_centre" parentTableSchema="opex" parentTableName="rq_budcd" x="358" y="300">
+      <foreignKeyColumn columnName="cost_centre" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="rank" parentTableSchema="opex" parentTableName="rq_ranks" x="303" y="461">
+      <foreignKeyColumn columnName="rank_code" parentColumnName="rank_code" />
+    </foreignKey>
+    <foreignKey id="location_code" parentTableSchema="opex" parentTableName="rq_locns" x="1199" y="20">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="id" fieldName="ID" label="Id" />
+    <column name="role_id" fieldName="RoleID" label="Role Id" aliasColumnName="name" aliasForeignKey="role" />
+    <column name="name" fieldName="RoleName" label="Role Name" foreignKey="role" />
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Uid" />
+    <column name="location_code" fieldName="StaffUlocationCode" label="Location Code" foreignKey="staff_u" />
+    <column name="cost_centre" fieldName="CostCentre" label="Cost Centre Code" format="c" aliasColumnName="budget_desc" aliasForeignKey="cost_centre" />
+    <column name="budget_desc" fieldName="CostCentrebudgetDesc" label="Cost Centre" foreignKey="cost_centre" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" aliasColumnName="location_desc" aliasForeignKey="location_code" />
+    <column name="location_desc" fieldName="LocationCodeLocationDesc" label="Location Code Location Desc" foreignKey="location_code" />
+    <column name="rank_code" fieldName="RankCode" label="Rank Code" />
+    <column name="rank_code" fieldName="RankCode1" label="Rank Code" foreignKey="rank" />
+  </columns>
+</dataModel>

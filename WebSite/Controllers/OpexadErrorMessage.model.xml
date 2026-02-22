@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="ad_error_message" alias="ad_error_message" created="2017-06-08T09:23:05" modified="2017-06-08T09:30:05" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="msgNo" fieldName="MsgNo" label="msg No" />
+    <column name="errorMsg" fieldName="ErrorMsg" label="error Msg" />
+    <column name="module_id" fieldName="ModuleID" label="Module Id" />
+    <column name="error_type" fieldName="ErrorType" label="Error Type" />
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+  </columns>
+</dataModel>

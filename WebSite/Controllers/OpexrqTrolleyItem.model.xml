@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_trolley_item" alias="rq_trolley_item" created="2017-06-08T15:50:10" modified="2021-01-30T14:39:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="item" parentTableSchema="opex" parentTableName="st_item" x="327" y="20">
+      <foreignKeyColumn columnName="item_code" parentColumnName="item_code" />
+    </foreignKey>
+    <foreignKey id="comment" parentTableSchema="opex" parentTableName="rq_comms" x="327" y="503">
+      <foreignKeyColumn columnName="comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" aliasColumnName="sti_desc" aliasForeignKey="item" />
+    <column name="sti_desc" fieldName="ItemStiDesc" label="Description" foreignKey="item" />
+    <column name="size_code" fieldName="SizeCode" label="Size" />
+    <column name="qty" fieldName="Qty" label="Qty" />
+    <column name="comment_code" fieldName="CommentCode" label="Comment Code" />
+    <column name="comment_desc" fieldName="CommentDesc" label="Comment" foreignKey="comment" />
+    <column name="line_value" fieldName="LineValue" label="Line Value" format="C2" />
+    <column name="req_item_cost" fieldName="ReqItemCost" label="Item Cost" format="C2" />
+    <column name="UpdateStaffProfile" fieldName="UpdateStaffProfile" label="Update Staff Profile" />
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Uid" />
+    <column name="type" fieldName="Type" label="Type" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="additional_information" fieldName="AdditionalInformation" label="Additional Information" />
+    <column name="gl_code" fieldName="glCode" label="gl Code" />
+    <column name="budget_code" fieldName="BudgetCode" label="Budget Code" />
+    <column name="supplier" fieldName="Supplier" label="Supplier" />
+  </columns>
+</dataModel>

@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RequisitionText" conflictDetection="overwriteChanges" label="Requisition Text" handler="DatatecnixOfficerII.Rules.RequisitionTextBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_txitm`.`rowid` `Rowid`
+	,`rq_txitm`.`rq_header` `RqHeader`
+	,`rq_header`.`staff_code` `RqHeaderstaffCode`
+	,`rq_header`.`location_code` `rqHeaderLocationCode`
+	,`rq_header`.`rqn_prefix` `rqHeaderRqnPrefix`
+	,`rq_header`.`staff_uid` `rqHeaderStaffUid`
+	,`rq_txitm`.`rqt_desc` `RqtDesc`
+	,`rq_txitm`.`rqt_notes` `RqtNotes`
+	,`rq_txitm`.`rqt_qty` `RqtQty`
+	,`rq_txitm`.`rqt_value` `RqtValue`
+	,`rq_txitm`.`rqt_act_val` `RqtActVal`
+	,`rq_txitm`.`comment_code` `CommentCode`
+	,`comment`.`comment_desc` `CommentDesc`
+	,`rq_txitm`.`status` `Status`
+	,`rq_status`.`status_description` `rqStatusDescription`
+	,`rq_txitm`.`date_entered` `DateEntered`
+	,`rq_txitm`.`date_approved` `DateApproved`
+	,`rq_txitm`.`date_completed` `DateCompleted`
+	,`rq_txitm`.`gl_code` `GlCode`
+	,`rq_txitm`.`line_value` `LineValue`
+	,`rq_txitm`.`actual_line_value` `ActualLineValue`
+	,`rq_txitm`.`budget_ind` `BudgetInd`
+	,`budget_ind`.`budget_desc` `BudgetIndbudgetDesc`
+	,`rq_txitm`.`po_header_id` `PoHeaderID`
+	,`requested_by`.`surname` `RequestedbySurname`
+	,`requested_by`.`staff_code` `RequestedbyStaffCode`
+from `opex`.`rq_txitm` `rq_txitm`
+	left join `opex`.`rq_rqns` `rq_header` on `rq_txitm`.`rq_header` = `rq_header`.`rowid`
+	left join `opex`.`rq_comms` `comment` on `rq_txitm`.`comment_code` = `comment`.`comment_code`
+	left join `opex`.`rq_budcd` `budget_ind` on `rq_txitm`.`budget_ind` = `budget_ind`.`budget_code`
+	left join `opex`.`rq_staff` `requested_by` on `rq_txitm`.`requested_by` = `requested_by`.`staff_uid`
+	left join `opex`.`rq_status` `rq_status` on `rq_txitm`.`status` = `rq_status`.`status_code`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="RqHeader" type="Int32" allowNulls="false" label="Requisition" showInSummary="true" />
+    <field name="RqHeaderstaffCode" type="String" readOnly="true" label="Rq Header Staff Code" length="8" />
+    <field name="rqHeaderLocationCode" type="String" readOnly="true" label="rq Header Location Code" length="8" />
+    <field name="rqHeaderRqnPrefix" type="String" readOnly="true" label="Requisition Number" length="2" />
+    <field name="rqHeaderStaffUid" type="UInt32" readOnly="true" label="StaffID" />
+    <field name="RqtDesc" type="String" label="Description" length="2000" showInSummary="true" />
+    <field name="RqtNotes" type="String" label="Additional Information" length="250" showInSummary="true" />
+    <field name="RqtQty" type="Int32" allowNulls="false" label="Qty" showInSummary="true" />
+    <field name="RqtValue" type="Decimal" allowNulls="false" label="Unit Cost" showInSummary="true" dataFormatString="C2" />
+    <field name="RqtActVal" type="Decimal" label="Actual Unit Cost" />
+    <field name="CommentCode" type="String" label="Reason Code" length="3">
+      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentDesc" />
+    </field>
+    <field name="CommentDesc" type="String" readOnly="true" label="Reason" length="20" />
+    <field name="Status" type="String" label="Status Code" length="2" />
+    <field name="rqStatusDescription" type="String" readOnly="true" label="Status" length="50" />
+    <field name="DateEntered" type="DateTime" label="Date Entered" />
+    <field name="DateApproved" type="DateTime" label="Date Approved" />
+    <field name="DateCompleted" type="DateTime" label="Date Completed" />
+    <field name="GlCode" type="String" label="GL Code" length="12" />
+    <field name="LineValue" type="Decimal" label="Line Value" dataFormatString="C2" />
+    <field name="ActualLineValue" type="Decimal" label="Actual Line Value" />
+    <field name="BudgetInd" type="String" label="Budget Code" length="8">
+      <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
+    </field>
+    <field name="BudgetIndbudgetDesc" type="String" readOnly="true" label="Budget" length="50" />
+    <field name="PoHeaderID" type="Int32" label="PO Reference" />
+    <field name="RequestedbySurname" type="String" readOnly="true" label="Requested by Surname" length="30" />
+    <field name="RequestedbyStaffCode" type="String" readOnly="true" label="Requested by Staff Code" length="8" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Non Stock Items (Outstanding)" sortExpression="RqHeader desc" filter="Status in (&quot;SU&quot;,&quot;IS&quot;,&quot;OO&quot;,&quot;PQ&quot;)">
+      <headerText>This is a list of non stock items that have been requested</headerText>
+      <dataFields>
+        <dataField fieldName="RqHeader" />
+        <dataField fieldName="RqtDesc" />
+        <dataField fieldName="RqtQty" columns="15" />
+        <dataField fieldName="RqtValue" columns="15" />
+        <dataField fieldName="LineValue" columns="15" />
+        <dataField fieldName="Status" aliasFieldName="rqStatusDescription" />
+        <dataField fieldName="DateApproved" columns="10" />
+        <dataField fieldName="DateCompleted" columns="10" />
+        <dataField fieldName="PoHeaderID" columns="15" />
+        <dataField fieldName="rqHeaderStaffUid" columns="15" hidden="true" />
+        <dataField fieldName="rqHeaderLocationCode" columns="8" hidden="true" />
+        <dataField fieldName="rqHeaderRqnPrefix" columns="2" hidden="true" />
+        <dataField fieldName="GlCode" columns="12" />
+        <dataField fieldName="BudgetInd" columns="8" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Requisition Text">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="General" tab="General" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RqHeader" />
+            <dataField fieldName="RqtDesc" />
+            <dataField fieldName="RqtQty" columns="15" />
+            <dataField fieldName="RqtValue" columns="15" />
+            <dataField fieldName="LineValue" columns="15" />
+            <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" />
+            <dataField fieldName="Status" aliasFieldName="rqStatusDescription" />
+          </dataFields>
+        </category>
+        <category headerText="Dates" id="c2" tab="Dates">
+          <dataFields>
+            <dataField fieldName="DateEntered" columns="10" />
+            <dataField fieldName="DateApproved" columns="10" />
+            <dataField fieldName="DateCompleted" columns="10" />
+          </dataFields>
+        </category>
+        <category headerText="Detail" id="c3" tab="Detail">
+          <dataFields>
+            <dataField fieldName="RqtNotes" />
+            <dataField fieldName="RequestedbySurname" columns="30" />
+            <dataField fieldName="RequestedbyStaffCode" columns="8" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="GlCode" columns="12" />
+            <dataField fieldName="PoHeaderID" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" tab="Hidden" id="c4">
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+          <dataFields>
+            <dataField fieldName="rqHeaderStaffUid" columns="15" />
+            <dataField fieldName="rqHeaderRqnPrefix" columns="2" />
+            <dataField fieldName="rqHeaderLocationCode" columns="8" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Requisition Text">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RqHeader" aliasFieldName="RqHeaderstaffCode" />
+            <dataField fieldName="rqHeaderLocationCode" columns="8" />
+            <dataField fieldName="rqHeaderRqnPrefix" columns="2" />
+            <dataField fieldName="rqHeaderStaffUid" columns="15" />
+            <dataField fieldName="RqtDesc" />
+            <dataField fieldName="RqtNotes" />
+            <dataField fieldName="RqtQty" columns="15" />
+            <dataField fieldName="RqtValue" columns="15" />
+            <dataField fieldName="RqtActVal" columns="15" />
+            <dataField fieldName="CommentCode" aliasFieldName="CommentDesc" />
+            <dataField fieldName="Status" aliasFieldName="rqStatusDescription" />
+            <dataField fieldName="DateEntered" columns="10" />
+            <dataField fieldName="DateApproved" columns="10" />
+            <dataField fieldName="DateCompleted" columns="10" />
+            <dataField fieldName="GlCode" columns="12" />
+            <dataField fieldName="LineValue" columns="15" />
+            <dataField fieldName="ActualLineValue" columns="15" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="PoHeaderID" columns="15" />
+            <dataField fieldName="RequestedbySurname" columns="30" />
+            <dataField fieldName="RequestedbyStaffCode" columns="8" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="GridAll" commandId="command1" type="Grid" label="All Non Stock Items" baseViewId="grid1" sortExpression="RqHeader desc" />
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Email" type="Email" phase="Execute" name="AskAQuestion" commandArgument="Ask"><![CDATA[From: "{Parameters_Forname} {Parameters_Surname}" {Parameters_OfficerEmail}
+To: {Parameters_AskEmail}
+Subject: {Parameters_Subject}
+<html>
+<body>
+<p>
+{Parameters_OfficerEmailHeader}
+{Parameters_Message}
+{Parameters_OfficerEmailFooter}
+</p>
+</body>
+</html>]]></rule>
+    <rule id="r102" commandName="Email" type="Code" phase="After" name="ConfirmEmail" />
+  </businessRules>
+</dataController>

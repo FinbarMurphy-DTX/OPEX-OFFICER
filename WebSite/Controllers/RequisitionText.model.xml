@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_txitm" alias="rq_txitm" created="2020-07-06T12:15:55" modified="2020-07-06T12:29:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="rq_header" parentTableSchema="opex" parentTableName="rq_rqns" x="344" y="20">
+      <foreignKeyColumn columnName="rq_header" parentColumnName="rowid" />
+    </foreignKey>
+    <foreignKey id="comment" parentTableSchema="opex" parentTableName="rq_comms" x="344" y="986">
+      <foreignKeyColumn columnName="comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+    <foreignKey id="budget_ind" parentTableSchema="opex" parentTableName="rq_budcd" x="737" y="20">
+      <foreignKeyColumn columnName="budget_ind" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="requested_by" parentTableSchema="opex" parentTableName="rq_staff" x="964" y="583">
+      <foreignKeyColumn columnName="requested_by" parentColumnName="staff_uid" />
+    </foreignKey>
+    <foreignKey id="rq_status" parentTableSchema="opex" parentTableName="rq_status" x="850" y="271">
+      <foreignKeyColumn columnName="status" parentColumnName="status_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="rq_header" fieldName="RqHeader" label="Rq Header" aliasColumnName="staff_code" aliasForeignKey="rq_header" />
+    <column name="staff_code" fieldName="RqHeaderstaffCode" label="Rq Header Staff Code" foreignKey="rq_header" />
+    <column name="location_code" fieldName="rqHeaderLocationCode" label="rq Header Location Code" foreignKey="rq_header" />
+    <column name="rqn_prefix" fieldName="rqHeaderRqnPrefix" label="Requisition Number" foreignKey="rq_header" />
+    <column name="staff_uid" fieldName="rqHeaderStaffUid" label="StaffID" foreignKey="rq_header" />
+    <column name="rqt_desc" fieldName="RqtDesc" label="Description" />
+    <column name="rqt_notes" fieldName="RqtNotes" label="Additional Information" />
+    <column name="rqt_qty" fieldName="RqtQty" label="Qty" />
+    <column name="rqt_value" fieldName="RqtValue" label="Unit Cost" />
+    <column name="rqt_act_val" fieldName="RqtActVal" label="Actual Unit Cost" />
+    <column name="comment_code" fieldName="CommentCode" label="Comment Code" aliasColumnName="comment_desc" aliasForeignKey="comment" />
+    <column name="comment_desc" fieldName="CommentDesc" label="Reason" foreignKey="comment" />
+    <column name="status" fieldName="Status" label="Status" aliasColumnName="status_description" aliasForeignKey="rq_status" />
+    <column name="status_description" fieldName="rqStatusDescription" label="rq Status Description" foreignKey="rq_status" />
+    <column name="date_entered" fieldName="DateEntered" label="Date Entered" />
+    <column name="date_approved" fieldName="DateApproved" label="Date Approved" />
+    <column name="date_completed" fieldName="DateCompleted" label="Date Completed" />
+    <column name="gl_code" fieldName="GlCode" label="Gl Code" />
+    <column name="line_value" fieldName="LineValue" label="Line Value" />
+    <column name="actual_line_value" fieldName="ActualLineValue" label="Actual Line Value" />
+    <column name="budget_ind" fieldName="BudgetInd" label="Budget Code" aliasColumnName="budget_desc" aliasForeignKey="budget_ind" />
+    <column name="budget_desc" fieldName="BudgetIndbudgetDesc" label="Budget" foreignKey="budget_ind" />
+    <column name="po_header_id" fieldName="PoHeaderID" label="PO Reference" />
+    <column name="surname" fieldName="RequestedbySurname" label="Requested by Surname" foreignKey="requested_by" />
+    <column name="staff_code" fieldName="RequestedbyStaffCode" label="Requested by Staff Code" foreignKey="requested_by" />
+  </columns>
+</dataModel>

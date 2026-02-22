@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="OpexrqLocns" conflictDetection="overwriteChanges" label="Opexrq Locns" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_locns`.`rowid` `Rowid`
+	,`rq_locns`.`location_code` `LocationCode`
+	,`rq_locns`.`location_desc` `LocationDesc`
+	,`rq_locns`.`budget_ind` `BudgetInd`
+	,`budget_ind`.`budget_desc` `BudgetIndbudgetDesc`
+	,`rq_locns`.`whse_code` `WhseCode`
+	,`rq_locns`.`user_name` `UserName`
+	,`rq_locns`.`turn_date` `TurnDate`
+	,`rq_locns`.`uniform_ytd2` `UniformYtd2`
+	,`rq_locns`.`non_stk_ytd2` `NonStkYtd2`
+	,`rq_locns`.`user_name2` `UserName2`
+	,`rq_locns`.`turn_date2` `TurnDate2`
+	,`rq_locns`.`uniform_ytd3` `UniformYtd3`
+	,`rq_locns`.`non_stk_ytd3` `NonStkYtd3`
+	,`rq_locns`.`user_name3` `UserName3`
+	,`rq_locns`.`turn_date3` `TurnDate3`
+	,`rq_locns`.`uniform_ytd4` `UniformYtd4`
+	,`rq_locns`.`non_stk_ytd4` `NonStkYtd4`
+	,`rq_locns`.`user_name4` `UserName4`
+	,`rq_locns`.`turn_date4` `TurnDate4`
+	,`rq_locns`.`uniform_ytd5` `UniformYtd5`
+	,`rq_locns`.`non_stk_ytd5` `NonStkYtd5`
+	,`rq_locns`.`user_name5` `UserName5`
+	,`rq_locns`.`turn_date5` `TurnDate5`
+	,`rq_locns`.`email` `Email`
+	,`rq_locns`.`disabled` `Disabled`
+	,`rq_locns`.`owner` `Owner`
+	,`rq_locns`.`division_code` `DivisionCode`
+	,`division`.`division_desc` `DivisionDesc`
+	,`division`.`company_id` `DivisionCompanyid`
+	,`rq_locns`.`company_id` `CompanyID`
+	,`company`.`name` `CompanyName`
+	,`rq_locns`.`default_delivery_location_id` `DefaultDeliveryLocationID`
+	,`default_delivery_location`.`sla_acc` `DefaultDeliveryLocationSlaAcc`
+from `opex`.`rq_locns` `rq_locns`
+	left join `opex`.`rq_budcd` `budget_ind` on `rq_locns`.`budget_ind` = `budget_ind`.`budget_code`
+	left join `opex`.`divisions` `division` on `rq_locns`.`division_code` = `division`.`division_code`
+	left join `opex`.`company` `company` on `rq_locns`.`company_id` = `company`.`id`
+	left join `opex`.`locations` `default_delivery_location` on `rq_locns`.`default_delivery_location_id` = `default_delivery_location`.`del_location_id`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="LocationCode" type="String" allowNulls="false" label="Location Code" length="8" showInSummary="true" />
+    <field name="LocationDesc" type="String" allowNulls="false" label="Location Desc" length="75" showInSummary="true" />
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8" showInSummary="true">
+      <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
+    </field>
+    <field name="BudgetIndbudgetDesc" type="String" readOnly="true" label="Budget Indbudget Desc" length="50" />
+    <field name="WhseCode" type="String" label="Whse Code" length="3" showInSummary="true" />
+    <field name="UserName" type="String" label="User Name" length="10" showInSummary="true" />
+    <field name="TurnDate" type="DateTime" label="Turn Date" />
+    <field name="UniformYtd2" type="Decimal" label="Uniform Ytd2" />
+    <field name="NonStkYtd2" type="Decimal" label="Non Stk Ytd2" />
+    <field name="UserName2" type="String" label="User Name2" length="10" />
+    <field name="TurnDate2" type="DateTime" label="Turn Date2" />
+    <field name="UniformYtd3" type="Decimal" label="Uniform Ytd3" />
+    <field name="NonStkYtd3" type="Decimal" label="Non Stk Ytd3" />
+    <field name="UserName3" type="String" label="User Name3" length="10" />
+    <field name="TurnDate3" type="DateTime" label="Turn Date3" />
+    <field name="UniformYtd4" type="Decimal" label="Uniform Ytd4" />
+    <field name="NonStkYtd4" type="Decimal" label="Non Stk Ytd4" />
+    <field name="UserName4" type="String" label="User Name4" length="10" />
+    <field name="TurnDate4" type="DateTime" label="Turn Date4" />
+    <field name="UniformYtd5" type="Decimal" label="Uniform Ytd5" />
+    <field name="NonStkYtd5" type="Decimal" label="Non Stk Ytd5" />
+    <field name="UserName5" type="String" label="User Name5" length="10" />
+    <field name="TurnDate5" type="DateTime" label="Turn Date5" />
+    <field name="Email" type="String" label="Email" length="60" />
+    <field name="Disabled" type="String" label="Disabled" length="1" />
+    <field name="Owner" type="String" label="Owner" length="8" />
+    <field name="DivisionCode" type="String" label="Division Code" length="8" />
+    <field name="DivisionDesc" type="String" readOnly="true" label="Division Desc" length="35" />
+    <field name="DivisionCompanyid" type="UInt32" readOnly="true" label="Division Company id" />
+    <field name="CompanyID" type="UInt32" label="Company Id" />
+    <field name="CompanyName" type="String" readOnly="true" label="Company Name" length="20" />
+    <field name="DefaultDeliveryLocationID" type="UInt32" label="Default Delivery Location Id">
+      <items style="Lookup" dataController="Opexlocations" dataValueField="DelLocationID" dataTextField="SlaAcc" />
+    </field>
+    <field name="DefaultDeliveryLocationSlaAcc" type="String" readOnly="true" label="Default Delivery Location Sla Acc" length="8" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Opexrq Locns">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="LocationCode" columns="8" />
+        <dataField fieldName="LocationDesc" />
+        <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+        <dataField fieldName="WhseCode" columns="3" />
+        <dataField fieldName="UserName" columns="10" />
+        <dataField fieldName="TurnDate" columns="10" />
+        <dataField fieldName="UniformYtd2" columns="15" />
+        <dataField fieldName="NonStkYtd2" columns="15" />
+        <dataField fieldName="UserName2" columns="10" />
+        <dataField fieldName="TurnDate2" columns="10" />
+        <dataField fieldName="UniformYtd3" columns="15" />
+        <dataField fieldName="NonStkYtd3" columns="15" />
+        <dataField fieldName="UserName3" columns="10" />
+        <dataField fieldName="TurnDate3" columns="10" />
+        <dataField fieldName="UniformYtd4" columns="15" />
+        <dataField fieldName="NonStkYtd4" columns="15" />
+        <dataField fieldName="UserName4" columns="10" />
+        <dataField fieldName="TurnDate4" columns="10" />
+        <dataField fieldName="UniformYtd5" columns="15" />
+        <dataField fieldName="NonStkYtd5" columns="15" />
+        <dataField fieldName="UserName5" columns="10" />
+        <dataField fieldName="TurnDate5" columns="10" />
+        <dataField fieldName="Email" />
+        <dataField fieldName="Disabled" columns="1" />
+        <dataField fieldName="Owner" columns="8" />
+        <dataField fieldName="DivisionCode" aliasFieldName="DivisionDesc" />
+        <dataField fieldName="DivisionCompanyid" columns="15" />
+        <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+        <dataField fieldName="DefaultDeliveryLocationID" aliasFieldName="DefaultDeliveryLocationSlaAcc" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Opexrq Locns">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Opexrq Locns" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="LocationDesc" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="WhseCode" columns="3" />
+            <dataField fieldName="UserName" columns="10" />
+            <dataField fieldName="TurnDate" columns="10" />
+            <dataField fieldName="UniformYtd2" columns="15" />
+            <dataField fieldName="NonStkYtd2" columns="15" />
+            <dataField fieldName="UserName2" columns="10" />
+            <dataField fieldName="TurnDate2" columns="10" />
+            <dataField fieldName="UniformYtd3" columns="15" />
+            <dataField fieldName="NonStkYtd3" columns="15" />
+            <dataField fieldName="UserName3" columns="10" />
+            <dataField fieldName="TurnDate3" columns="10" />
+            <dataField fieldName="UniformYtd4" columns="15" />
+            <dataField fieldName="NonStkYtd4" columns="15" />
+            <dataField fieldName="UserName4" columns="10" />
+            <dataField fieldName="TurnDate4" columns="10" />
+            <dataField fieldName="UniformYtd5" columns="15" />
+            <dataField fieldName="NonStkYtd5" columns="15" />
+            <dataField fieldName="UserName5" columns="10" />
+            <dataField fieldName="TurnDate5" columns="10" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="Owner" columns="8" />
+            <dataField fieldName="DivisionCode" aliasFieldName="DivisionDesc" />
+            <dataField fieldName="DivisionCompanyid" columns="15" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="DefaultDeliveryLocationID" aliasFieldName="DefaultDeliveryLocationSlaAcc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Locns">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="LocationDesc" />
+            <dataField fieldName="BudgetInd" aliasFieldName="BudgetIndbudgetDesc" />
+            <dataField fieldName="WhseCode" columns="3" />
+            <dataField fieldName="UserName" columns="10" />
+            <dataField fieldName="TurnDate" columns="10" />
+            <dataField fieldName="UniformYtd2" columns="15" />
+            <dataField fieldName="NonStkYtd2" columns="15" />
+            <dataField fieldName="UserName2" columns="10" />
+            <dataField fieldName="TurnDate2" columns="10" />
+            <dataField fieldName="UniformYtd3" columns="15" />
+            <dataField fieldName="NonStkYtd3" columns="15" />
+            <dataField fieldName="UserName3" columns="10" />
+            <dataField fieldName="TurnDate3" columns="10" />
+            <dataField fieldName="UniformYtd4" columns="15" />
+            <dataField fieldName="NonStkYtd4" columns="15" />
+            <dataField fieldName="UserName4" columns="10" />
+            <dataField fieldName="TurnDate4" columns="10" />
+            <dataField fieldName="UniformYtd5" columns="15" />
+            <dataField fieldName="NonStkYtd5" columns="15" />
+            <dataField fieldName="UserName5" columns="10" />
+            <dataField fieldName="TurnDate5" columns="10" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="Owner" columns="8" />
+            <dataField fieldName="DivisionCode" aliasFieldName="DivisionDesc" />
+            <dataField fieldName="DivisionCompanyid" columns="15" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="DefaultDeliveryLocationID" aliasFieldName="DefaultDeliveryLocationSlaAcc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

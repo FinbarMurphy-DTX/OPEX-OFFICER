@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="st_itmsz" alias="st_itmsz" created="2017-06-08T15:59:27" modified="2017-06-08T16:07:00" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" />
+    <column name="size_code" fieldName="SizeCode" label="Size Code" />
+    <column name="average_cost" fieldName="AverageCost" label="Average Cost" format="c" />
+    <column name="last_cost" fieldName="LastCost" label="Last Cost" format="c" />
+    <column name="standard_cost" fieldName="StandardCost" label="Standard Cost" format="c" />
+    <column name="on_stop" fieldName="OnStop" label="On Stop" />
+    <column name="last_purch_date" fieldName="LastPurchDate" label="Last Purch Date" />
+    <column name="danger_level" fieldName="DangerLevel" label="Danger Level" />
+    <column name="std_order_qty" fieldName="StdOrderQty" label="Std Order Qty" />
+    <column name="total_level" fieldName="TotalLevel" label="Total Level" />
+    <column name="open_balance" fieldName="OpenBalance" label="Open Balance" />
+    <column name="allocated_qty" fieldName="AllocatedQty" label="Allocated Qty" />
+    <column name="free_qty" fieldName="FreeQty" label="Free Qty" />
+    <column name="on_order_qty" fieldName="OnOrderQty" label="On Order Qty" />
+    <column name="total_issues" fieldName="TotalIssues" label="Total Issues" />
+    <column name="lead_time" fieldName="LeadTime" label="Lead Time" />
+    <column name="fifo_low" fieldName="FifoLow" label="Fifo Low" />
+    <column name="fifo_high" fieldName="FifoHigh" label="Fifo High" />
+    <column name="vat_code" fieldName="VatCode" label="Vat Code" />
+    <column name="standard_price" fieldName="StandardPrice" label="Standard Price" format="c" />
+    <column name="max_issue_lv" fieldName="MaxIssueLv" label="Max Issue Lv" />
+    <column name="max_order_qty" fieldName="MaxOrderQty" label="Max Order Qty" />
+    <column name="max_stk_lv" fieldName="MaxStkLv" label="Max Stk Lv" />
+    <column name="last_receipt_date" fieldName="LastReceiptDate" label="Last Receipt Date" />
+    <column name="frozen_qty" fieldName="FrozenQty" label="Frozen Qty" />
+    <column name="frozen_date" fieldName="FrozenDate" label="Frozen Date" />
+    <column name="stock_type" fieldName="StockType" label="Stock Type" />
+    <column name="abc_cls" fieldName="AbcCls" label="Abc Cls" />
+    <column name="abc_cls_dt" fieldName="AbcClsDt" label="Abc Cls Dt" />
+    <column name="size_sort_order" fieldName="SizeSortOrder" label="Size Sort Order" />
+    <column name="cost_fifo" fieldName="CostFifo" label="Cost Fifo" format="c" />
+    <column name="last_stock_take" fieldName="LastStockTake" label="Last Stock Take" />
+  </columns>
+</dataModel>

@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="StaffAccessControl" label="StaffAccessControl" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_staff`.`staff_uid` `StaffUid`
+	,`rq_staff`.`staff_code` `StaffCode`
+	,`rq_staff`.`staff_title` `StaffTitle`
+	,`rq_staff`.`initials` `Initials`
+	,`rq_staff`.`forname` `Forname`
+	,`rq_staff`.`surname` `Surname`
+	,`rq_staff`.`rank_code` `RankCode`
+	,`rank`.`rank_desc` `RankDesc`
+	,`rank_staff_filter`.`staff_filter` `RankStaffFilterstaffFilter`
+	,`rq_staff`.`epl_number` `EplNumber`
+	,`rq_staff`.`location_code` `LocationCode`
+	,`location`.`location_desc` `LocationDesc`
+	,`location`.`default_delivery_location_id` `LocationDefaultDeliveryLocationid`
+	,`location`.`location_catalogue_id` `LocationCatalogueid`
+	,`location`.`staff_location_catalogue_id` `LocationStaffLocationCatalogueid`
+	,`location_division`.`division_desc` `LocationDivisionDesc`
+	,`location_division_company`.`name` `LocationDivisionCompanyName`
+	,`location_company`.`name` `LocationCompanyName`
+	,`location_default_delivery_location`.`sla_acc` `LocationDefaultDeliveryLocationSlaAcc`
+	,`location_budget_ind`.`budget_desc` `LocationBudgetIndbudgetDesc`
+	,`rq_staff`.`join_date` `JoinDate`
+	,`rq_staff`.`leave_date` `LeaveDate`
+	,`rq_staff`.`comments` `Comments`
+	,`rq_staff`.`email` `Email`
+	,`rq_staff`.`company_id` `CompanyID`
+	,`company`.`name` `CompanyName`
+	,`rq_staff`.`userCredentials` `UserCredentials`
+	,`rq_staff`.`telephone` `Telephone`
+	,`rq_staff`.`internal` `Internal`
+	,`rq_staff`.`opex_user` `OpexUser`
+	,`rq_staff`.`opex_user_name` `OpexUserName`
+	,`rq_staff`.`gender` `Gender`
+	,`rq_staff`.`active` `Active`
+	,`rq_staff`.`restrict_access` `RestrictAccess`
+	,`rq_staff`.`access_control_type` `AccessControlType`
+	,`location_catalogue`.`location_catalogue` `LocationCatalogueLocationCatalogue`
+	,`location_catalogue`.`description` `LocationCatalogueDescription`
+from `opex`.`rq_staff` `rq_staff`
+	left join `opex`.`rq_ranks` `rank` on `rq_staff`.`rank_code` = `rank`.`rank_code`
+	left join `opex`.`item_staff_filter` `rank_staff_filter` on `rank`.`staff_filter` = `rank_staff_filter`.`staff_filter`
+	left join `opex`.`rq_locns` `location` on `rq_staff`.`location_code` = `location`.`location_code`
+	left join `opex`.`divisions` `location_division` on `location`.`division_code` = `location_division`.`division_code`
+	left join `opex`.`company` `location_division_company` on `location_division`.`company_id` = `location_division_company`.`id`
+	left join `opex`.`company` `location_company` on `location`.`company_id` = `location_company`.`id`
+	left join `opex`.`locations` `location_default_delivery_location` on `location`.`default_delivery_location_id` = `location_default_delivery_location`.`del_location_id`
+	left join `opex`.`rq_budcd` `location_budget_ind` on `location`.`budget_ind` = `location_budget_ind`.`budget_code`
+	left join `opex`.`location_catalogue` `location_catalogue` on `location`.`location_catalogue_id` = `location_catalogue`.`location_catalogue_id`
+	left join `opex`.`company` `company` on `rq_staff`.`company_id` = `company`.`id`
+]]></text>
+    </command>
+    <command id="staff_uidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="StaffUid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="StaffUid" type="UInt32" allowNulls="false" isPrimaryKey="true" label="Staff Uid" readOnly="true" />
+    <field name="StaffCode" type="String" label="Staff Code" length="8" showInSummary="true" />
+    <field name="StaffTitle" type="String" label="Staff Title" length="4" showInSummary="true" />
+    <field name="Initials" type="String" label="Initials" length="4" showInSummary="true" />
+    <field name="Forname" type="String" label="Forname" length="30" showInSummary="true" />
+    <field name="Surname" type="String" label="Surname" length="30" showInSummary="true" />
+    <field name="RankCode" type="String" allowNulls="false" label="Rank Code" length="8">
+      <items style="Lookup" dataController="RqRanks" newDataView="createForm1" dataValueField="RankCode" dataTextField="RankDesc" copy="" />
+    </field>
+    <field name="RankDesc" type="String" readOnly="true" label="Rank Desc" length="32" />
+    <field name="RankStaffFilterstaffFilter" type="String" readOnly="true" label="Rank Staff Filterstaff Filter" length="8" />
+    <field name="EplNumber" type="String" label="Epl Number" length="8" />
+    <field name="LocationCode" type="String" allowNulls="false" label="Location Code" length="8">
+      <items style="Lookup" dataController="OpexrqLocns" newDataView="createForm1" dataValueField="LocationCode" dataTextField="LocationDesc" copy="LocationDefaultDeliveryLocationid=DefaultDeliveryLocationID, LocationDivisionDesc=DivisionDesc, LocationDivisionCompanyName=CompanyName, LocationCompanyName=CompanyName, LocationDefaultDeliveryLocationSlaAcc=DefaultDeliveryLocationSlaAcc, LocationBudgetIndbudgetDesc=BudgetIndbudgetDesc, " />
+    </field>
+    <field name="LocationDesc" type="String" readOnly="true" label="Location Desc" length="75" />
+    <field name="LocationDefaultDeliveryLocationid" type="UInt32" readOnly="true" label="Location Default Delivery Location id" />
+    <field name="LocationCatalogueid" type="UInt32" readOnly="true" label="Location Catalogue id" />
+    <field name="LocationStaffLocationCatalogueid" type="UInt32" readOnly="true" label="Location Staff Location Catalogue id" />
+    <field name="LocationDivisionDesc" type="String" readOnly="true" label="Location Division Desc" length="35" />
+    <field name="LocationDivisionCompanyName" type="String" readOnly="true" label="Location Division Company Name" length="20" />
+    <field name="LocationCompanyName" type="String" readOnly="true" label="Location Company Name" length="20" />
+    <field name="LocationDefaultDeliveryLocationSlaAcc" type="String" readOnly="true" label="Location Default Delivery Location Sla Acc" length="8" />
+    <field name="LocationBudgetIndbudgetDesc" type="String" readOnly="true" label="Location Budget Indbudget Desc" length="50" />
+    <field name="JoinDate" type="DateTime" label="Join Date" />
+    <field name="LeaveDate" type="DateTime" label="Leave Date" />
+    <field name="Comments" type="String" label="Comments" length="60" />
+    <field name="Email" type="String" label="Email" length="255" />
+    <field name="CompanyID" type="UInt32" label="Company Id" />
+    <field name="CompanyName" type="String" readOnly="true" label="Company Name" length="20" />
+    <field name="UserCredentials" type="String" label="user Credentials" length="100" />
+    <field name="Telephone" type="String" label="Telephone" length="40" />
+    <field name="Internal" type="String" label="Internal" length="1" />
+    <field name="OpexUser" type="String" label="Opex User" length="1" />
+    <field name="OpexUserName" type="String" label="Opex User Name" length="256" />
+    <field name="Gender" type="String" label="Gender" length="1" />
+    <field name="Active" type="String" label="Active" length="1" />
+    <field name="RestrictAccess" type="String" label="Restrict Access" length="1" />
+    <field name="AccessControlType" type="String" label="Access Control Type" length="1" />
+    <field name="LocationCatalogueLocationCatalogue" type="String" readOnly="true" label="Location Catalogue Location Catalogue" length="8" />
+    <field name="LocationCatalogueDescription" type="String" readOnly="true" label="Location Catalogue Description" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Opexrq Staff" access="Public">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StaffCode" columns="8" />
+        <dataField fieldName="StaffTitle" columns="4" />
+        <dataField fieldName="Initials" columns="4" />
+        <dataField fieldName="Forname" columns="30" />
+        <dataField fieldName="Surname" columns="30" />
+        <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+        <dataField fieldName="RankStaffFilterstaffFilter" columns="8" />
+        <dataField fieldName="EplNumber" columns="8" />
+        <dataField fieldName="LocationCode" aliasFieldName="LocationDesc" />
+        <dataField fieldName="LocationDefaultDeliveryLocationid" columns="15" />
+        <dataField fieldName="LocationCatalogueid" columns="15" />
+        <dataField fieldName="LocationStaffLocationCatalogueid" columns="15" />
+        <dataField fieldName="LocationDivisionDesc" columns="35" />
+        <dataField fieldName="LocationDivisionCompanyName" columns="20" />
+        <dataField fieldName="LocationCompanyName" columns="20" />
+        <dataField fieldName="LocationDefaultDeliveryLocationSlaAcc" columns="8" />
+        <dataField fieldName="LocationBudgetIndbudgetDesc" columns="50" />
+        <dataField fieldName="JoinDate" columns="10" />
+        <dataField fieldName="LeaveDate" columns="10" />
+        <dataField fieldName="Comments" />
+        <dataField fieldName="Email" />
+        <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+        <dataField fieldName="UserCredentials" />
+        <dataField fieldName="Telephone" columns="40" />
+        <dataField fieldName="Internal" columns="1" />
+        <dataField fieldName="OpexUser" columns="1" />
+        <dataField fieldName="OpexUserName" />
+        <dataField fieldName="Gender" columns="1" />
+        <dataField fieldName="Active" columns="1" />
+        <dataField fieldName="RestrictAccess" columns="1" />
+        <dataField fieldName="AccessControlType" columns="1" />
+        <dataField fieldName="LocationCatalogueLocationCatalogue" columns="8" />
+        <dataField fieldName="LocationCatalogueDescription" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Opexrq Staff">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Opexrq Staff" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="StaffTitle" columns="4" />
+            <dataField fieldName="Initials" columns="4" />
+            <dataField fieldName="Forname" columns="30" />
+            <dataField fieldName="Surname" columns="30" />
+            <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+            <dataField fieldName="RankStaffFilterstaffFilter" columns="8" />
+            <dataField fieldName="EplNumber" columns="8" />
+            <dataField fieldName="LocationCode" aliasFieldName="LocationDesc" />
+            <dataField fieldName="LocationDefaultDeliveryLocationid" columns="15" />
+            <dataField fieldName="LocationCatalogueid" columns="15" />
+            <dataField fieldName="LocationStaffLocationCatalogueid" columns="15" />
+            <dataField fieldName="LocationDivisionDesc" columns="35" />
+            <dataField fieldName="LocationDivisionCompanyName" columns="20" />
+            <dataField fieldName="LocationCompanyName" columns="20" />
+            <dataField fieldName="LocationDefaultDeliveryLocationSlaAcc" columns="8" />
+            <dataField fieldName="LocationBudgetIndbudgetDesc" columns="50" />
+            <dataField fieldName="JoinDate" columns="10" />
+            <dataField fieldName="LeaveDate" columns="10" />
+            <dataField fieldName="Comments" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="UserCredentials" />
+            <dataField fieldName="Telephone" columns="40" />
+            <dataField fieldName="Internal" columns="1" />
+            <dataField fieldName="OpexUser" columns="1" />
+            <dataField fieldName="OpexUserName" />
+            <dataField fieldName="Gender" columns="1" />
+            <dataField fieldName="Active" columns="1" />
+            <dataField fieldName="RestrictAccess" columns="1" />
+            <dataField fieldName="AccessControlType" columns="1" />
+            <dataField fieldName="LocationCatalogueLocationCatalogue" columns="8" />
+            <dataField fieldName="LocationCatalogueDescription" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Staff">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="StaffTitle" columns="4" />
+            <dataField fieldName="Initials" columns="4" />
+            <dataField fieldName="Forname" columns="30" />
+            <dataField fieldName="Surname" columns="30" />
+            <dataField fieldName="RankCode" aliasFieldName="RankDesc" />
+            <dataField fieldName="RankStaffFilterstaffFilter" columns="8" />
+            <dataField fieldName="EplNumber" columns="8" />
+            <dataField fieldName="LocationCode" aliasFieldName="LocationDesc" />
+            <dataField fieldName="LocationDefaultDeliveryLocationid" columns="15" />
+            <dataField fieldName="LocationCatalogueid" columns="15" />
+            <dataField fieldName="LocationStaffLocationCatalogueid" columns="15" />
+            <dataField fieldName="LocationDivisionDesc" columns="35" />
+            <dataField fieldName="LocationDivisionCompanyName" columns="20" />
+            <dataField fieldName="LocationCompanyName" columns="20" />
+            <dataField fieldName="LocationDefaultDeliveryLocationSlaAcc" columns="8" />
+            <dataField fieldName="LocationBudgetIndbudgetDesc" columns="50" />
+            <dataField fieldName="JoinDate" columns="10" />
+            <dataField fieldName="LeaveDate" columns="10" />
+            <dataField fieldName="Comments" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="UserCredentials" />
+            <dataField fieldName="Telephone" columns="40" />
+            <dataField fieldName="Internal" columns="1" />
+            <dataField fieldName="OpexUser" columns="1" />
+            <dataField fieldName="OpexUserName" />
+            <dataField fieldName="Gender" columns="1" />
+            <dataField fieldName="Active" columns="1" />
+            <dataField fieldName="RestrictAccess" columns="1" />
+            <dataField fieldName="AccessControlType" columns="1" />
+            <dataField fieldName="LocationCatalogueLocationCatalogue" columns="8" />
+            <dataField fieldName="LocationCatalogueDescription" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

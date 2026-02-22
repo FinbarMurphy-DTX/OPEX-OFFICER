@@ -1,0 +1,69 @@
+﻿<!-- 
+  This file is provided to store the settings for your Data Aquarium project. 
+  You can safely delete this file if no further code generation is planned.
+-->
+<project compatibility="20111118" dataModel="required" subscriptionLevel="Unlimited" name="Officer II" prettyName="Officer II" type="Web Site Factory" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" sourceControl="" displayName="" group="" appGenVersion="8.9.44.0" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+  <connectionString hostDatabaseSharing="false" sessionStateMode="Custom">Server=localhost;User ID=opex;Password=opex;Database=opex;Persist Security Info=True;</connectionString>
+  <providerName>MySql.Data.MySqlClient</providerName>
+  <namespace>DatatecnixOfficerII</namespace>
+  <webServer run="true" port="19053" preview="Browser" client="">
+    <webConfig>
+AppendChild: /configuration/appSettings
+
+    &lt;add key="enableSimpleMembership" value="false"/&gt;
+    &lt;add key="autoFormsAuthentication" value="false"/&gt;
+
+SetAttribute: /configuration/system.webServer/modules
+runAllManagedModulesForAllRequests:true
+
+InsertAfter: /configuration/system.webServer
+  &lt;runtime&gt;
+    &lt;assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1"&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/&gt;
+        &lt;bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0"/&gt;
+      &lt;/dependentAssembly&gt;
+      &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name="System.Memory" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral"/&gt;
+        &lt;bindingRedirect oldVersion="0.0.0.0-4.0.1.2" newVersion="4.0.1.2"/&gt;
+      &lt;/dependentAssembly&gt;
+    &lt;/assemblyBinding&gt;
+  &lt;/runtime&gt;
+</webConfig>
+  </webServer>
+  <features useSaveAndNew="true" pageHeader="OPEX 2.3.7" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="11">
+    <navigation detectUnderscoreSeparatedSchema="" />
+    <blob allowUploadOnInsert="true" />
+    <framework scriptOnly="true" useExtenders="false" />
+    <grid actionColumn="false" />
+    <touch desktopDisplayDensity="Condensed" mobileDisplayDensity="Auto" transitions="" sidebar="Landscape" labelsInList="DisplayedBelow" initialListMode="SeeAll" menu="toolbar" promoteActions="true" smartDates="false" mapApiIdentifier="" mapApiIdentifierMobile="" />
+    <cms searchEngine="" analysisEngine="" analysisOnDataPages="false" />
+    <ease urlHashing="false">
+      <auditing></auditing>
+    </ease>
+    <packageProperties></packageProperties>
+    <smtp deliveryMethod="Network" deliveryFormat="" from="admin@datatecnix.co.uk" clientDomain="" targetName="" host="chimail.uk2.net" port="587" defaultCredentials="false" enableSsl="false" username="support@datatecnix.co.uk" password="uData9088!" />
+    <addons OfflineSync="" ContentMaker="" ContentHub="" />
+  </features>
+  <reports enabled="true" version="15" />
+  <host path="" url="" />
+  <databaseObjectFilter generate="ControllersAndPages"></databaseObjectFilter>
+  <native windows="false" android="false" ios="false" osx="false" />
+  <bll normalizeModelNames="true" discoveryDepth="1" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="true" includeViews="true" tabViewSelection="7">
+    <fieldMap></fieldMap>
+    <keys></keys>
+    <fieldsToIgnore></fieldsToIgnore>
+    <fieldsToHide></fieldsToHide>
+    <customLabels></customLabels>
+  </bll>
+  <membership enabled="true" providerName="MySql.Data.MySqlClient" connectionString="" windowsAuthentication="false" activeDirectory="false" customSecurity="false" dedicatedLogin="false" displayRememberMe="true" rememberMeSet="false" displaySignUp="false" displayPasswordRecovery="true" displayMyAccount="false" displayHelp="false" idleUserDetectionTimeout="30" tabViewSelection="3" validationKey="C78F60698D51F6E98D5F6AE12B11FDEC587374DB2EF5CCFDB72977BEAD37CAB695E90A23B79A2F18E5773ED9E553D282D62C418C6F29AFA37859648A479D56FD">
+    <adConfig></adConfig>
+    <config></config>
+  </membership>
+  <globalization uiCulture="en-GB" culture="en-GB" enableClientBasedCulture="false" supportedCultures="en-GB,en-GB; " googleTranslateApiKey="" />
+  <layout name="Classic" menuStyle="MultiLevel" />
+  <theme name="Aquarium" />
+  <publish mode="FileSystem">
+    <fileSystem external="true" />
+  </publish>
+</project>

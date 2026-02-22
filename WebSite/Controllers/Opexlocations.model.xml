@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="locations" alias="locations" created="2017-06-13T16:28:00" modified="2017-06-20T17:19:57" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+  </foreignKeys>
+  <columns>
+    <column name="sla_acc" fieldName="SlaAcc" label="Delivery Code" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" />
+    <column name="sla_nam" fieldName="SlaNam" label="Name" />
+    <column name="sla_shrt_nam" fieldName="SlaShrtNam" label="Short Name" />
+    <column name="sla_add1" fieldName="SlaAdd1" label="Address" />
+    <column name="sla_add2" fieldName="SlaAdd2" label="Address" />
+    <column name="del_location_id" fieldName="DelLocationID" label="Delivery Id" />
+    <column name="sla_add3" fieldName="SlaAdd3" label="Address" />
+    <column name="sla_add4" fieldName="SlaAdd4" label="Address" />
+    <column name="sla_pst_cd" fieldName="SlaPstCd" label="Sla Pst Cd" />
+    <column name="sla_cntt" fieldName="SlaCntt" label="Sla Cntt" />
+    <column name="sla_cntt_let1" fieldName="SlaCnttLet1" label="Sla Cntt Let1" />
+    <column name="sla_titl_let1" fieldName="SlaTitlLet1" label="Sla Titl Let1" />
+    <column name="sla_tel" fieldName="SlaTel" label="Sla Tel" />
+    <column name="sla_fax" fieldName="SlaFax" label="Sla Fax" />
+    <column name="email" fieldName="Email" label="Email" />
+    <column name="disabled" fieldName="Disabled" label="Disabled" />
+  </columns>
+</dataModel>

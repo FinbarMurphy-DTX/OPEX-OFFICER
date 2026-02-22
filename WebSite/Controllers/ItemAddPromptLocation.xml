@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ItemAddPromptLocation" conflictDetection="overwriteChanges" handler="DatatecnixOfficerII.Rules.ItemAddPromptLocationBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="ItemCode" type="String" label="Item Code" length="16" />
+    <field name="ItemStiDesc" type="String" readOnly="true" label="Description" length="75" />
+    <field name="SizeCode" type="String" label="Size" length="20" showInSummary="true" contextFields="ItemCode=ItemCode" causesCalculate="true" allowNulls="false">
+      <items style="Lookup" dataController="ItemSize" dataView="grid1" dataTextField="SizeCode" dataValueField="SizeCode" copy="ReqItemCost=Local_OPEXCost" />
+    </field>
+    <field name="Qty" type="Decimal" label="Qty" showInSummary="true" allowNulls="false" />
+    <field name="CommentCode" type="String" label="Reason Code" length="3" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="ReasonCodes" dataValueField="CommentCode" dataTextField="CommentCode" copy="CommentDesc=CommentDesc" dataView="grid1" />
+    </field>
+    <field name="UpdateStaffProfile" type="String" label="Update Staff Profile" length="1" />
+    <field name="CommentDesc" type="String" readOnly="true" label="Reason" length="20" />
+    <field name="LineValue" type="Decimal" dataFormatString="C2" label="Line Value" showInSummary="true" />
+    <field name="ReqItemCost" type="Decimal" dataFormatString="C2" label="Item Cost" />
+    <field name="StaffUid" type="UInt32" allowNulls="false" label="Staff Uid" />
+    <field name="Local_StaffProfileSize" type="String" label="Local Staff Profile Size" length="20" />
+    <field name="Description" type="String" label="Additional Information" length="500" />
+  </fields>
+  <views>
+    <view id="PromptView" type="Form" label="Prompt">
+      <categories>
+        <category id="c1" headerText="Add Item" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="StaffUid" columns="15" hidden="true" />
+            <dataField fieldName="ItemCode" columns="16" textMode="Static" />
+            <dataField fieldName="ItemStiDesc" rows="5" />
+            <dataField fieldName="SizeCode" columns="20" watermark="Choose a Size" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="CommentCode" columns="3" />
+            <dataField fieldName="CommentDesc" columns="20" />
+            <dataField fieldName="UpdateStaffProfile" columns="1" hidden="true" />
+            <dataField fieldName="Local_StaffProfileSize" columns="20" hidden="true" />
+            <dataField fieldName="ReqItemCost" columns="15" textMode="Static" />
+            <dataField fieldName="LineValue" columns="15" textMode="Static" />
+            <dataField fieldName="Description" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Code" phase="Execute" name="GetDefaultSize" />
+    <rule id="r101" commandName="Calculate" type="JavaScript" phase="Execute" name="CalculateLineCost"><![CDATA[var q = [Qty];
+var ic = [ReqItemCost];
+[LineValue]=q * ic;]]></rule>
+    <rule id="r102" commandName="Confirm" type="JavaScript" phase="Execute" name="UpdateStaffProfile"><![CDATA[// Check the size selected against the default one 
+// and set the updateStaffProfile if it needs to be updated on Dispatch
+// if no entry in staff profile it will create one
+debugger;
+
+var sizeCode = [SizeCode];
+var profileSizeCode = [Local_StaffProfileSize];
+var itemCode = [ItemCode];
+
+if (profileSizeCode == null)
+{
+  [UpdateStaffProfile] = "Y";
+}
+
+else if (sizeCode != profileSizeCode) 
+{
+  success = this.result.confirm(
+    'Update Staff History for {0} change from {1} to {2} ? ',itemCode,profileSizeCode,sizeCode);
+  if (success) {
+    [UpdateStaffProfile] = "Y";
+  }
+}
+]]></rule>
+  </businessRules>
+</dataController>

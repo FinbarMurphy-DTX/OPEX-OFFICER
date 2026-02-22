@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="serial_numbers" alias="serial_numbers" created="2020-01-10T18:18:35" modified="2020-01-12T13:57:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="item" parentTableSchema="opex" parentTableName="st_item" x="357" y="20">
+      <foreignKeyColumn columnName="item_code" parentColumnName="item_code" />
+    </foreignKey>
+    <foreignKey id="batch_reference" parentTableSchema="opex" parentTableName="serial_numbers_batch" x="1260" y="52">
+      <foreignKeyColumn columnName="batch_reference" parentColumnName="rowid" />
+    </foreignKey>
+    <foreignKey id="location" parentTableSchema="opex" parentTableName="rq_locns" x="287" y="690">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+    <foreignKey id="item_condition" parentTableSchema="opex" parentTableName="item_condition_status" x="777" y="20">
+      <foreignKeyColumn columnName="item_condition_code" parentColumnName="item_condition_code" />
+    </foreignKey>
+    <foreignKey id="whse" parentTableSchema="opex" parentTableName="st_whse" x="777" y="182">
+      <foreignKeyColumn columnName="whse_code" parentColumnName="whse_code" />
+    </foreignKey>
+    <foreignKey id="staff_u" parentTableSchema="opex" parentTableName="rq_staff" x="772" y="373">
+      <foreignKeyColumn columnName="staff_uid" parentColumnName="staff_uid" />
+    </foreignKey>
+    <foreignKey id="sn_status" parentTableSchema="opex" parentTableName="sn_status" x="529" y="530">
+      <foreignKeyColumn columnName="status" parentColumnName="code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="id" fieldName="ID" label="Id" />
+    <column name="item_code" fieldName="ItemCode" label="Item Code" aliasColumnName="sti_desc" aliasForeignKey="item" />
+    <column name="sti_desc" fieldName="ItemStiDesc" label="Item" foreignKey="item" />
+    <column name="serial_number" fieldName="SerialNumber" label="Serial Number" />
+    <column name="batch_reference" fieldName="BatchReference" label="Batch Reference" aliasColumnName="serial_number" aliasForeignKey="batch_reference" />
+    <column name="serial_number" fieldName="BatchReferenceSerialNumber" label="Batch Serial Number" foreignKey="batch_reference" />
+    <column name="supplier_code" fieldName="BatchReferenceSupplierCode" label="Batch Supplier Code" foreignKey="batch_reference" />
+    <column name="last_review" fieldName="LastReview" label="Last Review" />
+    <column name="expiry_date" fieldName="ExpiryDate" label="Expiry Date" />
+    <column name="last_transaction" fieldName="LastTransaction" label="Last Transaction" />
+    <column name="first_issue" fieldName="FirstIssue" label="First Issue" />
+    <column name="notes" fieldName="Notes" label="Notes" />
+    <column name="pla_acc" fieldName="PlaAcc" label="Supplier" />
+    <column name="status" fieldName="Status" label="Status" aliasColumnName="status" aliasForeignKey="sn_status" />
+    <column name="status" fieldName="snStatus" label="sn Status" foreignKey="sn_status" />
+    <column name="staff_code" fieldName="StaffCode" label="Staff Code" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" aliasColumnName="location_desc" aliasForeignKey="location" />
+    <column name="location_desc" fieldName="LocationDesc" label="Location" foreignKey="location" />
+    <column name="registered" fieldName="Registered" label="Registered" />
+    <column name="rq_number" fieldName="RqNumber" label="Requisition Number" />
+    <column name="item_condition_code" fieldName="ItemConditionCode" label="Item Condition Code" aliasColumnName="description" aliasForeignKey="item_condition" />
+    <column name="description" fieldName="ItemConditionDescription" label="Item Condition" foreignKey="item_condition" />
+    <column name="size_code" fieldName="SizeCode" label="Size Code" />
+    <column name="whse_code" fieldName="WhseCode" label="Warehouse" aliasColumnName="whse_code" aliasForeignKey="whse" />
+    <column name="whse_code" fieldName="WhseCode1" label="Warehouse" foreignKey="whse" />
+    <column name="stwh_desc" fieldName="WhseStwhDesc" label="Whse Stwh Desc" foreignKey="whse" />
+    <column name="do_not_issue" fieldName="DoNotIssue" label="Do Not Issue" />
+    <column name="req_prefix" fieldName="ReqPrefix" label="Req Prefix" />
+    <column name="staff_uid" fieldName="StaffUid" label="Staff Id" aliasColumnName="location_code" aliasForeignKey="staff_u" />
+    <column name="location_code" fieldName="StaffUlocationCode" foreignKey="staff_u" label="Staff Location Code" />
+    <column name="staff_code" fieldName="StaffuStaffCode" label="Staff Code" foreignKey="staff_u" />
+    <column name="epl_number" fieldName="StaffuEplNumber" label="Epl Number" foreignKey="staff_u" />
+    <column name="surname" fieldName="StaffuSurname" label="Surname" foreignKey="staff_u" />
+    <column name="has_actual_value" fieldName="HasActualValue" label="Has Actual Value" />
+    <column name="actual_value" fieldName="ActualValue" label="Actual Value" />
+    <column name="disposal_detail_id" fieldName="DisposalDetailID" label="Disposal Detail" />
+  </columns>
+</dataModel>

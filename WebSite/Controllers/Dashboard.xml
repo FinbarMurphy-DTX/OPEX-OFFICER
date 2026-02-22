@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Dashboard" label="Dashboard" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <views>
+    <view id="dashboard1" type="Form" label="Trolley" />
+  </views>
+  <fields>
+    <field name="ItemCataloguePersonal" type="DataView" label="Item Catalogue Personal">
+      <dataView controller="ItemCataloguePersonal" view="grid1" />
+    </field>
+  </fields>
+</dataController>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GlCodes" conflictDetection="overwriteChanges" label="Gl Codes" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`gl_codes`.`gl_code` `GlCode`
+	,`gl_codes`.`gl_description` `GlDescription`
+	,`gl_codes`.`disabled` `Disabled`
+	,`gl_codes`.`display_in_ss` `DisplayInSs`
+from `opex`.`gl_codes` `gl_codes`
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="GlCode" type="String" allowNulls="false" isPrimaryKey="true" label="GL Code" length="12" showInSummary="true" readOnly="true" />
+    <field name="GlDescription" type="String" label="Description" length="50" showInSummary="true" readOnly="true" />
+    <field name="Disabled" type="String" label="Disabled" length="1" showInSummary="true" readOnly="true" />
+    <field name="DisplayInSs" type="String" label="Display In Ss" length="1" showInSummary="true" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Gl Codes" filter="Disabled = &quot;N&quot; AND DisplayInSs = &quot;Y&quot;">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="GlCode" columns="12" />
+        <dataField fieldName="GlDescription" columns="50" />
+        <dataField fieldName="Disabled" columns="1" hidden="true" />
+        <dataField fieldName="DisplayInSs" columns="1" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Gl Codes">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Gl Codes" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GlCode" columns="12" />
+            <dataField fieldName="GlDescription" columns="50" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="DisplayInSs" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Gl Codes">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GlCode" columns="12" />
+            <dataField fieldName="GlDescription" columns="50" />
+            <dataField fieldName="Disabled" columns="1" />
+            <dataField fieldName="DisplayInSs" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

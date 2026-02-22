@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_locns" alias="rq_locns" created="2017-06-21T08:24:25" modified="2017-06-21T08:31:48" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="budget_ind" parentTableSchema="opex" parentTableName="rq_budcd" x="383" y="20">
+      <foreignKeyColumn columnName="budget_ind" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="division" parentTableSchema="opex" parentTableName="divisions" x="383" y="181">
+      <foreignKeyColumn columnName="division_code" parentColumnName="division_code" />
+    </foreignKey>
+    <foreignKey id="company" parentTableSchema="opex" parentTableName="company" x="383" y="365">
+      <foreignKeyColumn columnName="company_id" parentColumnName="id" />
+    </foreignKey>
+    <foreignKey id="default_delivery_location" parentTableSchema="opex" parentTableName="locations" x="383" y="526">
+      <foreignKeyColumn columnName="default_delivery_location_id" parentColumnName="del_location_id" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" />
+    <column name="location_desc" fieldName="LocationDesc" label="Location Desc" />
+    <column name="budget_ind" fieldName="BudgetInd" label="Budget Ind" aliasColumnName="budget_desc" aliasForeignKey="budget_ind" />
+    <column name="budget_desc" fieldName="BudgetIndbudgetDesc" label="Budget Indbudget Desc" foreignKey="budget_ind" />
+    <column name="whse_code" fieldName="WhseCode" label="Whse Code" />
+    <column name="user_name" fieldName="UserName" label="User Name" />
+    <column name="turn_date" fieldName="TurnDate" label="Turn Date" />
+    <column name="uniform_ytd2" fieldName="UniformYtd2" label="Uniform Ytd2" />
+    <column name="non_stk_ytd2" fieldName="NonStkYtd2" label="Non Stk Ytd2" />
+    <column name="user_name2" fieldName="UserName2" label="User Name2" />
+    <column name="turn_date2" fieldName="TurnDate2" label="Turn Date2" />
+    <column name="uniform_ytd3" fieldName="UniformYtd3" label="Uniform Ytd3" />
+    <column name="non_stk_ytd3" fieldName="NonStkYtd3" label="Non Stk Ytd3" />
+    <column name="user_name3" fieldName="UserName3" label="User Name3" />
+    <column name="turn_date3" fieldName="TurnDate3" label="Turn Date3" />
+    <column name="uniform_ytd4" fieldName="UniformYtd4" label="Uniform Ytd4" />
+    <column name="non_stk_ytd4" fieldName="NonStkYtd4" label="Non Stk Ytd4" />
+    <column name="user_name4" fieldName="UserName4" label="User Name4" />
+    <column name="turn_date4" fieldName="TurnDate4" label="Turn Date4" />
+    <column name="uniform_ytd5" fieldName="UniformYtd5" label="Uniform Ytd5" />
+    <column name="non_stk_ytd5" fieldName="NonStkYtd5" label="Non Stk Ytd5" />
+    <column name="user_name5" fieldName="UserName5" label="User Name5" />
+    <column name="turn_date5" fieldName="TurnDate5" label="Turn Date5" />
+    <column name="email" fieldName="Email" label="Email" />
+    <column name="disabled" fieldName="Disabled" label="Disabled" />
+    <column name="owner" fieldName="Owner" label="Owner" />
+    <column name="division_code" fieldName="DivisionCode" label="Division Code" aliasColumnName="division_desc" aliasForeignKey="division" />
+    <column name="division_desc" fieldName="DivisionDesc" label="Division Desc" foreignKey="division" />
+    <column name="company_id" fieldName="DivisionCompanyid" label="Division Company id" foreignKey="division" />
+    <column name="company_id" fieldName="CompanyID" label="Company Id" aliasColumnName="name" aliasForeignKey="company" />
+    <column name="name" fieldName="CompanyName" label="Company Name" foreignKey="company" />
+    <column name="default_delivery_location_id" fieldName="DefaultDeliveryLocationID" label="Default Delivery Location Id" aliasColumnName="sla_acc" aliasForeignKey="default_delivery_location" />
+    <column name="sla_acc" fieldName="DefaultDeliveryLocationSlaAcc" label="Default Delivery Location Sla Acc" foreignKey="default_delivery_location" />
+  </columns>
+</dataModel>

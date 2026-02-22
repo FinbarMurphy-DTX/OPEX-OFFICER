@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="opex" baseTable="rq_trolley_location" alias="rq_trolley_location" created="2017-06-22T08:58:27" modified="2017-06-22T10:31:06" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="budget" parentTableSchema="opex" parentTableName="rq_budcd" x="371" y="20">
+      <foreignKeyColumn columnName="budget_code" parentColumnName="budget_code" />
+    </foreignKey>
+    <foreignKey id="del_location" parentTableSchema="opex" parentTableName="locations" x="371" y="181">
+      <foreignKeyColumn columnName="del_location_id" parentColumnName="del_location_id" />
+    </foreignKey>
+    <foreignKey id="default_comment" parentTableSchema="opex" parentTableName="rq_comms" x="371" y="342">
+      <foreignKeyColumn columnName="default_comment_code" parentColumnName="comment_code" />
+    </foreignKey>
+    <foreignKey id="location" parentTableSchema="opex" parentTableName="rq_locns" x="371" y="503">
+      <foreignKeyColumn columnName="location_code" parentColumnName="location_code" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="date_required" fieldName="DateRequired" label="Date Required" />
+    <column name="status_code" fieldName="StatusCode" label="Status Code" />
+    <column name="header_value" fieldName="HeaderValue" label="Header Value" />
+    <column name="urgent_req" fieldName="UrgentReq" label="Urgent Req" />
+    <column name="free_text" fieldName="FreeText" label="Free Text" />
+    <column name="budget_code" fieldName="BudgetCode" label="Budget Code" aliasColumnName="budget_desc" aliasForeignKey="budget" />
+    <column name="budget_desc" fieldName="BudgetDesc" label="Budget Desc" foreignKey="budget" />
+    <column name="del_location_id" fieldName="DelLocationID" label="Del Location Id" aliasColumnName="sla_acc" aliasForeignKey="del_location" />
+    <column name="sla_acc" fieldName="DelLocationSlaAcc" label="Del Location Sla Acc" foreignKey="del_location" />
+    <column name="sla_nam" fieldName="DelLocationSlaNam" label="Del Location Sla Nam" foreignKey="del_location" />
+    <column name="default_comment_code" fieldName="DefaultCommentCode" label="Default Comment Code" aliasColumnName="comment_desc" aliasForeignKey="default_comment" />
+    <column name="comment_desc" fieldName="DefaultCommentDesc" label="Default Comment Desc" foreignKey="default_comment" />
+    <column name="location_code" fieldName="LocationCode" label="Location Code" />
+    <column name="location_code" fieldName="LocationCode1" label="Location Code" foreignKey="location" />
+    <column name="email" fieldName="Email" label="Email" />
+    <column name="rowid" fieldName="Rowid" label="Rowid" />
+  </columns>
+</dataModel>

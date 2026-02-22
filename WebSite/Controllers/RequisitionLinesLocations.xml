@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RequisitionLinesLocations" label="RequisitionLinesLocations" conflictDetection="overwriteChanges" handler="DatatecnixOfficerII.Rules.RequisitionLinesLocationsBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_rqitm_2`.`rowid` `Rowid`
+	,`rq_rqitm_2`.`item_code` `ItemCode`
+	,`item`.`sti_desc` `StiDesc`
+	,`rq_rqitm_2`.`size_code` `SizeCode`
+	,`rq_rqitm_2`.`outs_qty` `OutsQty`
+	,`rq_rqitm_2`.`comment_code` `CommentCode`
+	,`comment`.`comment_desc` `CommentDesc`
+	,`rq_rqitm_2`.`whse_code` `WhseCode`
+	,`whse`.`stwh_desc` `Warehouse`
+	,`rq_rqitm_2`.`status_code` `StatusCode`
+	,`status`.`status_description` `StatusDescription`
+	,`rq_rqitm_2`.`line_value` `LineValue`
+	,`rq_rqitm_2`.`alloc_qty` `AllocQty`
+	,`rq_rqitm_2`.`orig_qty` `OrigQty`
+	,`rq_rqitm_2`.`req_item_cost` `ReqItemCost`
+	,`rq_rqitm_2`.`budget_ind` `BudgetInd`
+	,`rq_rqitm_2`.`return_dt` `ReturnDt`
+	,`rq_rqitm_2`.`rq_header` `RqHeader`
+	,`rq_header`.`staff_code` `RqHeaderstaffCode`
+	,`rq_header`.`staff_uid` `rqHeaderStaffUid`
+	,`rq_header`.`location_code` `rqHeaderLocationCode`
+	,`rq_header`.`rqn_prefix` `rqHeaderRqnPrefix`
+	,`rq_rqitm_2`.`date_time_placed` `DateTimePlaced`
+	,`rq_rqitm_2`.`date_time_rcvd` `DateTimeRcvd`
+	,`rq_rqitm_2`.`return_qty_total` `ReturnQtyTotal`
+	,`rq_rqitm_2`.`serial_number_id` `SerialNumberID`
+	,`serial_number`.`serial_number` `SerialNumberSerialNumber`
+	,`serial_number`.`item_condition_code` `ConditionCode`
+	,`rq_rqitm_2`.`gl_code` `GlCode`
+	,`gl`.`gl_description` `glDescription`
+	,`rq_rqitm_2`.`dispatch_id` `DispatchID`
+	,`dispatch`.`status_code` `DispatchStatusCode`
+	,`rq_rqitm_2`.`additional_text` `AdditionalText`
+	,`item_condition_code`.`description` `ItemConditionCodeDescription`
+	,`location_code`.`location_desc` `LocationCodeLocationDesc`
+from `opex`.`rq_rqitm_2` `rq_rqitm_2`
+	left join `opex`.`rq_comms` `comment` on `rq_rqitm_2`.`comment_code` = `comment`.`comment_code`
+	left join `opex`.`st_whse` `whse` on `rq_rqitm_2`.`whse_code` = `whse`.`whse_code`
+	left join `opex`.`rq_status` `status` on `rq_rqitm_2`.`status_code` = `status`.`status_code`
+	left join `opex`.`rq_rqns` `rq_header` on `rq_rqitm_2`.`rq_header` = `rq_header`.`rowid`
+	left join `opex`.`rq_locns` `location_code` on `rq_header`.`location_code` = `location_code`.`location_code`
+	left join `opex`.`serial_numbers` `serial_number` on `rq_rqitm_2`.`serial_number_id` = `serial_number`.`id`
+	left join `opex`.`item_condition_status` `item_condition_code` on `serial_number`.`item_condition_code` = `item_condition_code`.`item_condition_code`
+	left join `opex`.`gl_codes` `gl` on `rq_rqitm_2`.`gl_code` = `gl`.`gl_code`
+	left join `opex`.`requisition_dispatch_detail` `dispatch` on `rq_rqitm_2`.`dispatch_id` = `dispatch`.`dispatch_id`
+	left join `opex`.`st_item` `item` on `rq_rqitm_2`.`item_code` = `item`.`item_code`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Rowid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="ItemCode" type="String" label="Item Code" length="16" showInSummary="true">
+      <items style="Lookup" dataController="Item" dataValueField="ItemCode" dataTextField="ItemCode" copy="StiDesc=StiDesc" dataView="grid1" />
+    </field>
+    <field name="StiDesc" type="String" readOnly="true" label="Item Description" length="75" />
+    <field name="SizeCode" type="String" allowNulls="false" label="Size Code" length="20" showInSummary="true" />
+    <field name="OutsQty" type="Decimal" label="Outstanding" showInSummary="true" />
+    <field name="CommentCode" type="String" label="Reason Code" length="3" showInSummary="true">
+      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentCode" copy="CommentDesc=CommentDesc" />
+    </field>
+    <field name="CommentDesc" type="String" readOnly="true" label="Reason" length="20" />
+    <field name="WhseCode" type="String" label="Warehouse Code" length="3" showInSummary="true" />
+    <field name="Warehouse" type="String" readOnly="true" label="Warehouse" length="32" />
+    <field name="StatusCode" type="String" label="Status Code" length="2" />
+    <field name="StatusDescription" type="String" readOnly="true" label="Status" length="50" />
+    <field name="LineValue" type="Decimal" label="Cost" dataFormatString="C2" />
+    <field name="AllocQty" type="Decimal" label="Issued" />
+    <field name="OrigQty" type="Decimal" allowNulls="false" label="Requested" />
+    <field name="ReqItemCost" type="Decimal" dataFormatString="C2" label="Item Cost" />
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8" />
+    <field name="ReturnDt" type="DateTime" label="Returned" />
+    <field name="RqHeader" type="Int32" allowNulls="false" label="Requisition" />
+    <field name="RqHeaderstaffCode" type="String" readOnly="true" label="Staff Code" length="8" />
+    <field name="rqHeaderStaffUid" type="UInt32" readOnly="true" label="Staff UID" />
+    <field name="rqHeaderLocationCode" type="String" readOnly="true" label="rq Header Location Code" length="8" />
+    <field name="rqHeaderRqnPrefix" type="String" readOnly="true" label="rq Header Rqn Prefix" length="2" />
+    <field name="DateTimePlaced" type="DateTime" label="Placed" dataFormatString="d" />
+    <field name="DateTimeRcvd" type="DateTime" label="Dispatched" dataFormatString="d" />
+    <field name="ReturnQtyTotal" type="Int32" label="Returned" />
+    <field name="SerialNumberID" type="Int32" label="Serial Number Id">
+      <items style="Lookup" dataController="SerialNumbersLocation" newDataView="createForm1" dataValueField="ID" dataTextField="ItemCode" copy="SerialNumberSerialNumber=SerialNumber, ConditionCode=ItemConditionCode, ItemConditionCodeDescription=ItemConditionDescription" />
+    </field>
+    <field name="SerialNumberSerialNumber" type="String" readOnly="true" label="Serial Number" length="20" />
+    <field name="ConditionCode" type="String" readOnly="true" label="Serial Number Item Condition Code" length="1" />
+    <field name="GlCode" type="String" label="GL Code" length="12">
+      <items style="Lookup" dataController="GlCodes" newDataView="createForm1" dataValueField="GlCode" dataTextField="GlCode" copy="glDescription=GlDescription" />
+    </field>
+    <field name="glDescription" type="String" readOnly="true" label="GL description" length="50" />
+    <field name="DispatchID" type="UInt32" label="Dispatch Id" />
+    <field name="DispatchStatusCode" type="String" readOnly="true" label="Dispatch Status Code" length="2" />
+    <field name="AdditionalText" type="String" label="Additional Text" length="500" />
+    <field name="ItemConditionCodeDescription" type="String" readOnly="true" label="Item Condition" length="50" />
+    <field name="LocationCodeLocationDesc" type="String" readOnly="true" label="Location Code Location Desc" length="75" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Location Requisitioned Items (Outstanding)" sortExpression="RqHeader desc, ItemCode desc" filter="`rq_rqitm_2`.`status_code`  not like &quot;N%&quot;&#xD;&#xA;AND&#xD;&#xA;(&#xD;&#xA;`rq_rqitm_2`.`status_code` in (&quot;OS&quot;,&quot;SU&quot;,&quot;EN&quot;,&quot;SQ&quot;,&quot;EA&quot;,&quot;WT&quot;,&quot;SN&quot;,&quot;TW&quot;,&quot;HD&quot;,&quot;CF&quot;,&quot;DS&quot;) OR&#xD;&#xA;(`rq_rqitm_2`.status_code  in (&quot;AL&quot;,&quot;PA&quot;,&quot;PK&quot; ) AND `rq_rqitm_2`.tailoring_for is null)&#xD;&#xA;)&#xD;&#xA;AND&#xD;&#xA;`rq_header`.`rqn_prefix` in (&quot;ST&quot;,&quot;SX&quot;)">
+      <headerText>This is a list of requisitioned items that are outstanding for this location</headerText>
+      <dataFields>
+        <dataField fieldName="RqHeader" />
+        <dataField fieldName="ItemCode" columns="16" />
+        <dataField fieldName="StiDesc" columns="50" rows="5" />
+        <dataField fieldName="SizeCode" columns="20" />
+        <dataField fieldName="StatusDescription" columns="50" rows="5" />
+        <dataField fieldName="OrigQty" columns="15" />
+        <dataField fieldName="AllocQty" columns="15" />
+        <dataField fieldName="OutsQty" columns="15" />
+        <dataField fieldName="ReqItemCost" columns="15" />
+        <dataField fieldName="LineValue" columns="15" />
+        <dataField fieldName="rqHeaderRqnPrefix" columns="2" hidden="true" />
+        <dataField fieldName="DateTimePlaced" columns="10" />
+        <dataField fieldName="DateTimeRcvd" columns="10" />
+        <dataField fieldName="rqHeaderLocationCode" columns="8" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Requisiton Detail">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Detail" tab="Detail" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="RqHeader" columns="15" />
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="StiDesc" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="StatusDescription" columns="50" />
+            <dataField fieldName="CommentDesc" columns="20" />
+            <dataField fieldName="rqHeaderLocationCode" columns="8" hidden="true" />
+            <dataField fieldName="rqHeaderRqnPrefix" columns="2" hidden="true" />
+            <dataField fieldName="AdditionalText" />
+            <dataField fieldName="LocationCodeLocationDesc" hidden="true" />
+          </dataFields>
+        </category>
+        <category headerText="Qty" id="c5" tab="Qty">
+          <dataFields>
+            <dataField fieldName="OrigQty" columns="15" />
+            <dataField fieldName="AllocQty" columns="15" />
+            <dataField fieldName="OutsQty" columns="15" />
+            <dataField fieldName="ReturnQtyTotal" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Dates" tab="Dates" id="c2">
+          <dataFields>
+            <dataField fieldName="DateTimePlaced" columns="10" />
+            <dataField fieldName="DateTimeRcvd" columns="10" />
+            <dataField fieldName="ReturnDt" columns="10" />
+          </dataFields>
+        </category>
+        <category headerText="Costs" tab="Costs" id="c3">
+          <dataFields>
+            <dataField fieldName="ReqItemCost" columns="15" />
+            <dataField fieldName="LineValue" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Serial Numbers" tab="Serial Numbers" id="c4">
+          <dataFields>
+            <dataField fieldName="SerialNumberSerialNumber" columns="20" />
+            <dataField fieldName="ItemConditionCodeDescription" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Rqitm2">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="16" />
+            <dataField fieldName="StiDesc" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="OutsQty" columns="15" />
+            <dataField fieldName="CommentCode" columns="3" />
+            <dataField fieldName="CommentDesc" columns="20" />
+            <dataField fieldName="WhseCode" columns="3" />
+            <dataField fieldName="Warehouse" columns="32" />
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="StatusDescription" columns="50" />
+            <dataField fieldName="LineValue" columns="15" />
+            <dataField fieldName="AllocQty" columns="15" />
+            <dataField fieldName="OrigQty" columns="15" />
+            <dataField fieldName="ReqItemCost" columns="15" />
+            <dataField fieldName="BudgetInd" columns="8" />
+            <dataField fieldName="ReturnDt" columns="10" />
+            <dataField fieldName="RqHeader" aliasFieldName="RqHeaderstaffCode" />
+            <dataField fieldName="rqHeaderStaffUid" columns="15" />
+            <dataField fieldName="rqHeaderLocationCode" columns="8" />
+            <dataField fieldName="rqHeaderRqnPrefix" columns="2" />
+            <dataField fieldName="DateTimePlaced" columns="10" />
+            <dataField fieldName="DateTimeRcvd" columns="10" />
+            <dataField fieldName="ReturnQtyTotal" columns="15" />
+            <dataField fieldName="SerialNumberID" aliasFieldName="CleanIdentifier-Error" />
+            <dataField fieldName="SerialNumberSerialNumber" columns="20" />
+            <dataField fieldName="ConditionCode" columns="1" />
+            <dataField fieldName="GlCode" columns="12" />
+            <dataField fieldName="glDescription" columns="50" />
+            <dataField fieldName="DispatchID" columns="15" />
+            <dataField fieldName="DispatchStatusCode" columns="2" />
+            <dataField fieldName="AdditionalText" />
+            <dataField fieldName="ItemConditionCodeDescription" columns="50" />
+            <dataField fieldName="LocationCodeLocationDesc" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="gridAll" commandId="command1" type="Grid" label="Location Requisitioned Items (All)" baseViewId="grid1" filter="`rq_rqitm_2`.`status_code`  not like &quot;N%&quot;&#xD;&#xA;AND&#xD;&#xA;`rq_header`.`rqn_prefix` in (&quot;ST&quot;,&quot;SX&quot;)" sortExpression="RqHeader desc, ItemCode desc">
+      <headerText>This is a list of all requisitioned items for this location</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="More Information" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+      <action commandName="Email" id="a101" headerText="Ask A Question" description="Ask a Question ?" commandArgument="Ask" confirmation="_controller=OfficerEmailPrompt&#xD;&#xA;_title=Ask Question about an Item&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" causesValidation="false" whenKeySelected="false" cssClass="glyphicon-question-sign" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Email" type="Email" phase="Execute" name="AskAQuestion" commandArgument="Ask"><![CDATA[From: "{Parameters_Forname} {Parameters_Surname}" {Parameters_OfficerEmail}
+To: {Parameters_AskEmail}
+Subject: {Parameters_Subject}
+<html>
+<body>
+<p>
+{Parameters_OfficerEmailHeader}
+{Parameters_Message}
+{Parameters_OfficerEmailFooter}
+</p>
+</body>
+</html>]]></rule>
+    <rule id="r102" commandName="Email" type="Code" phase="After" name="ConfirmEmail" />
+  </businessRules>
+</dataController>

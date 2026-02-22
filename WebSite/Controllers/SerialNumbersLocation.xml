@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SerialNumbersLocation" conflictDetection="overwriteChanges" label="Serial Numbers Location" handler="DatatecnixOfficerII.Rules.SerialNumbersLocationBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`serial_numbers`.`id` `ID`
+	,`serial_numbers`.`item_code` `ItemCode`
+	,`item`.`sti_desc` `ItemStiDesc`
+	,`serial_numbers`.`serial_number` `SerialNumber`
+	,`serial_numbers`.`batch_reference` `BatchReference`
+	,`batch_reference`.`serial_number` `BatchReferenceSerialNumber`
+	,`batch_reference`.`supplier_code` `BatchReferenceSupplierCode`
+	,`serial_numbers`.`last_review` `LastReview`
+	,`serial_numbers`.`expiry_date` `ExpiryDate`
+	,`serial_numbers`.`last_transaction` `LastTransaction`
+	,`serial_numbers`.`first_issue` `FirstIssue`
+	,`serial_numbers`.`notes` `Notes`
+	,`serial_numbers`.`pla_acc` `PlaAcc`
+	,`serial_numbers`.`status` `Status`
+	,`sn_status`.`status` `snStatus`
+	,`serial_numbers`.`staff_code` `StaffCode`
+	,`serial_numbers`.`location_code` `LocationCode`
+	,`location`.`location_desc` `LocationDesc`
+	,`serial_numbers`.`registered` `Registered`
+	,`serial_numbers`.`rq_number` `RqNumber`
+	,`serial_numbers`.`item_condition_code` `ItemConditionCode`
+	,`item_condition`.`description` `ItemConditionDescription`
+	,`serial_numbers`.`size_code` `SizeCode`
+	,`serial_numbers`.`whse_code` `WhseCode`
+	,`whse`.`whse_code` `WhseCode1`
+	,`whse`.`stwh_desc` `WhseStwhDesc`
+	,`serial_numbers`.`do_not_issue` `DoNotIssue`
+	,`serial_numbers`.`req_prefix` `ReqPrefix`
+	,`serial_numbers`.`staff_uid` `StaffUid`
+	,`staff_u`.`location_code` `StaffUlocationCode`
+	,`staff_u`.`staff_code` `StaffuStaffCode`
+	,`staff_u`.`epl_number` `StaffuEplNumber`
+	,`staff_u`.`surname` `StaffuSurname`
+	,`serial_numbers`.`has_actual_value` `HasActualValue`
+	,`serial_numbers`.`actual_value` `ActualValue`
+	,`serial_numbers`.`disposal_detail_id` `DisposalDetailID`
+from `opex`.`serial_numbers` `serial_numbers`
+	left join `opex`.`st_item` `item` on `serial_numbers`.`item_code` = `item`.`item_code`
+	left join `opex`.`serial_numbers_batch` `batch_reference` on `serial_numbers`.`batch_reference` = `batch_reference`.`rowid`
+	left join `opex`.`rq_locns` `location` on `serial_numbers`.`location_code` = `location`.`location_code`
+	left join `opex`.`item_condition_status` `item_condition` on `serial_numbers`.`item_condition_code` = `item_condition`.`item_condition_code`
+	left join `opex`.`st_whse` `whse` on `serial_numbers`.`whse_code` = `whse`.`whse_code`
+	left join `opex`.`rq_staff` `staff_u` on `serial_numbers`.`staff_uid` = `staff_u`.`staff_uid`
+	left join `opex`.`sn_status` `sn_status` on `serial_numbers`.`status` = `sn_status`.`code`
+]]></text>
+    </command>
+    <command id="idIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="ItemCode" type="String" allowNulls="false" label="Item Code" length="16" showInSummary="true">
+      <items style="Lookup" dataController="Item" newDataView="createForm1" dataValueField="ItemCode" dataTextField="StiDesc" />
+    </field>
+    <field name="ItemStiDesc" type="String" readOnly="true" label="Item" length="75" />
+    <field name="SerialNumber" type="String" allowNulls="false" label="Serial Number" length="20" showInSummary="true" />
+    <field name="BatchReference" type="Int32" label="Batch Reference" showInSummary="true" />
+    <field name="BatchReferenceSerialNumber" type="String" readOnly="true" label="Batch Serial Number" length="20" />
+    <field name="BatchReferenceSupplierCode" type="String" readOnly="true" label="Batch Supplier Code" length="10" />
+    <field name="LastReview" type="DateTime" label="Last Review" showInSummary="true" />
+    <field name="ExpiryDate" type="DateTime" label="Expiry Date" showInSummary="true" />
+    <field name="LastTransaction" type="DateTime" label="Last Transaction" />
+    <field name="FirstIssue" type="DateTime" label="First Issue" />
+    <field name="Notes" type="String" label="Notes" length="600" />
+    <field name="PlaAcc" type="String" label="Supplier" length="10" />
+    <field name="Status" type="String" label="Status" length="2" />
+    <field name="snStatus" type="String" readOnly="true" label="Status" length="20" />
+    <field name="StaffCode" type="String" label="Staff Code" length="8" />
+    <field name="LocationCode" type="String" label="Location Code" length="8">
+      <items style="Lookup" dataController="OpexrqLocns" newDataView="createForm1" dataValueField="LocationCode" dataTextField="LocationDesc" />
+    </field>
+    <field name="LocationDesc" type="String" readOnly="true" label="Location" length="75" />
+    <field name="Registered" type="DateTime" label="Registered" />
+    <field name="RqNumber" type="Int32" label="Requisition Number" />
+    <field name="ItemConditionCode" type="String" label="Item Condition Code" length="1" />
+    <field name="ItemConditionDescription" type="String" readOnly="true" label="Item Condition" length="50" />
+    <field name="SizeCode" type="String" label="Size Code" length="20" />
+    <field name="WhseCode" type="String" label="Warehouse" length="3" />
+    <field name="WhseCode1" type="String" readOnly="true" label="Warehouse" length="3" />
+    <field name="WhseStwhDesc" type="String" readOnly="true" label="Whse Stwh Desc" length="32" />
+    <field name="DoNotIssue" type="String" label="Do Not Issue" length="1" />
+    <field name="ReqPrefix" type="String" label="Req Prefix" length="2" />
+    <field name="StaffUid" type="UInt32" label="Staff Id">
+      <items style="Lookup" dataController="Staff" newDataView="createForm1" dataValueField="StaffUid" dataTextField="LocationCode" copy="StaffuStaffCode=StaffCode, StaffuEplNumber=EplNumber, StaffuSurname=Surname" />
+    </field>
+    <field name="StaffUlocationCode" type="String" readOnly="true" label="Staff Location Code" length="8" />
+    <field name="StaffuStaffCode" type="String" readOnly="true" label="Staff Code" length="8" />
+    <field name="StaffuEplNumber" type="String" readOnly="true" label="Epl Number" length="8" />
+    <field name="StaffuSurname" type="String" readOnly="true" label="Surname" length="30" />
+    <field name="HasActualValue" type="String" label="Has Actual Value" length="1" />
+    <field name="ActualValue" type="Decimal" label="Actual Value" />
+    <field name="DisposalDetailID" type="UInt32" label="Disposal Detail" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="All" tags="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;multi-select-none" filter="Status in (&quot;I&quot;,&quot;T&quot;)">
+      <headerText>This is a list of all items (Issued and Assigned) for this location</headerText>
+      <dataFields>
+        <dataField fieldName="ItemCode" aliasFieldName="ItemStiDesc" />
+        <dataField fieldName="SerialNumber" columns="20" />
+        <dataField fieldName="ExpiryDate" columns="10" />
+        <dataField fieldName="BatchReference" aliasFieldName="BatchReferenceSerialNumber" hidden="true" />
+        <dataField fieldName="BatchReferenceSupplierCode" columns="10" hidden="true" />
+        <dataField fieldName="Status" aliasFieldName="snStatus" />
+        <dataField fieldName="DoNotIssue" columns="1" hidden="true" />
+        <dataField fieldName="snStatus" columns="20" hidden="true" />
+        <dataField fieldName="StaffUid" hidden="true" />
+        <dataField fieldName="StaffuStaffCode" columns="8" hidden="true" />
+        <dataField fieldName="StaffuEplNumber" columns="8" />
+        <dataField fieldName="StaffuSurname" columns="30" />
+        <dataField fieldName="LocationCode" columns="8" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Serial Numbers Location">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Serial Numbers Location" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" aliasFieldName="ItemStiDesc" />
+            <dataField fieldName="SerialNumber" columns="20" />
+            <dataField fieldName="BatchReference" aliasFieldName="BatchReferenceSerialNumber" />
+            <dataField fieldName="BatchReferenceSupplierCode" columns="10" />
+            <dataField fieldName="LastReview" columns="10" />
+            <dataField fieldName="ExpiryDate" columns="10" />
+            <dataField fieldName="LastTransaction" columns="10" />
+            <dataField fieldName="FirstIssue" columns="10" />
+            <dataField fieldName="Notes" />
+            <dataField fieldName="PlaAcc" columns="10" />
+            <dataField fieldName="Status" aliasFieldName="snStatus" />
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="LocationCode" aliasFieldName="LocationDesc" />
+            <dataField fieldName="Registered" columns="10" />
+            <dataField fieldName="RqNumber" columns="15" />
+            <dataField fieldName="ItemConditionCode" aliasFieldName="ItemConditionDescription" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="WhseCode" aliasFieldName="WhseCode1" />
+            <dataField fieldName="WhseStwhDesc" columns="32" />
+            <dataField fieldName="DoNotIssue" columns="1" />
+            <dataField fieldName="ReqPrefix" columns="2" />
+            <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+            <dataField fieldName="StaffuStaffCode" columns="8" />
+            <dataField fieldName="StaffuEplNumber" columns="8" />
+            <dataField fieldName="StaffuSurname" columns="30" />
+            <dataField fieldName="HasActualValue" columns="1" />
+            <dataField fieldName="ActualValue" columns="15" />
+            <dataField fieldName="DisposalDetailID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Serial Numbers Location">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ItemCode" aliasFieldName="ItemStiDesc" />
+            <dataField fieldName="SerialNumber" columns="20" />
+            <dataField fieldName="BatchReference" aliasFieldName="BatchReferenceSerialNumber" />
+            <dataField fieldName="BatchReferenceSupplierCode" columns="10" />
+            <dataField fieldName="LastReview" columns="10" />
+            <dataField fieldName="ExpiryDate" columns="10" />
+            <dataField fieldName="LastTransaction" columns="10" />
+            <dataField fieldName="FirstIssue" columns="10" />
+            <dataField fieldName="Notes" />
+            <dataField fieldName="PlaAcc" columns="10" />
+            <dataField fieldName="Status" aliasFieldName="snStatus" />
+            <dataField fieldName="StaffCode" columns="8" />
+            <dataField fieldName="LocationCode" aliasFieldName="LocationDesc" />
+            <dataField fieldName="Registered" columns="10" />
+            <dataField fieldName="RqNumber" columns="15" />
+            <dataField fieldName="ItemConditionCode" aliasFieldName="ItemConditionDescription" />
+            <dataField fieldName="SizeCode" columns="20" />
+            <dataField fieldName="WhseCode" aliasFieldName="WhseCode1" />
+            <dataField fieldName="WhseStwhDesc" columns="32" />
+            <dataField fieldName="DoNotIssue" columns="1" />
+            <dataField fieldName="ReqPrefix" columns="2" />
+            <dataField fieldName="StaffUid" aliasFieldName="StaffUlocationCode" />
+            <dataField fieldName="StaffuStaffCode" columns="8" />
+            <dataField fieldName="StaffuEplNumber" columns="8" />
+            <dataField fieldName="StaffuSurname" columns="30" />
+            <dataField fieldName="HasActualValue" columns="1" />
+            <dataField fieldName="ActualValue" columns="15" />
+            <dataField fieldName="DisposalDetailID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="gridAssigned" commandId="command1" type="Grid" label="Assigned to Officers" baseViewId="grid1" filter="StaffUlocationCode &lt;&gt; &quot;Location&quot;&#xD;&#xA;AND &#xD;&#xA;Status in (&quot;I&quot;,&quot;T&quot;)" />
+    <view id="gridIssued" commandId="command1" type="Grid" label="Issued to Location" baseViewId="grid1" filter="StaffUlocationCode = &quot;Location&quot;&#xD;&#xA;AND &#xD;&#xA;Status in (&quot;I&quot;)" />
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="Info" />
+      <action commandName="Custom" commandArgument="Assign" id="a101" headerText="Assign" whenKeySelected="true" confirmation="_controller=SerialNumbersAssignPrompt&#xD;&#xA;_title=Enter Officer to Assign To&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" whenClientScript="[StaffuStaffCode] == &quot;Location&quot;" />
+      <action commandName="Custom" commandArgument="Replace" id="a100" headerText="Replace" whenKeySelected="true" confirmation="_controller=SerialNumbersReplacePrompt&#xD;&#xA;_title=Enter New Serial Number&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" whenClientScript="[StaffuStaffCode] != &quot;Location&quot;&#xD;&#xA;&amp;&amp;&#xD;&#xA;[Status] == &quot;I&quot;" />
+      <action commandName="Custom" commandArgument="Return" id="a102" headerText="Return" whenKeySelected="true" whenClientScript="[Status] != &quot;T&quot;" confirmation="Not Implemented" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a100" commandName="ReportAsPdf" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="SerialNumberActions" flat="true">
+      <action commandName="Custom" commandArgument="Assign" id="a101" headerText="Assign" whenKeySelected="true" confirmation="_controller=SerialNumbersAssignPrompt&#xD;&#xA;_title=Enter Officer to Assign To&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" whenClientScript="[StaffuStaffCode] == &quot;Location&quot;" />
+      <action commandName="Custom" commandArgument="Replace" id="a100" headerText="Replace" whenKeySelected="true" confirmation="_controller=SerialNumbersReplacePrompt&#xD;&#xA;_title=Enter New Serial Number&#xD;&#xA;_width=500&#xD;&#xA;_view = PromptView" whenClientScript="[StaffuStaffCode] != &quot;Location&quot;&#xD;&#xA;&amp;&amp;&#xD;&#xA;[Status] == &quot;I&quot;" />
+      <action commandName="Custom" commandArgument="Return" id="a102" headerText="Return" whenKeySelected="true" confirmation="Not Implemented" whenClientScript="[Status] != &quot;T&quot;" />
+      <action commandName="ReportAsPdf" id="a103" headerText="Transit Document" whenClientScript="[Status] == &quot;T&quot;" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="Replace" type="Code" phase="Execute" name="ReplaceSerialItem" />
+    <rule id="r101" commandName="Custom" commandArgument="Assign" type="Code" phase="Execute" name="Assign" />
+    <rule id="r102" commandName="Report" type="Code" phase="After" />
+  </businessRules>
+</dataController>

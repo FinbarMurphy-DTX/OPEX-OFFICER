@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TrolleyLocation" conflictDetection="overwriteChanges" label="Opexrq Trolley Location" handler="DatatecnixOfficerII.Rules.TrolleyLocationBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	`rq_trolley_location`.`date_required` `DateRequired`
+	,`rq_trolley_location`.`status_code` `StatusCode`
+	,`rq_trolley_location`.`header_value` `HeaderValue`
+	,`rq_trolley_location`.`urgent_req` `UrgentReq`
+	,`rq_trolley_location`.`free_text` `FreeText`
+	,`rq_trolley_location`.`budget_code` `BudgetCode`
+	,`budget`.`budget_desc` `BudgetDesc`
+	,`rq_trolley_location`.`del_location_id` `DelLocationID`
+	,`del_location`.`sla_acc` `DelLocationSlaAcc`
+	,`del_location`.`sla_nam` `DelLocationSlaNam`
+	,`rq_trolley_location`.`default_comment_code` `DefaultCommentCode`
+	,`default_comment`.`comment_desc` `DefaultCommentDesc`
+	,`rq_trolley_location`.`location_code` `LocationCode`
+	,`location`.`location_code` `LocationCode1`
+	,`rq_trolley_location`.`email` `Email`
+	,`rq_trolley_location`.`rowid` `Rowid`
+from `opex`.`rq_trolley_location` `rq_trolley_location`
+	left join `opex`.`rq_budcd` `budget` on `rq_trolley_location`.`budget_code` = `budget`.`budget_code`
+	left join `opex`.`locations` `del_location` on `rq_trolley_location`.`del_location_id` = `del_location`.`del_location_id`
+	left join `opex`.`rq_comms` `default_comment` on `rq_trolley_location`.`default_comment_code` = `default_comment`.`comment_code`
+	left join `opex`.`rq_locns` `location` on `rq_trolley_location`.`location_code` = `location`.`location_code`
+]]></text>
+    </command>
+    <command id="rowidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Rowid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="DateRequired" type="DateTime" label="Date Required" showInSummary="true" />
+    <field name="StatusCode" type="String" label="Status Code" length="2" showInSummary="true" />
+    <field name="HeaderValue" type="Decimal" allowNulls="false" label="Header Value" showInSummary="true" readOnly="true" dataFormatString="C2" />
+    <field name="UrgentReq" type="String" label="Urgent Req" length="1" showInSummary="true" />
+    <field name="FreeText" type="String" label="Free Text" length="255" showInSummary="true" />
+    <field name="BudgetCode" type="String" label="Budget Code" length="8">
+      <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
+    </field>
+    <field name="BudgetDesc" type="String" readOnly="true" label="Budget Desc" length="50" />
+    <field name="DelLocationID" type="UInt32" label="Del Location Id">
+      <items style="Lookup" dataController="Opexlocations" dataValueField="DelLocationID" dataTextField="SlaNam" copy="DelLocationSlaNam=SlaNam&#xD;&#xA;DelLocationSlaAcc=SlaAcc&#xD;&#xA;" dataView="grid1" />
+    </field>
+    <field name="DelLocationSlaAcc" type="String" readOnly="true" label="Del Location Sla Acc" length="8" />
+    <field name="DelLocationSlaNam" type="String" readOnly="true" label="Deliver To" length="75" />
+    <field name="DefaultCommentCode" type="String" label="Default Reason Code" length="3">
+      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentDesc" />
+    </field>
+    <field name="DefaultCommentDesc" type="String" readOnly="true" label="Default Comment Desc" length="20" />
+    <field name="LocationCode" type="String" allowNulls="false" label="Location Code" length="8" readOnly="true">
+      <items style="Lookup" dataController="OpexrqLocns" newDataView="createForm1" dataValueField="LocationCode" dataTextField="LocationCode" copy="LocationCode1=LocationCode" />
+    </field>
+    <field name="LocationCode1" type="String" readOnly="true" label="Location Code" length="8" />
+    <field name="Email" type="String" label="Delivery Advice" length="255" />
+    <field name="Rowid" type="UInt32" allowNulls="false" isPrimaryKey="true" label="Rowid" readOnly="true" />
+    <field name="Local_TrolleyCount" type="UInt32" label="Items in Trolley" computed="true" dataFormatString="N0">
+      <formula>select count(*) from rq_trolley_item_location t where t.location_code = `rq_trolley_location`.`location_code`</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Delivery Information">
+      <headerText>Delivery Information</headerText>
+      <dataFields>
+        <dataField fieldName="LocationCode" columns="8" />
+        <dataField fieldName="DelLocationSlaNam" columns="50" rows="5" />
+        <dataField fieldName="DateRequired" columns="10" />
+        <dataField fieldName="FreeText" columns="50" rows="5" />
+        <dataField fieldName="DefaultCommentCode" columns="3" hidden="true" />
+        <dataField fieldName="Local_TrolleyCount" columns="15" />
+        <dataField fieldName="HeaderValue" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Location Trolley">
+      <headerText>You can modify the delivery details and add a default reason code here</headerText>
+      <categories>
+        <category id="c1" headerText="Delivery Details" tab="Delivery" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaNam" />
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="DefaultCommentCode" aliasFieldName="DefaultCommentDesc" />
+          </dataFields>
+        </category>
+        <category headerText="Costs + Budget" id="c3" tab="Costs + Budget">
+          <dataFields>
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="BudgetCode" columns="8" />
+            <dataField fieldName="BudgetDesc" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Hidden" id="c2" tab="Hidden">
+          <dataFields>
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="Email" />
+          </dataFields>
+          <visibility>
+            <expression test="false" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Opexrq Trolley Location">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DateRequired" columns="10" />
+            <dataField fieldName="StatusCode" columns="2" />
+            <dataField fieldName="HeaderValue" columns="15" />
+            <dataField fieldName="UrgentReq" columns="1" />
+            <dataField fieldName="FreeText" />
+            <dataField fieldName="BudgetCode" aliasFieldName="BudgetDesc" />
+            <dataField fieldName="DelLocationID" aliasFieldName="DelLocationSlaAcc" />
+            <dataField fieldName="DelLocationSlaNam" />
+            <dataField fieldName="DefaultCommentCode" aliasFieldName="DefaultCommentDesc" />
+            <dataField fieldName="LocationCode" columns="8" />
+            <dataField fieldName="LocationCode1" columns="8" />
+            <dataField fieldName="Email" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true" />
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Trolley Actions" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action commandName="Custom" commandArgument="FullScreen" headerText="Show Catalogue" id="a102" description="Full Screen" causesValidation="false" cssClass="material-icon-view-module" />
+      <action commandName="Custom" commandArgument="SubmitLocationTrolley" headerText="Submit Trolley" causesValidation="false" id="a100" confirmation="This will submit all the items in your trolley for approval and dispatch" cssClass="material-icon-shopping-cart" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag1" scope="Grid" flat="false">
+      <action commandName="Custom" commandArgument="FullScreen" headerText="Show Catalogue" id="a102" description="Full Screen" causesValidation="false" cssClass="material-icon-view-module" />
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="More Information" />
+      <action id="a2" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="SubmitLocationTrolley" type="Code" phase="Execute" name="SubmitLocationTrolley" />
+    <rule id="r103" commandName="Custom" commandArgument="FullScreen" type="JavaScript" phase="Execute" name="FullScreen"><![CDATA[debugger;
+$app.touch.show({ controller: 'ItemCatalogueLocation', view: 'grid1' });]]></rule>
+  </businessRules>
+</dataController>
