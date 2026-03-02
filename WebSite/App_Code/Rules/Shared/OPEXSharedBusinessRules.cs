@@ -327,15 +327,15 @@ namespace DatatecnixOfficerII.Rules
                         Context.Session["AskEmail"] = OPEXOption("SH", "Question Email", false) ?? "info@datatecnix.co.uk";
                         fred.staffRecord = staffRecord;
                         fred.rank = staffRecord.RankCode;
+                        Context.Session.Add("OPEXOfficerOfficer", JsonConvert.SerializeObject(fred));
 
                     }
                     else 
                     {
                         OpexMessage("SH", "5", Context.User.Identity.Name);
+                        fred = null;
                         Result.Canceled = true;
                     }
-
-                    Context.Session.Add("OPEXOfficerOfficer", JsonConvert.SerializeObject(fred));
                    
                     return fred;
                 }

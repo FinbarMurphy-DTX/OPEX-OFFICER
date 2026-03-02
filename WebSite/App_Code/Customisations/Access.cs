@@ -15,7 +15,11 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
-                RestrictAccess(Officer.staffRecord.StaffUid);
+                if ((Officer != null) && (Officer.staffRecord != null))
+
+                    RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
+        
             else
                 UnrestrictedAccess();
 
@@ -45,7 +49,10 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
-                RestrictAccess(Officer.staffRecord.StaffUid);
+
+                if ((Officer != null) && (Officer.staffRecord != null))
+                    RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
             else
                 UnrestrictedAccess();
 
@@ -138,7 +145,10 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
-                RestrictAccess(Officer.staffRecord.StaffUid);
+                if ((Officer != null) && (Officer.staffRecord != null))
+
+                    RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
             else
                 UnrestrictedAccess();
 
@@ -158,9 +168,12 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
+            {
+                if ((Officer != null) && (Officer.staffRecord != null))
 
                 RestrictAccess(Officer.staffRecord.StaffUid);
-                
+                else RestrictAccess(0);
+            }
             else
                 UnrestrictedAccess();
 
@@ -177,7 +190,10 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
-                RestrictAccess(Officer.staffRecord.StaffUid);
+                if ((Officer != null) && (Officer.staffRecord != null))
+
+                    RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
             // RestrictAccess(950);
             else
                 UnrestrictedAccess();
@@ -220,8 +236,9 @@ namespace DatatecnixOfficerII.Rules
         {
 
             if (UserIsInRole("Officer"))
-
-                RestrictAccess(Officer.staffRecord.StaffUid);
+                if ((Officer != null) && (Officer.staffRecord != null))
+                    RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
 
             else
                 UnrestrictedAccess();
@@ -282,9 +299,11 @@ namespace DatatecnixOfficerII.Rules
         public void restrictByStaffCode()
         {
 
-            if (UserIsInRole("Location"))
+            if (UserIsInRole("Officer"))
             {
+                if ((Officer != null) && (Officer.staffRecord != null))
                     RestrictAccess(Officer.staffRecord.StaffUid);
+                else RestrictAccess(0);
             }
      
             else
@@ -301,8 +320,10 @@ namespace DatatecnixOfficerII.Rules
         [AccessControl("SerialNumbersLocation", "LocationCode")]
         public void restrictByLocationCode()
         {
-
-            RestrictAccess(Officer.staffRecord.LocationCode);
+            if (UserIsInRole("Location"))
+            {
+                RestrictAccess(Officer.staffRecord.LocationCode);
+            }
 
 
         }
