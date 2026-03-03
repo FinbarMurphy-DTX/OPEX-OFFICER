@@ -95,8 +95,8 @@ from `opex`.`serial_numbers` `serial_numbers`
     <field name="DisposalDetailID" type="UInt32" label="Disposal Detail" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="PAVA (Issued)" filter="status in ( &quot;I&quot;,&quot;T&quot;)">
-      <headerText>This is a list of Issued PAVA's</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="PPE (Issued)" filter="status in ( &quot;I&quot;,&quot;T&quot;)">
+      <headerText>This is a list of PPE Equipmemt Issued</headerText>
       <dataFields>
         <dataField fieldName="StaffUid" columns="15" hidden="true" />
         <dataField fieldName="ItemCode" />

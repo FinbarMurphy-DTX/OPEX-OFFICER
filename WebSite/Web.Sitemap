@@ -13,7 +13,10 @@
       </siteMapNode>
       <siteMapNode title="My Profile" description="" url="~/pages/my-profile" roles="Officer-Profile" />
     </siteMapNode>
-    <siteMapNode title="PPE" description="View Serial Numbers Location" url="~/pages/serial-numbers-location" />
+    <siteMapNode title="PPE" description="View Serial Numbers Location" url="~/pages/serial-numbers-location">
+      <siteMapNode title="Personal Issue" description="" url="~/pages/personal-issue" roles="Officer" />
+      <siteMapNode title="Location Issue" description="" url="~/pages/location-issue" roles="Location" />
+    </siteMapNode>
     <siteMapNode title="Opex Site Content" description="View Opex Site Content" url="~/pages/opex_site_content" roles="Administrators, Content Editors, Developers" />
   </siteMapNode>
 </siteMap>

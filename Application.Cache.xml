@@ -4,7 +4,8 @@
       <containers>
         <container id="c101" flow="NewRow" />
       </containers>
-      <controls></controls>
+      <controls>
+      </controls>
       <dataViews>
         <dataView id="view1" container="c101" controller="MyProfile" view="loginForm" multiSelect="false" autoHide="Nothing" startCommandArgument="loginForm" startCommandName="New" visibleWhen="debugger;&#xD;&#xA;(($app.userId() == null)  || ($app.userId() == &quot;&quot;) )" showModalForms="true" />
       </dataViews>
@@ -32,8 +33,10 @@
       <about>You can order items from your personal catalogue here</about>
     </page>
     <page name="MyDetail" title="Profile" description="Show details of items ordered/requisitioned previously" index="1030" path="History" useExtenders="false" roles="Officer-Detail,Location-Detail">
-      <containers></containers>
-      <dataViews></dataViews>
+      <containers>
+      </containers>
+      <dataViews>
+      </dataViews>
       <controls />
       <about>This page shows your profile and items requested</about>
     </page>
@@ -79,13 +82,27 @@
     </page>
     <page name="SerialNumbersLocation" title="Serial Numbers Location" description="View Serial Numbers Location" index="1090" path="PPE" useExtenders="false" offline="false">
       <containers>
+      </containers>
+      <dataViews>
+      </dataViews>
+      <controls />
+      <about>This page allows serial numbers location management.</about>
+    </page>
+    <page name="PersonalIssue" path="PPE | Personal Issue" index="1100" title="Personal Issue" roles="Officer" useExtenders="false" offline="false" kiosk="false" generate="Always">
+      <containers>
+        <container id="c101" flow="NewRow" />
+      </containers>
+      <dataViews>
+        <dataView id="view1" container="c101" controller="SerialNumbersStaff" view="grid1" multiSelect="false" autoHide="Nothing" tag="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none" />
+      </dataViews>
+    </page>
+    <page name="LocationIssue" path="PPE | Location Issue" index="1110" title="Location Issue" roles="Location" useExtenders="false" offline="false" kiosk="false" generate="Always">
+      <containers>
         <container id="container1" flow="NewRow" />
       </containers>
       <dataViews>
         <dataView id="view1" controller="SerialNumbersLocation" view="grid1" showInSummary="true" container="container1" activator="None" text="" tag="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none" />
       </dataViews>
-      <controls />
-      <about>This page allows serial numbers location management.</about>
     </page>
     <page name="opex_site_content" title="Opex Site Content" description="View Opex Site Content" index="1120" path="Opex Site Content" roles="Administrators, Content Editors, Developers" xmlns="urn:schemas-codeontime-com:data-aquarium-application">
       <containers>

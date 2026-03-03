@@ -222,7 +222,7 @@ namespace DatatecnixOfficerII.Rules
                         if (tp.LocalRankCode != null)
                         {
                             RqRanks r = RqRanks.SelectSingle("rank_code=@r", new FieldValue("@r", tp.LocalRankCode));
-                            if (r != null)
+                            if ((r != null) &&  (r.StaffFilter != null))
                             {
                                 f = r.StaffFilter;
                             }

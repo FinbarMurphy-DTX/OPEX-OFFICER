@@ -22305,4 +22305,18 @@ else
                 </Script>
     </update>
   </c>
+  <c y="NodeSet" t="2026-03-03T11:44:09.8410678Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <update>
+      <HeaderText>This is a list of PPE Equipmemt Issued</HeaderText>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:50:50.7301353Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <update>
+      <Label>PPE (Issued)</Label>
+    </update>
+  </c>
 </log>
