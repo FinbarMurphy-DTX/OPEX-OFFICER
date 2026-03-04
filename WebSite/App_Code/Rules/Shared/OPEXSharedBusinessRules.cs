@@ -311,12 +311,9 @@ namespace DatatecnixOfficerII.Rules
 
                     else if (Membership.GetUser() != null)
                     {
-                      
+                        
                         staffRecord = StaffAccessControl.SelectSingle("userCredentials = @p",
                             new FieldValue("@p", Membership.GetUser().UserName.Replace("\\", "")));
-
-
-
                     }
 
         
