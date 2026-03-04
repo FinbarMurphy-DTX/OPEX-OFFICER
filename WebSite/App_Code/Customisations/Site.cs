@@ -103,9 +103,12 @@ namespace DatatecnixOfficerII.Handlers
             }
             */
 
+            if (Request.AppRelativeCurrentExecutionFilePath == "~/manifest.json")
+            {
+                
+            }
 
-
-            if (!Page.User.Identity.IsAuthenticated)
+            else if (!Page.User.Identity.IsAuthenticated)
             // TODO  This shoud probably be a straight SQL query as we are not logged in to OPEX III so the controllers are all Public
             {
                 if (authMethod == "WIN")
@@ -163,9 +166,9 @@ namespace DatatecnixOfficerII.Handlers
 
                     if (OPEXredirectURL != null)
                     {
-                        Context.Session["OPEXredirectURL"] = OPEXredirectURL;
-                        HttpCookie myCookie = new HttpCookie("OPEXredirectURL");
-                        myCookie["URL"] = OPEXredirectURL;
+                        Context.Session["OPEXOfficerredirectURL"] = OPEXredirectURL;
+                        HttpCookie myCookie = new HttpCookie("OPEXOfficerredirectURL");
+                        myCookie["OPEXOfficerredirectURL"] = OPEXredirectURL;
                         myCookie.Expires = DateTime.Now.AddDays(1d);
                         Response.Cookies.Add(myCookie);
                         
@@ -191,11 +194,11 @@ namespace DatatecnixOfficerII.Handlers
                     {
 
 
-                        object redirect = HttpContext.Current.Session["OPEXredirectURL"];
+                        object redirect = HttpContext.Current.Session["OPEXOfficerredirectURL"];
                         string rd = (String)redirect;
                         if (rd != null)
                         {
-                            HttpContext.Current.Session["OPEXredirectURL"] = null;
+                            HttpContext.Current.Session["OPEXOfficerredirectUR"] = null;
                             if (Context.Session["OPEXCredentials"] == null)  // User Credentials not found
                             {
                                 HttpContext.Current.Response.Redirect(rd + "?invalid=true", true);
@@ -214,16 +217,16 @@ namespace DatatecnixOfficerII.Handlers
                             {
 
                             }
-                            else // The IIS session has finished so check forthe return url in a cookie
+                            else // The IIS session has finished so check for the return url in a cookie
                             {
 
 
                                 HttpContext.Current.Session["OPEXCredentials"] = null;
                                 HttpContext.Current.Session["OPEXOfficer"] = null;
-                                HttpCookie myCookie1 = Request.Cookies["OPEXredirectURL"];
+                                HttpCookie myCookie1 = Request.Cookies["OPEXOfficerredirectURL"];
                                 if (myCookie1 != null)
                                 {
-                                    string url = myCookie1["URL"];
+                                    string url = myCookie1["OPEXOfficerredirectURL"];
                                     if (url != null)
                                     {
                                         HttpContext.Current.Response.Redirect(url, false);
@@ -277,7 +280,7 @@ namespace DatatecnixOfficerII.Handlers
 
                 // Special Case to catch the laod balancer changing between the refresh ( I think)
                 {
-                    HttpCookie myCookie1 = Request.Cookies["OPEXredirectURL"];
+                    HttpCookie myCookie1 = Request.Cookies["OPEXOfficerredirectURL"];
                     if (myCookie1 != null)
                     {
                         string url = myCookie1["URL"];

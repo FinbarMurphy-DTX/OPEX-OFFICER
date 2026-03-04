@@ -2086,4 +2086,83 @@ multi-select-none</Tag>
     <page name="GlCodes" />
     <delete />
   </c>
+  <c y="NodeSet" t="2026-03-03T11:40:50.1420436Z">
+    <pages />
+    <insert type="page" context="/page/SerialNumbersLocation">
+      <Name>PersonalIssue</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Kiosk>false</Kiosk>
+      <Title>Personal Issue</Title>
+      <Roles>Officer</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:41:20.5821291Z">
+    <pages />
+    <insert type="page" context="/page/SerialNumbersLocation">
+      <Name>LocationIssue</Name>
+      <Generate>Always</Generate>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Kiosk>false</Kiosk>
+      <Title>Location Issue</Title>
+      <Roles>Location</Roles>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:41:23.5096914Z">
+    <page name="LocationIssue" />
+    <move>
+      <page name="SerialNumbersLocation" />
+      <dataView id="view1" />
+    </move>
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:41:31.3315148Z">
+    <page name="SerialNumbersLocation" />
+    <container id="container1" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:41:37.4104235Z">
+    <page name="PersonalIssue" />
+    <insert type="container">
+      <Flow>NewRow</Flow>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2026-03-03T11:50:36.2400292Z">
+    <page name="PersonalIssue" />
+    <container id="c101" />
+    <insert type="dataView">
+      <Controller>SerialNumbersStaff</Controller>
+      <View>grid1</View>
+      <ShowInSummary>false</ShowInSummary>
+      <MultiSelect>false</MultiSelect>
+      <ShowActionBar>true</ShowActionBar>
+      <ShowDescription>true</ShowDescription>
+      <ShowViewSelector>true</ShowViewSelector>
+      <ShowSearchBar>true</ShowSearchBar>
+      <ShowQuickFind>true</ShowQuickFind>
+      <SearchByFirstLetter>false</SearchByFirstLetter>
+      <ShowRowNumber>false</ShowRowNumber>
+      <ShowPager>Bottom</ShowPager>
+      <ShowPageSize>true</ShowPageSize>
+      <ShowModalForms>false</ShowModalForms>
+      <SearchOnStart>false</SearchOnStart>
+      <ShowDetailsInListMode>true</ShowDetailsInListMode>
+      <AutoHighlightFirstRow>false</AutoHighlightFirstRow>
+      <AutoSelectFirstRow>false</AutoSelectFirstRow>
+      <AutoHide>Nothing</AutoHide>
+    </insert>
+  </c>
+  <c y="NodeSet" t="2026-03-03T13:39:52.9339989Z">
+    <page name="PersonalIssue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+view-style-calendar-disabled,
+multi-select-none</Tag>
+    </update>
+  </c>
 </log>
