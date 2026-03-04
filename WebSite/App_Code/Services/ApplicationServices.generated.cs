@@ -9,7 +9,7 @@ namespace DatatecnixOfficerII.Services
 
         public virtual void Initialize()
         {
-            ApplicationServices.FrameworkAppName = "OPEX 2.4.1";
+            ApplicationServices.FrameworkAppName = "OPEX 2.4.2";
             ApplicationServices.FrameworkSiteContentControllerName = "opex_site_content";
             ApplicationServices.Version = "8.9.44.38";
             ApplicationServices.HostVersion = "1.2.5.0";
