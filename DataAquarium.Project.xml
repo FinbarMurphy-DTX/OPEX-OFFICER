@@ -31,7 +31,7 @@ InsertAfter: /configuration/system.webServer
   &lt;/runtime&gt;
 </webConfig>
   </webServer>
-  <features useSaveAndNew="true" pageHeader="OPEX 2.4.1" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="0">
+  <features useSaveAndNew="true" pageHeader="OPEX 2.4.2" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true" tabViewSelection="0">
     <navigation detectUnderscoreSeparatedSchema="" />
     <blob allowUploadOnInsert="true" />
     <framework scriptOnly="true" useExtenders="false" />
