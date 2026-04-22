@@ -40,7 +40,7 @@ from `opex`.`rq_trolley_location` `rq_trolley_location`
     <field name="HeaderValue" type="Decimal" allowNulls="false" label="Header Value" showInSummary="true" readOnly="true" dataFormatString="C2" />
     <field name="UrgentReq" type="String" label="Urgent Req" length="1" showInSummary="true" />
     <field name="FreeText" type="String" label="Free Text" length="255" showInSummary="true" />
-    <field name="BudgetCode" type="String" label="Budget Code" length="8">
+    <field name="BudgetCode" type="String" label="Budget Code" length="8" allowNulls="false">
       <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
     </field>
     <field name="BudgetDesc" type="String" readOnly="true" label="Budget Desc" length="50" />
@@ -50,7 +50,7 @@ from `opex`.`rq_trolley_location` `rq_trolley_location`
     <field name="DelLocationSlaAcc" type="String" readOnly="true" label="Del Location Sla Acc" length="8" />
     <field name="DelLocationSlaNam" type="String" readOnly="true" label="Deliver To" length="75" />
     <field name="DefaultCommentCode" type="String" label="Default Reason Code" length="3">
-      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentDesc" />
+      <items style="Lookup" dataController="ReasonCodes" dataValueField="CommentCode" dataTextField="CommentDesc" />
     </field>
     <field name="DefaultCommentDesc" type="String" readOnly="true" label="Default Comment Desc" length="20" />
     <field name="LocationCode" type="String" allowNulls="false" label="Location Code" length="8" readOnly="true">

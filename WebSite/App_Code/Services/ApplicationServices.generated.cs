@@ -11,7 +11,7 @@ namespace DatatecnixOfficerII.Services
         {
             ApplicationServices.FrameworkAppName = "OPEX 2.4.2";
             ApplicationServices.FrameworkSiteContentControllerName = "opex_site_content";
-            ApplicationServices.Version = "8.9.44.38";
+            ApplicationServices.Version = "8.9.44.40";
             ApplicationServices.HostVersion = "1.2.5.0";
             var compilation = ((CompilationSection)(WebConfigurationManager.GetSection("system.web/compilation")));
             var releaseMode = !compilation.Debug;

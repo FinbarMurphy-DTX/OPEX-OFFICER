@@ -69,7 +69,7 @@ from `opex`.`rq_trolley` `rq_trolley`
     <field name="DelCode" type="String" label="Del Code" length="8" />
     <field name="FreeText" type="String" label="Comments" length="255" />
     <field name="JobNo" type="String" label="Job No" length="10" />
-    <field name="BudgetInd" type="String" label="Budget Ind" length="8">
+    <field name="BudgetInd" type="String" label="Budget Ind" length="8" allowNulls="false">
       <items style="Lookup" dataController="RqBudcd" newDataView="createForm1" dataValueField="BudgetCode" dataTextField="BudgetDesc" />
     </field>
     <field name="BudgetIndbudgetDesc" type="String" readOnly="true" label="Budget Indbudget Desc" length="50" />
@@ -100,7 +100,7 @@ from `opex`.`rq_trolley` `rq_trolley`
     <field name="RoleRankDesc" type="String" readOnly="true" label="Role Rank" length="32" />
     <field name="StaffUlocationLocationDesc" type="String" readOnly="true" label="Location" length="75" />
     <field name="DefaultCommentCode" type="String" label="Default Reason Code" length="3">
-      <items style="Lookup" dataController="ReasonCodes" newDataView="createForm1" dataValueField="CommentCode" dataTextField="CommentDesc" />
+      <items style="Lookup" dataController="ReasonCodes" dataValueField="CommentCode" dataTextField="CommentDesc" />
     </field>
     <field name="DefaultCommentCodeCommentDesc" type="String" readOnly="true" label="Default Reason" length="20" />
     <field name="Local_TrolleyCount" type="UInt32" label="Items in Trolley" computed="true" dataFormatString="N0" isVirtual="true">
