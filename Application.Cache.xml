@@ -88,15 +88,15 @@
       <controls />
       <about>This page allows serial numbers location management.</about>
     </page>
-    <page name="PersonalIssue" path="PPE | Personal Issue" index="1100" title="Personal Issue" roles="Officer" useExtenders="false" offline="false" kiosk="false" generate="Always">
+    <page name="PersonalIssue" path="PPE | Personal Issue" index="1100" title="Personal Issue" roles="Officer-Detail" useExtenders="false" offline="false" kiosk="false" generate="Always">
       <containers>
         <container id="c101" flow="NewRow" />
       </containers>
       <dataViews>
-        <dataView id="view1" container="c101" controller="SerialNumbersStaff" view="grid1" multiSelect="false" autoHide="Nothing" tag="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none" />
+        <dataView id="view1" container="c101" controller="SerialNumbersStaff" view="grid1" multiSelect="false" autoHide="Nothing" tag="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none" filterFields="StaffUid" filterSourceController="TrolleyPersonal" />
       </dataViews>
     </page>
-    <page name="LocationIssue" path="PPE | Location Issue" index="1110" title="Location Issue" roles="Location" useExtenders="false" offline="false" kiosk="false" generate="Always">
+    <page name="LocationIssue" path="PPE | Location Issue" index="1110" title="Location Issue" roles="Location-Detail" useExtenders="false" offline="false" kiosk="false" generate="Always">
       <containers>
         <container id="container1" flow="NewRow" />
       </containers>
@@ -104,7 +104,7 @@
         <dataView id="view1" controller="SerialNumbersLocation" view="grid1" showInSummary="true" container="container1" activator="None" text="" tag="view-style-grid, &#xD;&#xA;view-style-charts-disabled,&#xD;&#xA;view-style-list-disabled,&#xD;&#xA;view-style-cards-disabled,&#xD;&#xA;view-style-calendar-disabled,&#xD;&#xA;multi-select-none" />
       </dataViews>
     </page>
-    <page name="opex_site_content" title="Opex Site Content" description="View Opex Site Content" index="1120" path="Opex Site Content" roles="Administrators, Content Editors, Developers" xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+    <page name="opex_site_content" title="Opex Site Content" description="View Opex Site Content" index="1120" path="Opex Site Content" roles="Administrators, Content Editors, Developers" xmlns="urn:schemas-codeontime-com:data-aquarium-application" useExtenders="false" offline="false" kiosk="false">
       <containers>
         <container id="container1" flow="NewRow" />
       </containers>

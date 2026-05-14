@@ -3523,8 +3523,8 @@ from `opex`.`serial_numbers` `serial_numbers`
       <field name="DisposalDetailID" type="UInt32" label="Disposal Detail" />
     </fields>
     <views>
-      <view id="grid1" type="Grid" commandId="command1" label="PPE (Issued)" filter="status in ( &quot;I&quot;,&quot;T&quot;)">
-        <headerText>This is a list of PPE Equipmemt Issued</headerText>
+      <view id="grid1" type="Grid" commandId="command1" label="PPE (Issued)" filter="status in ( &quot;I&quot;,&quot;T&quot;)  AND&#xD;&#xA;StaffUid = @OfficerUID">
+        <headerText>This is a list of PPE Equipmemt Issued or in Transit</headerText>
         <dataFields>
           <dataField fieldName="StaffUid" columns="15" hidden="true">
           </dataField>
@@ -3535,10 +3535,7 @@ from `opex`.`serial_numbers` `serial_numbers`
           <dataField fieldName="ExpiryDate" columns="10" />
           <dataField fieldName="Notes" />
           <dataField fieldName="Status" columns="2" />
-          <dataField fieldName="StaffCode" columns="8" />
           <dataField fieldName="ItemConditionCode" aliasFieldName="ItemConditionDescription" />
-          <dataField fieldName="StaffuEplNumber" columns="8" hidden="true">
-          </dataField>
         </dataFields>
       </view>
       <view id="editForm1" type="Form" commandId="command1" label="Review Serial Numbers Staff">

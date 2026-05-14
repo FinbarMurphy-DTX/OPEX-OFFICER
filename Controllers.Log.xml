@@ -22347,4 +22347,42 @@ else
       <ItemsNewDataView />
     </update>
   </c>
+  <c y="NodeSet" t="2026-05-14T14:34:45.2096997Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <update>
+      <HeaderText>This is a list of PPE Equipmemt Issued or in Transit</HeaderText>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T14:40:09.9836648Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <update>
+      <FilterExpression>status in ( "I","T")  AND
+StaffUid = @OfficerUID</FilterExpression>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T14:46:25.1838011Z">
+    <controller name="SerialNumbersStaff" />
+    <actionGroup id="ag100" />
+    <action id="a100" />
+    <update>
+      <Confirmation>_controller=SerialNumbersReplacePrompt
+_title=Enter New Serial Number
+_width=500
+_view = PromptView</Confirmation>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T15:13:57.5125303Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <dataField fieldName="StaffCode" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2026-05-14T15:13:57.5438127Z">
+    <controller name="SerialNumbersStaff" />
+    <view id="grid1" />
+    <dataField fieldName="StaffuEplNumber" />
+    <delete />
+  </c>
 </log>

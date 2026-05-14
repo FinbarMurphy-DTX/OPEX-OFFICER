@@ -2165,4 +2165,58 @@ view-style-calendar-disabled,
 multi-select-none</Tag>
     </update>
   </c>
+  <c y="NodeSet" t="2026-05-14T14:30:43.2389114Z">
+    <page name="PersonalIssue" />
+    <copy>
+      <page name="MyCatalogue" />
+      <container id="c101" />
+    </copy>
+  </c>
+  <c y="NodeSet" t="2026-05-14T14:30:54.5451968Z">
+    <page name="PersonalIssue" />
+    <container id="c101" />
+    <before>
+      <page name="PersonalIssue" />
+      <container id="c102" />
+    </before>
+  </c>
+  <c y="NodeSet" t="2026-05-14T14:31:14.7625781Z">
+    <page name="PersonalIssue" />
+    <dataView id="view1" />
+    <update>
+      <Tag>view-style-grid, 
+view-style-charts-disabled,
+view-style-list-disabled,
+view-style-cards-disabled,
+view-style-calendar-disabled,
+multi-select-none</Tag>
+      <FilterSource>view2</FilterSource>
+      <FilterFields>StaffUid</FilterFields>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T14:34:07.8322226Z">
+    <page name="PersonalIssue" />
+    <container id="c102" />
+    <delete />
+  </c>
+  <c y="NodeSet" t="2026-05-14T15:11:56.3204467Z">
+    <page name="PersonalIssue" />
+    <update>
+      <Roles>Officer-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T15:12:21.2629074Z">
+    <page name="LocationIssue" />
+    <update>
+      <Roles>Location-Detail</Roles>
+    </update>
+  </c>
+  <c y="NodeSet" t="2026-05-14T15:12:34.4018661Z">
+    <page name="opex_site_content" />
+    <update>
+      <UseExtenders>false</UseExtenders>
+      <Offline>false</Offline>
+      <Kiosk>false</Kiosk>
+    </update>
+  </c>
 </log>
