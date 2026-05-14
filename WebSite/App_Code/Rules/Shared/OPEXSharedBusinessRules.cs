@@ -314,6 +314,14 @@ namespace DatatecnixOfficerII.Rules
                         
                         staffRecord = StaffAccessControl.SelectSingle("userCredentials = @p",
                             new FieldValue("@p", Membership.GetUser().UserName.Replace("\\", "")));
+
+                        // If we can't find a record based on the username then try the email address this is catering for old OPEX sigin and SSO Signin //
+
+                        if (staffRecord == null)
+                        {
+                            staffRecord = StaffAccessControl.SelectSingle("email = @p",
+                                new FieldValue("@p", Membership.GetUser().Email.Replace("\\", "")));
+                        }
                     }
 
         
